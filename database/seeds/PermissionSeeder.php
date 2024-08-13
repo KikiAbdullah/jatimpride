@@ -31,7 +31,12 @@ class PermissionSeeder extends Seeder
         $role2->givePermissionTo('view_roles');
         $role2->givePermissionTo('edit_roles');
 
+        $role3 = Role::create(['name' => 'GUEST']);
+
         $user = \App\User::find(1);
         $user->assignRole($role1);
+
+        $user = \App\User::find(2);
+        $user->assignRole($role3);
     }
 }

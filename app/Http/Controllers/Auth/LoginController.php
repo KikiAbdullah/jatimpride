@@ -45,13 +45,15 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validateLogin($request);
-        Cookie::queue(Cookie::forget(env('APP_2FA_NAME')??"token_2fa"));
+        Cookie::queue(Cookie::forget(env('APP_2FA_NAME') ?? "token_2fa"));
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
-        if (method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)) {
+        if (
+            method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)
+        ) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
@@ -90,18 +92,19 @@ class LoginController extends Controller
             'username' => $request->username,
             'password' => md5($request->password)
         ])->first();
-        if(!empty($user)){
-        return $this->guard()->login(
-            $user, $request->filled('remember')
-        );
-    }
+        if (!empty($user)) {
+            return $this->guard()->login(
+                $user,
+                $request->filled('remember')
+            );
+        }
     }
 
     public function logout(Request $request)
     {
         $this->guard()->logout();
 
-        Cookie::queue(Cookie::forget(env('APP_2FA_NAME')??"token_2fa"));
+        Cookie::queue(Cookie::forget(env('APP_2FA_NAME') ?? "token_2fa"));
 
         $request->session()->flush();
 

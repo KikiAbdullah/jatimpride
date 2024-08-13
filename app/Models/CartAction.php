@@ -35,7 +35,7 @@ class CartAction
 
     public function findItem($id)
     {
-        return $this->items->search(function($item, $key) use($id){
+        return $this->items->search(function ($item, $key) use ($id) {
             return $item['id'] == $id;
         });
     }
@@ -52,7 +52,7 @@ class CartAction
     public function removeItem($item_id)
     {
         $itemIndex = $this->findItem($item_id);
-        if($itemIndex !== false){
+        if ($itemIndex !== false) {
             $this->items->forget($itemIndex);
             $this->syncToCart();
         }

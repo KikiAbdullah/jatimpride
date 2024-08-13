@@ -14,9 +14,17 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'username' => 'admin',
             'name' => 'Administrator',
-            'email' => 'nizar.hdt@gmail.com',
+            'email' => 'kikirabdullah@gmail.com',
             'password' => md5('admin'),
-            'nowa' => '082132922001'
-        ]);   
+            'nowa' => '085155300552'
+        ]);
+
+        DB::table('users')->insert([
+            'username' => 'kiki',
+            'name' => 'Kiki',
+            'email' => 'kikirabdullaha@gmail.com',
+            'password' => md5('123123'),
+            'nowa' => '085155300552'
+        ]);
     }
 }
