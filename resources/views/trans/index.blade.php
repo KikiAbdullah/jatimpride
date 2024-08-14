@@ -63,6 +63,7 @@
 @endsection
 
 @section('customjs')
+    <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
         var dtable;
         const urlAjax = '{{ route('trans.get-data') }}';
@@ -73,7 +74,7 @@
             '<a href="#!" class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnBack"><i class="ph-caret-left ph-2x text-indigo"></i>CANCEL</a>';
 
         $(document).ready(function($) {
-            
+
             dtable = $('#dtable').DataTable({
                 "select": {
                     style: "single",
@@ -259,113 +260,93 @@
 
             $('body').on("click", '.btnOption', function(e) {
                 e.preventDefault();
-                var title = $(this).data('title');
-                var url = $(this).attr('href');
-                var icon = $(this).data('icon');
-                var tipe = $(this).data('tipe');
-                var msg = $(this).data('msg');
 
+                const title = $(this).data('title');
+                const url = $(this).attr('href');
+                const icon = $(this).data('icon');
+                const tipe = $(this).data('tipe');
+                const msg = $(this).data('msg');
 
-                var html = '';
-                if (tipe == 'closed') {
-                    html += '{!! Form::text('noresi', null, [
-                        'class' => 'form-control mb-2 field-noresi',
-                        'placeholder' => 'Masukan Nomor Resi',
-                        'autofocus' => true,
-                    ]) !!}' +
-                        '<small><cite>Masukan Nomor Resi Apabila Dikirim melalui kurir</cite></small>';
+                let inputHtml = '';
+
+                if (tipe === 'closed') {
+                    inputHtml += `<input type="text" name="noresi" class="form-control mb-2 field-noresi" placeholder="Masukan Nomor Resi" autofocus>
+                                <small><cite>Masukan Nomor Resi Apabila Dikirim melalui kurir</cite></small>`;
+
+                } else if (tipe === 'rejected') {
+                    inputHtml += `<input type="text" name="text_rejected" class="form-control mb-2 field-text-rejected" placeholder="Masukan Alasan Ditolak" autofocus>
+                                <small><cite>Masukan alasan ditolak</cite></small>`;
                 }
 
                 swalInit.fire({
                     icon: icon,
                     title: title,
-                    html: tipe == 'closed' ? html : 'Are you sure ' + title + ' ?',
+                    html: inputHtml || `Are you sure ${title}?`,
                     showCancelButton: true,
                     confirmButtonText: 'Yes',
                     confirmButtonColor: 'red',
                     reverseButtons: true,
                     showLoaderOnConfirm: true,
                     didOpen: () => {
-                        // The textfield element
-                        textField = Swal.getPopup().querySelector(".field-noresi")
-                        textField?.focus()
-                    },
-                    preConfirm: (value) => {
-                        let noresi = Swal.getPopup().querySelector(".field-noresi")?.value || 1;
-
                         if (tipe == 'closed') {
-                            return $.ajax({
-                                type: 'POST',
-                                url: url,
-                                data: {
-                                    noresi: noresi,
-                                },
-                                dataType: "json",
-                            }).done(function(data) {
-                                return data;
-                            }).fail(function(jqXHR, textStatus, errorThrown) {
-                                if (jqXHR.status == 422) {
-                                    var xhr = JSON.stringify(JSON.parse(jqXHR
-                                            .responseText)
-                                        .errors);
-                                } else {
-                                    var xhr = JSON.stringify(JSON.parse(jqXHR
-                                        .responseText));
-                                }
-                                swalInit.fire({
-                                    title: 'Request Error',
-                                    text: xhr.substring(0, 160),
-                                    icon: 'error',
-                                })
-                            })
-                        } else {
-                            return $.ajax({
-                                type: 'POST',
-                                url: url,
-                                dataType: "json",
-                            }).done(function(data) {
-                                return data;
-                            }).fail(function(jqXHR, textStatus, errorThrown) {
-                                if (jqXHR.status == 422) {
-                                    var xhr = JSON.stringify(JSON.parse(jqXHR
-                                            .responseText)
-                                        .errors);
-                                } else {
-                                    var xhr = JSON.stringify(JSON.parse(jqXHR
-                                        .responseText));
-                                }
-                                swalInit.fire({
-                                    title: 'Request Error',
-                                    text: xhr.substring(0, 160),
-                                    icon: 'error',
-                                })
-                            })
+                            textField = Swal.getPopup().querySelector(".field-noresi");
+                            textField?.focus();
+
+                        } else if (tipe == 'rejected') {
+                            textField = Swal.getPopup().querySelector(
+                                ".field-text-rejected");
+                            textField?.focus();
                         }
+                    },
+                    preConfirm: () => {
+                        const noresi = Swal.getPopup().querySelector(".field-noresi")
+                            ?.value ||
+                            '';
+                        const textRejected = Swal.getPopup().querySelector(
+                            ".field-text-rejected")?.value || '';
 
-
+                        return $.ajax({
+                                type: 'POST',
+                                url: url,
+                                data: tipe === 'closed' ? {
+                                    noresi
+                                } : tipe === 'rejected' ? {
+                                    text_reject: textRejected
+                                } : {},
+                                dataType: "json",
+                            }).done(data => data)
+                            .fail(jqXHR => {
+                                const xhr = JSON.stringify(JSON.parse(jqXHR.responseText));
+                                swalInit.fire({
+                                    title: 'Request Error',
+                                    text: xhr.substring(0, 160),
+                                    icon: 'error',
+                                });
+                            });
                     },
                     allowEscapeKey: false,
                     allowOutsideClick: false
-                }).then((result) => {
-                    if (result.value != null)
+                }).then(result => {
+                    if (result.isConfirmed) {
                         if (result.value.status) {
                             swalInit.fire({
                                 title: 'Success',
                                 text: result.value.msg,
                                 icon: 'success',
-                            })
-                            dtable.ajax.reload(null, false)
+                            });
+                            dtable.ajax.reload(null, false);
                             $('#mymodal').modal('hide');
-
                         } else {
                             swalInit.fire({
                                 title: 'Error',
                                 text: result.value.msg.substring(0, 160),
                                 icon: 'error',
-                            })
+                            });
                         }
-                })
+                    }
+                });
             });
+
         });
 
         function confirmTrans(el, e) {
@@ -387,6 +368,20 @@
                         $("#mymodal").find('.modal-body').html(response.view);
                         $("#mymodal").find('select.select').select2({
                             dropdownParent: $('#mymodal')
+                        });
+
+
+                        GLightbox({
+                            selector: '[data-bs-popup="lightbox"]',
+                            loop: true,
+                            svg: {
+                                next: document.dir == "rtl" ?
+                                    '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"><g><path d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/></g></svg>' :
+                                    '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"> <g><path d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z"/></g></svg>',
+                                prev: document.dir == "rtl" ?
+                                    '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"><g><path d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z"/></g></svg>' :
+                                    '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175" xml:space="preserve"><g><path d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/></g></svg>'
+                            }
                         });
 
                     }

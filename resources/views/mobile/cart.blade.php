@@ -8,10 +8,12 @@
                 <div class="table-responsive card-body">
                     <table class="table mb-0">
                         <tbody>
-                            @foreach ($items as $item)
+                            @forelse ($items as $item)
                                 <tr>
                                     <th scope="row">
-                                        <a class="remove-product" href="#"><i class="fa fa-x"></i></a>
+                                        <a class="remove-product"
+                                            onclick="RemoveLines('{{ route('mobile.cart-delete', $item->id) }}', event)"
+                                            href="#"><i class="fa fa-x"></i></a>
                                     </th>
                                     <td>
                                         <a href="{{ route('mobile.product-detail', $item->merch_id) }}">
@@ -29,19 +31,27 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    Belum Ada Transaksi
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
             <!-- Coupon Area-->
-            <!-- Cart Amount Area-->
-            <div class="card cart-amount-area">
-                <div class="card-body d-flex align-items-center justify-content-between">
-                    <h5 class="total-price mb-0">Rp<span class="counter">{{ cleanNumber($items->sum('total')) }}</span></h5>
-                    <a class="btn btn-warning" onclick="CheckoutBtn(this, event)">Lanjutkan Pembayaran</a>
+
+            @if ($items->isNotEmpty())
+                <!-- Cart Amount Area-->
+                <div class="card cart-amount-area">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <h5 class="total-price mb-0">Rp<span class="counter">{{ cleanNumber($items->sum('total')) }}</span>
+                        </h5>
+                        <a class="btn btn-warning" onclick="CheckoutBtn(this, event)">Lanjutkan Pembayaran</a>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection
@@ -162,6 +172,66 @@
             })
 
             e.preventDefault();
+        }
+
+        const RemoveLines = (url, e) => {
+
+            Swal.fire({
+                toast: true,
+                icon: 'question',
+                title: 'Hapus Item Keranjang?',
+                showCancelButton: true,
+                confirmButtonText: 'Confirm',
+                reverseButtons: true,
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    $.ajax({
+                            type: 'GET',
+                            url: url,
+                            dataType: "json",
+                            success: () => {
+                                window.location.href = "";
+                            },
+                        })
+                        .done(function(data) {
+                            return data;
+                        })
+                        .fail(function(jqXHR, textStatus, errorThrown) {
+                            if (jqXHR.status == 422) {
+                                var xhr = JSON.stringify(JSON.parse(jqXHR.responseText).errors);
+                            } else {
+                                var xhr = JSON.stringify(JSON.parse(jqXHR.responseText));
+                            }
+                            swalInit.fire({
+                                title: "Request Error",
+                                toast: true,
+                                text: xhr.substring(0, 160),
+                                icon: "error",
+                            });
+                        });
+                },
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.value != null)
+                    if (result.value.status) {
+                        Swal.fire({
+                            toast: true,
+                            title: 'Success',
+                            text: result.value.msg,
+                            icon: 'success',
+                            showConfirmButton: false,
+                        });
+                        window.location.href = '{{ route('mobile.order') }}';
+                    } else {
+                        Swal.fire({
+                            toast: true,
+                            title: 'Error',
+                            text: result.value.msg.substring(0, 160),
+                            icon: 'error',
+                            showConfirmButton: false,
+                        })
+                    }
+            })
         }
     </script>
 @endsection

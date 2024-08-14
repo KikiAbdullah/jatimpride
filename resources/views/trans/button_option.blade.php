@@ -10,10 +10,23 @@
             class="ph-arrow-u-up-left  text-danger"></i>Batal Konfirmasi</a>
 @endif
 
+
+@if (array_key_exists('rejected', $url))
+    <a href="{{ route($url['rejected'], $id) }}" data-title="Reject" data-icon="question" data-tipe="rejected"
+        class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
+            class="ph-x-circle text-danger"></i>Reject</a>
+@endif
+
+@if (array_key_exists('unrejected', $url))
+    <a href="{{ route($url['unrejected'], $id) }}" data-title="Batal Reject" data-icon="question" data-tipe="unrejected"
+        class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
+            class="ph-arrow-u-up-left text-indigo"></i>Batal Reject</a>
+@endif
+
 @if (array_key_exists('closed', $url))
     <a href="{{ route($url['closed'], $id) }}" data-title="Selesai" data-icon="question" data-tipe="closed"
         class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
-            class="ph-check-circle text-success"></i>Selesai</a>
+            class="ph-circle-wavy-check text-success"></i>Selesai</a>
 @endif
 
 @if (array_key_exists('unclosed', $url))

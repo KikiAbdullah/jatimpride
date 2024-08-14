@@ -1,0 +1,999 @@
+<!DOCTYPE html
+   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+   xmlns:o="urn:schemas-microsoft-com:office:office">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <!--[if !mso]><!-- -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <!--<![endif]-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="format-detection" content="date=no" />
+      <meta name="format-detection" content="address=no" />
+      <meta name="format-detection" content="email=no" />
+      <meta name="x-apple-disable-message-reformatting" />
+      <link href="https://fonts.googleapis.com/css?family=Outfit:ital,wght@0,400;0,400;0,500;0,600" rel="stylesheet" />
+      <title>{{ $title ?? '' }}</title>
+      <style>
+         html,
+         body {
+         margin: 0;
+         padding: 0;
+         min-height: 100%;
+         width: 100%;
+         -webkit-font-smoothing: antialiased;
+         }
+         * {
+         -ms-text-size-adjust: 100%;
+         }
+         #outlook a {
+         padding: 0;
+         }
+         .ExternalClass {
+         width: 100%;
+         line-height: 100%;
+         }
+         table,
+         td,
+         th {
+         border-collapse: collapse;
+         }
+         img {
+         border: 0;
+         outline: 0;
+         line-height: 100%;
+         text-decoration: none;
+         -ms-interpolation-mode: bicubic;
+         }
+         a[x-apple-data-detectors] {
+         color: inherit;
+         text-decoration: none;
+         }
+         .pc-gmail-fix {
+         display: none !important;
+         }
+         .pc-project-body {
+         background-color: transparent !important;
+         }
+         @media (min-width: 621px) {
+         .pc-lg-hide,
+         .pc-lg-bg-img-hide {
+         display: none !important;
+         background-image: none !important;
+         }
+         }
+         @media (max-width: 620px) {
+         .pc-project-body {
+         min-width: 0 !important;
+         }
+         .pc-project-container,
+         .pc-w620-width-fill,
+         .pc-w620-width-100pc,
+         .pc-w620-gridCollapsed-1,
+         .pc-w620-tableCollapsed-1 {
+         width: 100% !important;
+         }
+         .pc-sm-hide,
+         .pc-w620-gridCollapsed-1>tbody,
+         .pc-w620-tableCollapsed-1>tbody {
+         display: block !important;
+         }
+         .pc-sm-bg-img-hide,
+         .pc-lg-bg-img-hide {
+         background-image: none !important;
+         }
+         table,
+         td,
+         th {
+         margin: 0 !important;
+         padding: 0 !important;
+         }
+         .pc-w620-padding-0-0-0-0,
+         .pc-w620-padding-20-20-0-20,
+         .pc-w620-padding-20-20-20-20,
+         .pc-w620-padding-28-28-28-28,
+         .pc-w620-padding-0-0-15-0,
+         .pc-w620-padding-16-28-16-28,
+         .pc-w620-padding-28-28-0-28,
+         .pc-w620-padding-30-20-20-20,
+         .pc-w620-padding-16-0-16-0,
+         .pc-w620-padding-20-28-30-28,
+         .pc-w620-padding-35-35-35-35,
+         .pc-w620-padding-16-16-16-16 {
+         padding: 0 !important;
+         }
+         .pc-w620-fontSize-30,
+         .pc-w620-fontSize-16,
+         .pc-w620-fontSize-14px,
+         .pc-w620-fontSize-16px,
+         .pc-w620-fontSize-20px,
+         .pc-w620-fontSize-30px,
+         .pc-w620-fontSize-28px {
+         font-size: inherit !important;
+         }
+         .pc-w620-lineHeight-40,
+         .pc-w620-lineHeight-26,
+         .pc-w620-lineHeight-32,
+         .pc-w620-lineHeight-140pc {
+         line-height: inherit !important;
+         }
+         .pc-w620-width-auto,
+         .pc-w620-width-102,
+         .pc-w620-height-auto,
+         .pc-w620-height-102,
+         .pc-w620-width-200,
+         .pc-w620-width-410,
+         .pc-w620-width-60,
+         .pc-w620-height-60 {
+         width: auto !important;
+         height: auto !important;
+         }
+         .pc-w620-align-left,
+         .pc-w620-align-right,
+         .pc-w620-align-center,
+         .pc-w620-textAlign-center {
+         text-align: inherit !important;
+         text-align-last: inherit !important;
+         }
+         table,
+         img {
+         margin: 0 auto !important;
+         float: none !important;
+         }
+         .pc-w620-itemsSpacings-16-10,
+         .pc-w620-itemsSpacings-0-12,
+         .pc-w620-itemsSpacings-0-30,
+         .pc-w620-itemsSpacings-20-0,
+         .pc-w620-itemsSpacings-20-12 {
+         padding: 0 !important;
+         }
+         .pc-w620-valign-middle,
+         .pc-w620-valign-bottom {
+         vertical-align: inherit !important;
+         }
+         .pc-w620-gridCollapsed-1>tbody>.pc-grid-tr-first>.pc-grid-td-first,
+         .pc-w620-gridCollapsed-1>.pc-grid-tr-first>.pc-grid-td-first,
+         .pc-w620-gridCollapsed-0>tbody>.pc-grid-tr-first>td,
+         .pc-w620-gridCollapsed-0>.pc-grid-tr-first>td,
+         .pc-w620-gridCollapsed-0>tbody>tr>.pc-grid-td-first,
+         .pc-w620-gridCollapsed-0>tr>.pc-grid-td-first {
+         padding-top: 0 !important;
+         }
+         .pc-w620-gridCollapsed-1>tbody>.pc-grid-tr-last>.pc-grid-td-last,
+         .pc-w620-gridCollapsed-1>.pc-grid-tr-last>.pc-grid-td-last,
+         .pc-w620-gridCollapsed-0>tbody>.pc-grid-tr-last>td,
+         .pc-w620-gridCollapsed-0>.pc-grid-tr-last>td {
+         padding-bottom: 0 !important;
+         }
+         .pc-w620-gridCollapsed-0>tbody>tr>.pc-grid-td-last,
+         .pc-w620-gridCollapsed-0>tr>.pc-grid-td-last {
+         padding-right: 0 !important;
+         }
+         }
+         @media (max-width: 520px) {
+         .pc-w520-padding-30-30-30-30 {
+         padding: 30px !important;
+         }
+         }
+         @font-face {
+         font-family: "Outfit";
+         font-style: normal;
+         font-weight: 400;
+         src: url("https://fonts.gstatic.com/s/outfit/v11/QGYyz_MVcBeNP4NjuGObqx1XmO1I4TC1O4i0FQ.woff") format("woff"),
+         url("https://fonts.gstatic.com/s/outfit/v11/QGYyz_MVcBeNP4NjuGObqx1XmO1I4TC1O4i0Ew.woff2") format("woff2");
+         }
+         @font-face {
+         font-family: "Outfit";
+         font-style: normal;
+         font-weight: 500;
+         src: url("https://fonts.gstatic.com/s/outfit/v11/QGYyz_MVcBeNP4NjuGObqx1XmO1I4QK1O4i0FQ.woff") format("woff"),
+         url("https://fonts.gstatic.com/s/outfit/v11/QGYyz_MVcBeNP4NjuGObqx1XmO1I4QK1O4i0Ew.woff2") format("woff2");
+         }
+         @font-face {
+         font-family: "Outfit";
+         font-style: normal;
+         font-weight: 600;
+         src: url("https://fonts.gstatic.com/s/outfit/v11/QGYyz_MVcBeNP4NjuGObqx1XmO1I4e6yO4i0FQ.woff") format("woff"),
+         url("https://fonts.gstatic.com/s/outfit/v11/QGYyz_MVcBeNP4NjuGObqx1XmO1I4e6yO4i0Ew.woff2") format("woff2");
+         }
+      </style>
+   </head>
+   <body class="body pc-font-alt"
+      style="
+      width: 100% !important;
+      min-height: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: 1.5;
+      color: #2d3a41;
+      mso-line-height-rule: exactly;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      font-variant-ligatures: normal;
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #e3dad5;
+      "
+      bgcolor="#e3dad5">
+      <table class="pc-project-body"
+         style="
+         table-layout: fixed;
+         min-width: 600px;
+         background-color: #e3dad5;
+         "
+         bgcolor="#e3dad5" width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+         <tr>
+            <td align="center" valign="top">
+               <table class="pc-project-container" align="center" width="600" style="width: 600px; max-width: 600px"
+                  border="0" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                     <td style="padding: 20px 0px 20px 0px" align="left" valign="top">
+                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
+                           style="width: 100%">
+                           <tr>
+                              <td valign="top" class="pc-w620-padding-28-28-28-28"
+                                 style="padding: 24px 40px 40px 40px; border-radius: 0px; background-color: #1a110c;">
+                                 <!-- BEGIN MODULE: Header -->
+                                 <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                    role="presentation">
+                                    <tr>
+                                       <td class="pc-w620-spacing-0-0-28-0" align="center" valign="top"
+                                          style="
+                                          padding: 0px 0px
+                                          32px 0px;
+                                          ">
+                                          <img src="images/image-17102359007180.png" class=""
+                                             width="164" height="32" alt=""
+                                             style="
+                                             display: block;
+                                             outline: 0;
+                                             line-height: 100%;
+                                             -ms-interpolation-mode: bicubic;
+                                             width: 164px;
+                                             height: auto;
+                                             max-width: 100%;
+                                             border: 0;
+                                             " />
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td align="center" valign="top"
+                                          style="
+                                          padding: 0px 0px
+                                          12px 0px;
+                                          ">
+                                          <table border="0" cellpadding="0" cellspacing="0"
+                                             role="presentation" width="100%"
+                                             style="
+                                             border-collapse: separate;
+                                             border-spacing: 0;
+                                             margin-right: auto;
+                                             margin-left: auto;
+                                             ">
+                                             <tr>
+                                                <td valign="top" align="center"
+                                                   style="
+                                                   padding: 0px
+                                                   0px
+                                                   0px
+                                                   0px;
+                                                   ">
+                                                   <div class="pc-font-alt pc-w620-fontSize-30 pc-w620-lineHeight-40"
+                                                      style="
+                                                      line-height: 128%;
+                                                      letter-spacing: -0.2px;
+                                                      font-family: 'Outfit',
+                                                      Arial,
+                                                      Helvetica,
+                                                      sans-serif;
+                                                      font-size: 38px;
+                                                      font-weight: 500;
+                                                      font-variant-ligatures: normal;
+                                                      color: #ffffff;
+                                                      text-align: center;
+                                                      text-align-last: center;
+                                                      ">
+                                                      <div>
+                                                         <span>Terima
+                                                         Kasih
+                                                         atas
+                                                         Pemesanan
+                                                         Anda</span>
+                                                      </div>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td valign="top" align="center"
+                                                   style="
+                                                   padding: 0px
+                                                   0px
+                                                   0px
+                                                   0px;
+                                                   ">
+                                                   <div class="pc-font-alt pc-w620-fontSize-16 pc-w620-lineHeight-26"
+                                                      style="
+                                                      line-height: 156%;
+                                                      letter-spacing: -0.2px;
+                                                      font-family: 'Outfit',
+                                                      Arial,
+                                                      Helvetica,
+                                                      sans-serif;
+                                                      font-size: 19px;
+                                                      font-weight: normal;
+                                                      font-variant-ligatures: normal;
+                                                      color: #ffffffcc;
+                                                      text-align: center;
+                                                      text-align-last: center;
+                                                      ">
+                                                      <div>
+                                                         <span
+                                                            style="
+                                                            font-weight: 400;
+                                                            font-style: normal;
+                                                            ">Pesanan Anda sudah masuk. Kami sedang menyiapkannya, harap tunggu email konfirmasi, Terima kasih.</span>
+                                                      </div>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td class="pc-w620-spacing-0-0-0-0"
+                                          style="
+                                          padding: 0px 0px 0px
+                                          0px;
+                                          ">
+                                           <table
+                                           class="pc-width-fill pc-w620-tableCollapsed-1"
+                                           border="0" cellpadding="0"
+                                           cellspacing="0" role="presentation"
+                                           width="100%" bgcolor="#ffffff0d"
+                                           style="
+                                           border-collapse: separate;
+                                           border-spacing: 0;
+                                           width: 100%;
+                                           background-color: #ffffff0d;
+                                           border-radius: 8px
+                                           8px
+                                           8px
+                                           8px;
+                                           ">
+                                           <tbody>
+                                              <tr>
+                                                 <td class="pc-w620-width-100pc"
+                                                    width="176"
+                                                    valign="top">
+                                                    <table width="100%"
+                                                       border="0"
+                                                       cellpadding="0"
+                                                       cellspacing="0"
+                                                       role="presentation">
+                                                       <tr>
+                                                          <td style="
+                                                             padding: 20px
+                                                             20px
+                                                             20px
+                                                             20px;
+                                                             "
+                                                             align="left">
+                                                             <table
+                                                                width="100%"
+                                                                border="0"
+                                                                cellpadding="0"
+                                                                cellspacing="0"
+                                                                role="presentation">
+                                                                <tr>
+                                                                   <td align="left"
+                                                                      valign="top"
+                                                                      style="
+                                                                      padding: 0px
+                                                                      0px
+                                                                      8px
+                                                                      0px;
+                                                                      ">
+                                                                      <table
+                                                                         border="0"
+                                                                         cellpadding="0"
+                                                                         cellspacing="0"
+                                                                         role="presentation"
+                                                                         class="pc-w620-width-100pc"
+                                                                         width="100%"
+                                                                         style="
+                                                                         border-collapse: separate;
+                                                                         border-spacing: 0;
+                                                                         margin-right: auto;
+                                                                         margin-left: auto;
+                                                                         ">
+                                                                         <tr>
+                                                                            <td valign="top"
+                                                                               align="left"
+                                                                               style="
+                                                                               padding: 0px
+                                                                               0px
+                                                                               0px
+                                                                               0px;
+                                                                               ">
+                                                                               <div class="pc-font-alt pc-w620-fontSize-16px"
+                                                                                  style="
+                                                                                  line-height: 140%;
+                                                                                  letter-spacing: -0.2px;
+                                                                                  font-family: 'Outfit',
+                                                                                  Arial,
+                                                                                  Helvetica,
+                                                                                  sans-serif;
+                                                                                  font-size: 20px;
+                                                                                  font-weight: 500;
+                                                                                  font-variant-ligatures: normal;
+                                                                                  color: #ffcb65;
+                                                                                  text-align: left;
+                                                                                  text-align-last: left;
+                                                                                  ">
+                                                                                  <div>
+                                                                                     <span>Summary</span>
+                                                                                  </div>
+                                                                               </div>
+                                                                            </td>
+                                                                         </tr>
+                                                                         <tr>
+                                                                            <td valign="top"
+                                                                               align="left"
+                                                                               style="
+                                                                               padding: 0px
+                                                                               0px
+                                                                               0px
+                                                                               0px;
+                                                                               ">
+                                                                               <div class="pc-font-alt pc-w620-fontSize-14px"
+                                                                                  style="
+                                                                                  line-height: 140%;
+                                                                                  letter-spacing: -0px;
+                                                                                  font-family: 'Outfit',
+                                                                                  Arial,
+                                                                                  Helvetica,
+                                                                                  sans-serif;
+                                                                                  font-size: 16px;
+                                                                                  font-weight: 500;
+                                                                                  font-variant-ligatures: normal;
+                                                                                  color: #ff9065;
+                                                                                  text-align: left;
+                                                                                  text-align-last: left;
+                                                                                  ">
+                                                                                  <div>
+                                                                                     <span>Ready
+                                                                                     to
+                                                                                     Ship</span>
+                                                                                  </div>
+                                                                               </div>
+                                                                            </td>
+                                                                         </tr>
+                                                                         <tr>
+                                                                            <td valign="top"
+                                                                               align="left"
+                                                                               style="
+                                                                               padding: 0px
+                                                                               0px
+                                                                               0px
+                                                                               0px;
+                                                                               ">
+                                                                               <div class="pc-font-alt"
+                                                                                  style="
+                                                                                  line-height: 140%;
+                                                                                  letter-spacing: -0px;
+                                                                                  font-family: 'Outfit',
+                                                                                  Arial,
+                                                                                  Helvetica,
+                                                                                  sans-serif;
+                                                                                  font-size: 14px;
+                                                                                  font-weight: normal;
+                                                                                  font-variant-ligatures: normal;
+                                                                                  color: #ffffffcc;
+                                                                                  text-align: left;
+                                                                                  text-align-last: left;
+                                                                                  ">
+                                                                                  <div>
+                                                                                     <span>#7348
+                                                                                     •
+                                                                                     June
+                                                                                     30,
+                                                                                     2024</span>
+                                                                                  </div>
+                                                                               </div>
+                                                                            </td>
+                                                                         </tr>
+                                                                         <tr>
+                                                                            <td valign="top"
+                                                                               align="left">
+                                                                               <div class="pc-font-alt"
+                                                                                  style="
+                                                                                  line-height: 140%;
+                                                                                  letter-spacing: -0px;
+                                                                                  font-family: 'Outfit',
+                                                                                  Arial,
+                                                                                  Helvetica,
+                                                                                  sans-serif;
+                                                                                  font-size: 14px;
+                                                                                  font-weight: 600;
+                                                                                  font-variant-ligatures: normal;
+                                                                                  color: #ffffff;
+                                                                                  text-align: left;
+                                                                                  text-align-last: left;
+                                                                                  ">
+                                                                                  <div>
+                                                                                     <span>$415.08</span>
+                                                                                  </div>
+                                                                               </div>
+                                                                            </td>
+                                                                         </tr>
+                                                                      </table>
+                                                                   </td>
+                                                                </tr>
+                                                             </table>
+                                                          </td>
+                                                       </tr>
+                                                    </table>
+                                                 </td>
+                                                 <td class="pc-w620-width-100pc"
+                                                    width="168"
+                                                    valign="middle">
+                                                    <table width="100%"
+                                                       border="0"
+                                                       cellpadding="0"
+                                                       cellspacing="0"
+                                                       role="presentation">
+                                                       <tr>
+                                                          <td style="
+                                                             padding: 20px
+                                                             20px
+                                                             20px
+                                                             20px;
+                                                             "
+                                                             align="left">
+                                                             <table
+                                                                width="100%"
+                                                                border="0"
+                                                                cellpadding="0"
+                                                                cellspacing="0"
+                                                                role="presentation">
+                                                                <tr>
+                                                                   <td align="left"
+                                                                      valign="top"
+                                                                      style="
+                                                                      padding: 0px
+                                                                      0px
+                                                                      12px
+                                                                      0px;
+                                                                      ">
+                                                                      <table
+                                                                         border="0"
+                                                                         cellpadding="0"
+                                                                         cellspacing="0"
+                                                                         role="presentation"
+                                                                         class="pc-w620-width-100pc"
+                                                                         width="100%"
+                                                                         style="
+                                                                         border-collapse: separate;
+                                                                         border-spacing: 0;
+                                                                         margin-right: auto;
+                                                                         margin-left: auto;
+                                                                         ">
+                                                                         <tr>
+                                                                            <td valign="top"
+                                                                               align="left"
+                                                                               style="
+                                                                               padding: 0px
+                                                                               0px
+                                                                               0px
+                                                                               0px;
+                                                                               ">
+                                                                               <div class="pc-font-alt pc-w620-fontSize-16px"
+                                                                                  style="
+                                                                                  line-height: 140%;
+                                                                                  letter-spacing: -0.2px;
+                                                                                  font-family: 'Outfit',
+                                                                                  Arial,
+                                                                                  Helvetica,
+                                                                                  sans-serif;
+                                                                                  font-size: 20px;
+                                                                                  font-weight: 500;
+                                                                                  font-variant-ligatures: normal;
+                                                                                  color: #ffcb65;
+                                                                                  text-align: left;
+                                                                                  text-align-last: left;
+                                                                                  ">
+                                                                                  <div>
+                                                                                     <span>Shipping
+                                                                                     Address</span>
+                                                                                  </div>
+                                                                               </div>
+                                                                            </td>
+                                                                         </tr>
+                                                                         <tr>
+                                                                            <td valign="top"
+                                                                               align="left"
+                                                                               style="
+                                                                               padding: 0px
+                                                                               0px
+                                                                               0px
+                                                                               0px;
+                                                                               ">
+                                                                               <div class="pc-font-alt pc-w620-fontSize-14px"
+                                                                                  style="
+                                                                                  line-height: 140%;
+                                                                                  letter-spacing: -0.2px;
+                                                                                  font-family: 'Outfit',
+                                                                                  Arial,
+                                                                                  Helvetica,
+                                                                                  sans-serif;
+                                                                                  font-size: 16px;
+                                                                                  font-weight: 600;
+                                                                                  font-variant-ligatures: normal;
+                                                                                  color: #ffffff;
+                                                                                  text-align: left;
+                                                                                  text-align-last: left;
+                                                                                  ">
+                                                                                  <div>
+                                                                                     <span>Stenano
+                                                                                     William</span>
+                                                                                  </div>
+                                                                               </div>
+                                                                            </td>
+                                                                         </tr>
+                                                                         <tr>
+                                                                            <td valign="top"
+                                                                               align="left"
+                                                                               style="
+                                                                               padding: 0px
+                                                                               0px
+                                                                               0px
+                                                                               0px;
+                                                                               ">
+                                                                               <div class="pc-font-alt"
+                                                                                  style="
+                                                                                  line-height: 140%;
+                                                                                  letter-spacing: -0px;
+                                                                                  font-family: 'Outfit',
+                                                                                  Arial,
+                                                                                  Helvetica,
+                                                                                  sans-serif;
+                                                                                  font-size: 14px;
+                                                                                  font-weight: normal;
+                                                                                  font-variant-ligatures: normal;
+                                                                                  color: #ffffffcc;
+                                                                                  text-align: left;
+                                                                                  text-align-last: left;
+                                                                                  ">
+                                                                                  <div>
+                                                                                     <span>Sweet
+                                                                                     Snack
+                                                                                     HQ
+                                                                                     ,
+                                                                                     123
+                                                                                     Bique
+                                                                                     Street
+                                                                                     Unit
+                                                                                     10
+                                                                                     </span>
+                                                                                  </div>
+                                                                               </div>
+                                                                            </td>
+                                                                         </tr>
+                                                                         <tr>
+                                                                            <td valign="top"
+                                                                               align="left">
+                                                                               <div class="pc-font-alt"
+                                                                                  style="
+                                                                                  line-height: 140%;
+                                                                                  letter-spacing: -0px;
+                                                                                  font-family: 'Outfit',
+                                                                                  Arial,
+                                                                                  Helvetica,
+                                                                                  sans-serif;
+                                                                                  font-size: 14px;
+                                                                                  font-weight: normal;
+                                                                                  font-variant-ligatures: normal;
+                                                                                  color: #ffffffcc;
+                                                                                  text-align: left;
+                                                                                  text-align-last: left;
+                                                                                  ">
+                                                                                  <div>
+                                                                                     <span>Boston,
+                                                                                     MA
+                                                                                     02110</span>
+                                                                                  </div>
+                                                                               </div>
+                                                                            </td>
+                                                                         </tr>
+                                                                      </table>
+                                                                   </td>
+                                                                </tr>
+                                                             </table>
+                                                          </td>
+                                                       </tr>
+                                                    </table>
+                                                 </td>
+                                              </tr>
+                                           </tbody>
+                                        </table>
+                                       </td>
+                                    </tr>
+                                 </table>
+                                 <!-- END MODULE: Header -->
+                              </td>
+                           </tr>
+                           <tr>
+                              <td valign="top">
+                                 <!-- BEGIN MODULE: Detail Item Order -->
+                                 <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                                    role="presentation">
+                                    <tr>
+                                       <td class="pc-w620-spacing-0-0-0-0"
+                                          style="
+                                          padding: 0px 0px 0px
+                                          0px;
+                                          ">
+                                          <table width="100%" border="0" cellspacing="0"
+                                             cellpadding="0" role="presentation">
+                                             <tr>
+                                                <td valign="top" class="pc-w620-padding-16-28-16-28"
+                                                   style="
+                                                   padding: 40px
+                                                   40px
+                                                   24px
+                                                   40px;
+                                                   border-radius: 0px;
+                                                   background-color: #ffffff;
+                                                   "
+                                                   bgcolor="#ffffff">
+                                                   <table width="100%" border="0" cellpadding="0"
+                                                      cellspacing="0" role="presentation">
+                                                      <tr>
+                                                         <td class="pc-w620-spacing-0-0-0-0"
+                                                            align="center" valign="top"
+                                                            style="
+                                                            padding: 0px
+                                                            0px
+                                                            4px
+                                                            0px;
+                                                            ">
+                                                            <table border="0" cellpadding="0"
+                                                               cellspacing="0" role="presentation"
+                                                               width="100%"
+                                                               style="
+                                                               border-collapse: separate;
+                                                               border-spacing: 0;
+                                                               margin-right: auto;
+                                                               margin-left: auto;
+                                                               ">
+                                                               <tr>
+                                                                  <td valign="top"
+                                                                     class="pc-w620-padding-0-0-0-0"
+                                                                     align="center"
+                                                                     style="
+                                                                     padding: 0px
+                                                                     0px
+                                                                     0px
+                                                                     0px;
+                                                                     ">
+                                                                     <div class="pc-font-alt pc-w620-fontSize-30 pc-w620-lineHeight-40"
+                                                                        style="
+                                                                        line-height: 128%;
+                                                                        letter-spacing: -0.6px;
+                                                                        font-family: 'Outfit',
+                                                                        Arial,
+                                                                        Helvetica,
+                                                                        sans-serif;
+                                                                        font-size: 32px;
+                                                                        font-weight: 500;
+                                                                        font-variant-ligatures: normal;
+                                                                        color: #1b110c;
+                                                                        text-align: center;
+                                                                        text-align-last: center;
+                                                                        ">
+                                                                        <div>
+                                                                           <span>Your
+                                                                           item
+                                                                           in
+                                                                           this
+                                                                           order</span>
+                                                                        </div>
+                                                                     </div>
+                                                                  </td>
+                                                               </tr>
+                                                               <tr>
+                                                                  <td valign="top"
+                                                                     class="pc-w620-padding-0-0-0-0"
+                                                                     align="center"
+                                                                     style="
+                                                                     padding: 0px
+                                                                     0px
+                                                                     0px
+                                                                     0px;
+                                                                     ">
+                                                                     <div class="pc-font-alt pc-w620-fontSize-16px pc-w620-lineHeight-140pc"
+                                                                        style="
+                                                                        line-height: 128%;
+                                                                        letter-spacing: -0px;
+                                                                        font-family: 'Outfit',
+                                                                        Arial,
+                                                                        Helvetica,
+                                                                        sans-serif;
+                                                                        font-size: 16px;
+                                                                        font-weight: normal;
+                                                                        font-variant-ligatures: normal;
+                                                                        color: #2a1e19cc;
+                                                                        text-align: center;
+                                                                        text-align-last: center;
+                                                                        ">
+                                                                        <div>
+                                                                           <span>Order
+                                                                           number:
+                                                                           #7348</span>
+                                                                        </div>
+                                                                     </div>
+                                                                  </td>
+                                                               </tr>
+                                                            </table>
+                                                         </td>
+                                                      </tr>
+                                                   </table>
+                                                   <table width="100%" border="0" cellpadding="0">
+                                                   </table>
+                                                   <table width="100%" border="0" cellpadding="0"
+                                                      cellspacing="0" role="presentation">
+                                                      <tr>
+                                                         <td
+                                                            style="
+                                                            padding: 0px
+                                                            0px
+                                                            8px
+                                                            0px;
+                                                            ">
+                                                            <table
+                                                               class="pc-width-fill pc-w620-tableCollapsed-0"
+                                                               border="0" cellpadding="0"
+                                                               cellspacing="0" role="presentation"
+                                                               width="100%"
+                                                               style="
+                                                               border-collapse: separate;
+                                                               border-spacing: 0;
+                                                               width: 100%;
+                                                               ">
+                                                               <tbody>
+                                                                  <tr>
+                                                                     <td valign="top"
+                                                                        class="pc-w620-padding-0-0-0-0 pc-w620-align-left"
+                                                                        align="left">
+                                                                        <div class="pc-font-alt pc-w620-align-left pc-w620-fontSize-16 pc-w620-lineHeight-26"
+                                                                           style="
+                                                                           line-height: 28px;
+                                                                           letter-spacing: -0.2px;
+                                                                           font-family: 'Outfit',
+                                                                           Arial,
+                                                                           Helvetica,
+                                                                           sans-serif;
+                                                                           font-size: 16px;
+                                                                           font-weight: normal;
+                                                                           font-variant-ligatures: normal;
+                                                                           color: #1b110ccc;
+                                                                           text-align: left;
+                                                                           text-align-last: left;
+                                                                           ">
+                                                                           <div>
+                                                                              <span>Subtotal</span>
+                                                                           </div>
+                                                                        </div>
+                                                                     </td>
+                                                                     <td valign="top"
+                                                                        class="pc-w620-align-right"
+                                                                        align="right"
+                                                                        style="
+                                                                        padding: 0px
+                                                                        0px
+                                                                        0px
+                                                                        0px;
+                                                                        ">
+                                                                        <div class="pc-font-alt pc-w620-align-right pc-w620-fontSize-16 pc-w620-lineHeight-26"
+                                                                           style="
+                                                                           line-height: 28px;
+                                                                           letter-spacing: -0.2px;
+                                                                           font-family: 'Outfit',
+                                                                           Arial,
+                                                                           Helvetica,
+                                                                           sans-serif;
+                                                                           font-size: 16px;
+                                                                           font-weight: 500;
+                                                                           font-variant-ligatures: normal;
+                                                                           color: #19110d;
+                                                                           text-align: right;
+                                                                           text-align-last: right;
+                                                                           ">
+                                                                           <div>
+                                                                              <span>$500.10</span>
+                                                                           </div>
+                                                                        </div>
+                                                                     </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                     <td valign="top"
+                                                                        class="pc-w620-align-left"
+                                                                        align="left">
+                                                                        <div class="pc-font-alt pc-w620-align-left pc-w620-fontSize-20px pc-w620-lineHeight-32"
+                                                                           style="
+                                                                           line-height: 34px;
+                                                                           letter-spacing: -0px;
+                                                                           font-family: 'Outfit',
+                                                                           Arial,
+                                                                           Helvetica,
+                                                                           sans-serif;
+                                                                           font-size: 18px;
+                                                                           font-weight: 600;
+                                                                           font-variant-ligatures: normal;
+                                                                           color: #1b110c;
+                                                                           text-align: left;
+                                                                           text-align-last: left;
+                                                                           ">
+                                                                           <div>
+                                                                              <span>Total:</span>
+                                                                           </div>
+                                                                        </div>
+                                                                     </td>
+                                                                     <td valign="top"
+                                                                        class="pc-w620-align-right"
+                                                                        align="right"
+                                                                        style="
+                                                                        padding: 0px
+                                                                        0px
+                                                                        0px
+                                                                        0px;
+                                                                        ">
+                                                                        <div class="pc-font-alt pc-w620-align-right pc-w620-fontSize-20px pc-w620-lineHeight-32"
+                                                                           style="
+                                                                           line-height: 34px;
+                                                                           letter-spacing: -0px;
+                                                                           font-family: 'Outfit',
+                                                                           Arial,
+                                                                           Helvetica,
+                                                                           sans-serif;
+                                                                           font-size: 18px;
+                                                                           font-weight: 600;
+                                                                           font-variant-ligatures: normal;
+                                                                           color: #1b110c;
+                                                                           text-align: right;
+                                                                           text-align-last: right;
+                                                                           ">
+                                                                           <div>
+                                                                              <span>$415.08</span>
+                                                                           </div>
+                                                                        </div>
+                                                                     </td>
+                                                                  </tr>
+                                                               </tbody>
+                                                            </table>
+                                                         </td>
+                                                      </tr>
+                                                   </table>
+                                                </td>
+                                             </tr>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </table>
+                                 <!-- END MODULE: Detail Item Order -->
+                              </td>
+                           </tr>
+                        </table>
+                     </td>
+                  </tr>
+               </table>
+            </td>
+         </tr>
+      </table>
+      <!-- Fix for Gmail on iOS -->
+      <div class="pc-gmail-fix" style="white-space: nowrap; font: 15px courier; line-height: 0"></div>
+   </body>
+</html>

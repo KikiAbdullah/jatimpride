@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-9">
         <div class="row mb-1">
             <label class="col-lg-3 text-lg-end fw-normal text-muted form-custom-head">Tanggal</label>
             <div class="col-lg-9 mb-1">
@@ -39,9 +39,20 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6 text-center">
-        <img src="{{ asset('storage/bukti_pengiriman/' . $item->id . '/' . $item->bukti) }}" style="max-height: 500px;"
-            class="img-fluid" alt="">
+    <div class="col-md-3 text-center">
+        <div class="card">
+            <div class="card-img-actions m-1">
+                <img class="card-img img-fluid" style="max-height: 300px;"
+                    src="{{ asset('storage/bukti_pengiriman/' . $item->id . '/' . $item->bukti) }}" alt="">
+                <div class="card-img-actions-overlay card-img">
+                    <a href="{{ asset('storage/bukti_pengiriman/' . $item->id . '/' . $item->bukti) }}"
+                        class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox"
+                        data-gallery="gallery1">
+                        <i class="ph-magnifying-glass"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -77,11 +88,10 @@
 </div>
 
 <div class="d-flex justify-content-end align-items-center mt-3">
-
     <a href="{{ route($url, $id) }}" data-title="Konfirmasi" data-icon="question" data-tipe="confirm"
         class="btn btn-success btn-labeled btn-labeled-start rounded-pill btnOption">
         <span class="btn-labeled-icon bg-black bg-opacity-20 m-1 rounded-pill">
-            <i class="ph-check"></i>
+            <i class="ph-check-circle"></i>
         </span>
         Konfirmasi
     </a>

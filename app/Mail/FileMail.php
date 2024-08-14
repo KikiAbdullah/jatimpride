@@ -13,16 +13,18 @@ class FileMail extends Mailable
 
     public $subject;
     public $file;
+    public $trans;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($subject, $file)
+    public function __construct($subject, $file, $trans)
     {
         $this->subject = $subject;
         $this->file = $file;
+        $this->trans = $trans;
     }
 
     /**
@@ -32,8 +34,12 @@ class FileMail extends Mailable
      */
     public function build()
     {
+        $data = [
+            'item' => $this->trans,
+        ];
+
         return $this->subject($this->subject)
-            ->view('emails.confirmed') // Ganti dengan view yang kamu inginkan
+            ->view('emails.confirmed', $data) // Ganti dengan view yang kamu inginkan
             ->attach($this->file);
     }
 }

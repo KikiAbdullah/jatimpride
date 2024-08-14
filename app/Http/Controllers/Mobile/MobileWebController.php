@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers\Mobile;
 
+use App\Helpers\LogHelper;
 use App\Http\Controllers\Controller;
+use App\Mail\FileMail;
 use App\Models\CartMerch;
 use App\Models\Master\JenisPengiriman;
 use App\Models\Master\Merch;
 use App\Models\Trans;
 use App\Models\TransLine;
+use App\User;
 use Illuminate\Http\Request;
 use DB;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class MobileWebController extends Controller
 {
-    public function __construct(Trans $model)
+    public function __construct(Trans $model, User $user)
     {
         $this->title            = 'Mobile';
         $this->subtitle         = 'Mobile';
@@ -22,6 +26,7 @@ class MobileWebController extends Controller
         $this->folder           = '';
         $this->relation         = ['customer', 'lines', 'jenisPengiriman', 'payment'];
         $this->model            = $model;
+        $this->user            = $user;
         $this->withTrashed      = true;
     }
 
@@ -170,6 +175,36 @@ class MobileWebController extends Controller
             return response()->json($response);
         }
     }
+
+    public function cartDelete(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $cart = CartMerch::find($id);
+
+            if (!empty($cart)) {
+                $cart->delete();
+            }
+
+            DB::commit();
+
+            $response           = [
+                'status'            => true,
+                'msg'               => 'Data Saved.',
+            ];
+            return response()->json($response);
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $response           = [
+                'status'            => false,
+                'msg'               => $e->getMessage(),
+            ];
+            return response()->json($response);
+        }
+    }
     ///cart
 
     //order
@@ -238,7 +273,17 @@ class MobileWebController extends Controller
 
             if (!empty($cartToLines)) {
                 TransLine::insert($cartToLines);
+
+
+                $carts->delete();
             }
+
+            if (!empty($model->customer->email)) {
+                $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
+                $subject = "Pemesanan Diterima";
+                $email = Mail::to($model->customer->email)->send(new FileMail($subject, $filePath, $model));
+            }
+
 
             DB::commit();
 
@@ -249,6 +294,140 @@ class MobileWebController extends Controller
             DB::rollback();
 
             return $this->redirectBackWithError($e->getMessage());
+        }
+    }
+
+
+    ///PROFILE
+    public function profile(Request $request)
+    {
+        $view  = [
+            'title'     => 'Profile',
+            'subtitle'  => 'Profile',
+            'item'      => auth()->user(),
+        ];
+        return view($this->generateViewName('profile'))->with($view);
+    }
+
+
+    public function profileEdit(Request $request)
+    {
+        $view  = [
+            'title'     => 'Edit Profile',
+            'subtitle'  => 'Edit Profile',
+            'item'      => auth()->user(),
+        ];
+        return view($this->generateViewName('profile-edit'))->with($view);
+    }
+
+    public function profileUpdate(Request $request, $id)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $data  = $this->getRequest();
+
+            $model = $this->user->findOrFail($id);
+
+            if ($data['password'] == "") {
+                $model->update([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'nowa' => $data['nowa'],
+                ]);
+            } else {
+                $model->update([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'nowa' => $data['nowa'],
+                    'password' => $data['password'],
+                ]);
+            }
+
+            $model->syncRoles('GUEST');
+
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLog('edit', $model->no ?? $model->id, $this->subtitle);
+
+            DB::commit();
+            if ($request->ajax()) {
+                $response           = [
+                    'status'            => true,
+                    'msg'               => 'Data Saved.',
+                ];
+                return response()->json($response);
+            } else {
+                return redirect()->route($this->generateUrl('index'))
+                    ->withSuccess('Berhasil');
+            }
+        } catch (Exception $e) {
+
+            DB::rollback();
+            if ($request->ajax()) {
+                $response           = [
+                    'status'            => false,
+                    'msg'               => $e->getMessage(),
+                ];
+                return response()->json($response);
+            } else {
+                return $this->redirectBackWithError($e->getMessage());
+            }
+        }
+    }
+
+    //REGISTER
+    public function register(Request $request)
+    {
+        $view  = [
+            'title'     => 'Register',
+            'subtitle'  => 'Register',
+        ];
+        return view($this->generateViewName('register'))->with($view);
+    }
+
+
+    public function registerStore(Request $request)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $data  = $this->getRequest();
+
+            $model = $this->user->fill($data);
+            $model->save();
+
+            $model->assignRole('GUEST');
+
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLog('add', $model->no ?? $model->id, $this->subtitle);
+
+            DB::commit();
+            if ($request->ajax()) {
+                $response           = [
+                    'status'            => true,
+                    'msg'               => 'Data Saved.',
+                ];
+                return response()->json($response);
+            } else {
+                return redirect()->route($this->generateUrl('index'))
+                    ->withSuccess('Berhasil');
+            }
+        } catch (Exception $e) {
+
+            DB::rollback();
+            if ($request->ajax()) {
+                $response           = [
+                    'status'            => false,
+                    'msg'               => $e->getMessage(),
+                ];
+                return response()->json($response);
+            } else {
+                return $this->redirectBackWithError($e->getMessage());
+            }
         }
     }
 }

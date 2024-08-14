@@ -9,7 +9,6 @@
         <div class="page-header-content d-lg-flex">
             <div class="d-flex">
                 <h4 class="page-title mb-0">
-                    Detail {{ $title }}
                 </h4>
 
                 <a href="#page_header"
@@ -22,6 +21,62 @@
             <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
                 <div class="hstack gap-0 mb-3 mb-lg-0">
                     <span class="menuoption"></span>
+                    <a href="{{ route('trans.index') }}"
+                        class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold"><i
+                            class="ph-caret-left ph-2x text-warning"></i>Kembali</a>
+
+                    @switch($item->status)
+                        @case('open')
+                            <a href="{{ route('trans.confirm', $id) }}" data-title="Konfirmasi" data-icon="question"
+                                data-tipe="confirm"
+                                class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
+                                    class="ph-check-circle text-success"></i>Konfirmasi</a>
+
+                            <a href="{{ route('trans.rejected', $id) }}" data-title="Reject" data-icon="question"
+                                data-tipe="rejected"
+                                class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
+                                    class="ph-x-circle text-danger"></i>Reject</a>
+
+                            {!! Form::open([
+                                'route' => ['trans.destroy', $id],
+                                'method' => 'DELETE',
+                                'class' => 'delete',
+                                'style' => 'display: contents',
+                            ]) !!}
+                            <a href="#"
+                                class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold deleteBtn"><i
+                                    class="ph-trash text-danger"></i>DELETE</a>
+                            {!! Form::close() !!}
+                        @break
+
+                        @case('confirm')
+                            <a href="{{ route('trans.unconfirm', $id) }}" data-title="Batal Konfirmasi" data-icon="question"
+                                data-tipe="unconfirm"
+                                class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
+                                    class="ph-arrow-u-up-left  text-danger"></i>Batal Konfirmasi</a>
+
+                            <a href="{{ route('trans.closed', $id) }}" data-title="Selesai" data-icon="question" data-tipe="closed"
+                                class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
+                                    class="ph-circle-wavy-check text-success"></i>Selesai</a>
+                        @break
+
+                        @case('closed')
+                            <a href="{{ route('trans.unclosed', $id) }}" data-title="Batal Selesai" data-icon="question"
+                                data-tipe="unclosed"
+                                class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
+                                    class="ph-arrow-u-up-left  text-danger"></i>Batal Selesai</a>
+                        @break
+
+                        @case('rejected')
+                            <a href="{{ route('trans.unrejected', $id) }}" data-title="Batal Reject" data-icon="question"
+                                data-tipe="unrejected"
+                                class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
+                                    class="ph-arrow-u-up-left text-indigo"></i>Batal Reject</a>
+                        @break
+
+                        @default
+                    @endswitch
+
                 </div>
             </div>
         </div>
@@ -35,10 +90,18 @@
         <div class="row">
             <div class="col-md-12">
                 <!-- Card -->
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-indigo text-white d-flex align-items-center">
+                                <div>
+                                    <h6 class="mb-sm-0">
+                                        Detail Transaksi
+                                    </h6>
+                                    <cite class="fs-sm mb-2"></cite>
+                                </div>
+                            </div>
+                            <div class="card-body">
                                 <div class="row mb-1">
                                     <label
                                         class="col-lg-3 text-lg-end fw-normal text-muted form-custom-head">Tanggal</label>
@@ -57,8 +120,19 @@
                                     <label
                                         class="col-lg-3 text-lg-end fw-normal text-muted form-custom-head">Customer</label>
                                     <div class="col-lg-9 mb-1">
-                                        <div class="fw-semibold form-control-plaintext">{{ ucwords($item->customer->name) }}
+                                        <div class="fw-semibold form-control-plaintext">
+                                            {{ ucwords($item->customer->name) }}
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-1">
+                                    <label class="col-lg-3 text-lg-end fw-normal text-muted form-custom-head">Jenis
+                                        Pengiriman</label>
+                                    <div class="col-lg-9 mb-1">
+                                        <div class="form-control-plaintext">
+                                            {{ ucwords($item->jenisPengiriman->name) }}
+                                        </div>
+                                        <small><cite>{{ $item->jenisPengiriman->text }}</cite></small>
                                     </div>
                                 </div>
                                 <div class="row mb-1">
@@ -81,28 +155,44 @@
                                         <div class="form-control-plaintext">{!! $item->status_formatted !!}</div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <div class="card">
-                                    <div class="card-img-actions m-1">
-                                        <img class="card-img img-fluid" style="max-height: 300px;"
-                                            src="{{ asset('storage/bukti_pengiriman/' . $item->id . '/' . $item->bukti) }}"
-                                            alt="">
-                                        <div class="card-img-actions-overlay card-img">
-                                            <a href="{{ asset('storage/bukti_pengiriman/' . $item->id . '/' . $item->bukti) }}"
-                                                class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox"
-                                                data-gallery="gallery1">
-                                                <i class="ph-magnifying-glass"></i>
-                                            </a>
+
+                                <div class="row mb-1">
+                                    <label class="col-lg-3 text-lg-end fw-normal text-muted form-custom-head">Bukti
+                                        Pembayaran</label>
+                                    <div class="col-lg-3 mb-1">
+                                        <div class="card">
+                                            <div class="card-img-actions m-1">
+                                                <img class="card-img img-fluid" style="max-height: 300px;"
+                                                    src="{{ asset('storage/bukti_pengiriman/' . $item->id . '/' . $item->bukti) }}"
+                                                    alt="">
+                                                <div class="card-img-actions-overlay card-img">
+                                                    <a href="{{ asset('storage/bukti_pengiriman/' . $item->id . '/' . $item->bukti) }}"
+                                                        class="btn btn-outline-white btn-icon rounded-pill"
+                                                        data-bs-popup="lightbox" data-gallery="gallery1">
+                                                        <i class="ph-magnifying-glass"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
+
+
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row mt-3">
-                        <div class="col-lg-12">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-indigo text-white d-flex align-items-center">
+                                <div>
+                                    <h6 class="mb-sm-0">
+                                        Item Transaksi
+                                    </h6>
+                                    <cite class="fs-sm mb-2"></cite>
+                                </div>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-xxs table-bordered" id="dtable">
                                     <thead>
@@ -110,7 +200,7 @@
                                             <th>Item</th>
                                             <th width="10%">Size</th>
                                             <th width="10%" class="text-end">Qty</th>
-                                            <th width="20%" class="text-end">Harga</th>
+                                            <th width="20%" class="text-end">Harga [Rp]</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -123,8 +213,9 @@
                                             </tr>
                                         @endforeach
                                         <tr>
-                                            <th colspan="3">Total</th>
-                                            <th class="text-end">{{ cleanNumber($item->lines->sum('total')) }}</th>
+                                            <th colspan="3" class="text-end">Total [Rp]</th>
+                                            <th class="text-end">{{ cleanNumber ($item->lines->sum('total')) }}
+                                            </th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -143,6 +234,93 @@
     <script src="{{ asset('assets/js/vendor/media/glightbox.min.js') }}" type="text/javascript"></script>
     <script>
         $(document).ready(function() {
+            $('body').on("click", '.btnOption', function(e) {
+                e.preventDefault();
+
+                const title = $(this).data('title');
+                const url = $(this).attr('href');
+                const icon = $(this).data('icon');
+                const tipe = $(this).data('tipe');
+                const msg = $(this).data('msg');
+
+                let inputHtml = '';
+
+                if (tipe === 'closed') {
+                    inputHtml += `<input type="text" name="noresi" class="form-control mb-2 field-noresi" placeholder="Masukan Nomor Resi" autofocus>
+                                <small><cite>Masukan Nomor Resi Apabila Dikirim melalui kurir</cite></small>`;
+
+                } else if (tipe === 'rejected') {
+                    inputHtml += `<input type="text" name="text_rejected" class="form-control mb-2 field-text-rejected" placeholder="Masukan Alasan Ditolak" autofocus>
+                                <small><cite>Masukan alasan ditolak</cite></small>`;
+                }
+
+                swalInit.fire({
+                    icon: icon,
+                    title: title,
+                    html: inputHtml || `Are you sure ${title}?`,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    confirmButtonColor: 'red',
+                    reverseButtons: true,
+                    showLoaderOnConfirm: true,
+                    didOpen: () => {
+                        if (tipe == 'closed') {
+                            textField = Swal.getPopup().querySelector(".field-noresi");
+                            textField?.focus();
+
+                        } else if (tipe == 'rejected') {
+                            textField = Swal.getPopup().querySelector(
+                                ".field-text-rejected");
+                            textField?.focus();
+                        }
+                    },
+                    preConfirm: () => {
+                        const noresi = Swal.getPopup().querySelector(".field-noresi")
+                            ?.value ||
+                            '';
+                        const textRejected = Swal.getPopup().querySelector(
+                            ".field-text-rejected")?.value || '';
+
+                        return $.ajax({
+                                type: 'POST',
+                                url: url,
+                                data: tipe === 'closed' ? {
+                                    noresi
+                                } : tipe === 'rejected' ? {
+                                    text_reject: textRejected
+                                } : {},
+                                dataType: "json",
+                            }).done(data => data)
+                            .fail(jqXHR => {
+                                const xhr = JSON.stringify(JSON.parse(jqXHR.responseText));
+                                swalInit.fire({
+                                    title: 'Request Error',
+                                    text: xhr.substring(0, 160),
+                                    icon: 'error',
+                                });
+                            });
+                    },
+                    allowEscapeKey: false,
+                    allowOutsideClick: false
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        if (result.value.status) {
+                            swalInit.fire({
+                                title: 'Success',
+                                text: result.value.msg,
+                                icon: 'success',
+                            });
+                            window.location.href = "";
+                        } else {
+                            swalInit.fire({
+                                title: 'Error',
+                                text: result.value.msg.substring(0, 160),
+                                icon: 'error',
+                            });
+                        }
+                    }
+                });
+            });
 
             GLightbox({
                 selector: '[data-bs-popup="lightbox"]',

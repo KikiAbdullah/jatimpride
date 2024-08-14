@@ -6,6 +6,7 @@ use App\Models\Master\Kabupaten;
 use App\Models\Master\Kecamatan;
 use App\Models\Master\Kelurahan;
 use App\Models\Master\Provinsi;
+use App\UserLog;
 use DB;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -60,5 +61,10 @@ trait ListTrait
     public function listKelurahanByModel($model)
     {
         return Kelurahan::where('kecamatan_id', $model->kecamatan_id)->pluck('nama_kelurahan', 'id');
+    }
+
+    public function listUserLog()
+    {
+        return UserLog::orderBy('created_at', 'desc')->limit(10)->get();
     }
 }

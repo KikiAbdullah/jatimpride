@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Trans;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Spatie\Permission\Models\Permission;
@@ -27,11 +28,22 @@ class AppController extends Controller
     public function index(Request $request)
     {
         if (auth()->user()->roles->first()->name == 'GUEST') {
-            return redirect()->route('mobile.index');   
+            return redirect()->route('mobile.index');
         }
 
         $data['title'] = "Dashboard";
         $data['subtitle'] = "Hi, " . auth()->user()->name;
+
+        $statuses = ['open', 'confirm', 'closed', 'rejected'];
+
+        $data['total'] = [];
+
+        foreach ($statuses as $status) {
+            $data['total'][$status] = Trans::where('status', $status)->count();
+        }
+
+        $data['userlog'] = $this->listUserLog();
+
         return view('home')->with($data);
     }
 

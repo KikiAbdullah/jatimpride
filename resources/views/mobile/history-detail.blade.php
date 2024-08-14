@@ -6,7 +6,7 @@
         <div class="checkout-wrapper-area py-3">
             <!-- Billing Address-->
             <div class="billing-information-card mb-3">
-                <div class="card billing-information-title-card bg-danger">
+                <div class="card billing-information-title-card bg-primary">
                     <div class="card-body">
                         <h6 class="text-center mb-0 text-white">Detail Pemesanan</h6>
                     </div>
@@ -39,6 +39,34 @@
                             <div class="title mb-2"><i class="lni lni-pencil"></i><span>Keterangan</span></div>
                             <div class="data-content">{{ $item->text ?? '' }}</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-wrapper-area py-3">
+                <div class="cart-table card mb-3">
+                    <div class="table-responsive card-body">
+                        <table class="table mb-0">
+                            <tbody>
+                                @foreach ($item->lines as $line)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ route('mobile.product-detail', $line->merch_id) }}">
+                                                {{ $line->merch->name ?? '' }} - {{ $line->merch->size ?? '' }}
+                                                <span>
+                                                    Rp {{ cleanNumber($line->merch->harga) }}
+                                                </span>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <div class="quantity">
+                                                <span>{{ cleanNumber($line->qty) }}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

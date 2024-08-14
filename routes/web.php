@@ -1,6 +1,7 @@
 <?php
 
 use App\Mail\FileMail;
+use App\Models\Trans;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +88,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('closed/{id}',         'TransController@closed')->name('closed');
             Route::post('unclosed/{id}',         'TransController@unclosed')->name('unclosed');
 
+            Route::post('rejected/{id}',         'TransController@rejected')->name('rejected');
+            Route::post('unrejected/{id}',         'TransController@unrejected')->name('unrejected');
+
 
             Route::group(['prefix' => 'lines', 'as' => 'lines.'], function () {});
         });
@@ -103,12 +107,17 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::post('/cart-store',              'Mobile\MobileWebController@cartStore')->name('cart-store');
         Route::post('/cart-update',              'Mobile\MobileWebController@cartUpdate')->name('cart-update');
+        Route::get('/cart-delete/{id}',              'Mobile\MobileWebController@cartDelete')->name('cart-delete');
         Route::get('/cart',                     'Mobile\MobileWebController@cart')->name('cart');
 
 
 
         Route::get('/order',            'Mobile\MobileWebController@order')->name('order');
         Route::post('/order-store',     'Mobile\MobileWebController@orderStore')->name('order-store');
+
+        Route::get('/profile',          'Mobile\MobileWebController@profile')->name('profile');
+        Route::get('/profile-edit',     'Mobile\MobileWebController@profileEdit')->name('profile-edit');
+        Route::post('profile-update/{id}',   'Mobile\MobileWebController@profileUpdate')->name('profile-update');
     });
 
     // STATE
@@ -119,11 +128,17 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
+Route::get('mobile/register',                 'Mobile\MobileWebController@register')->name('mobile.register');
+Route::post('mobile/register-store',                 'Mobile\MobileWebController@registerStore')->name('mobile.register-store');
+
+
 Route::get('/send-mail', function () {
+
+    $trans = Trans::first();
     $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
     $subject = "File Attachment Example";
 
-    Mail::to('kikirabdullah@gmail.com')->send(new FileMail($subject, $filePath));
+    Mail::to('kikirabdullah@gmail.com')->send(new FileMail($subject, $filePath, $trans));
 
     return "Email sent successfully!";
 });

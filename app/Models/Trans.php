@@ -119,6 +119,10 @@ class Trans extends Model
                 $title      = 'Closed';
                 $badge      = 'success';
                 break;
+            case 'rejected':
+                $title      = 'Rejected';
+                $badge      = 'danger';
+                break;
         }
 
         return '<span class="badge bg-' . $badge . '">' . $title . '</span>';

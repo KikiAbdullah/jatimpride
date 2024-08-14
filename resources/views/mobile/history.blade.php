@@ -9,7 +9,7 @@
                 <div class="table-responsive card-body">
                     <table class="table mb-0" width="100%">
                         <tbody>
-                            @foreach ($items as $item)
+                            @forelse ($items as $item)
                                 <tr>
                                     <td>
                                         <a href="{{ route('mobile.history-detail', $item->id) }}">{{ $item->no }}<span>Rp
@@ -21,7 +21,12 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+
+                            @empty
+                                <tr>
+                                    <td>Belum Ada Transaksi</td>
+                                </tr>
+                            @endforelse
 
                         </tbody>
                     </table>

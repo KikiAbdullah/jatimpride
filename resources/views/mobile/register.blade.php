@@ -81,73 +81,75 @@
                         src="{{ asset('app_local/img/logo.png') }}" class="img-fluid" style="max-height: 50px;"
                         alt=""></a>
             </div>
-            <div class="navbar-logo-container d-flex align-items-center">
-                <!-- Navbar Toggler -->
-                <div class="suha-navbar-toggler ms-2" data-bs-toggle="offcanvas" data-bs-target="#suhaOffcanvas"
-                    aria-controls="suhaOffcanvas">
-                    <div><span></span><span></span><span></span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="offcanvas offcanvas-start suha-offcanvas-wrap" tabindex="-1" id="suhaOffcanvas"
-        aria-labelledby="suhaOffcanvasLabel">
-        <!-- Close button-->
-        <button class="btn-close btn-close-white" type="button" data-bs-dismiss="offcanvas"
-            aria-label="Close"></button>
-        <!-- Offcanvas body-->
-        <div class="offcanvas-body">
-            <!-- Sidenav Profile-->
-            <div class="sidenav-profile">
-                <div class="user-profile"><img src="{{ asset('mobile-asset/img/bg-img/9.jpg') }}" alt="">
-                </div>
-                <div class="user-info">
-                    <h5 class="user-name mb-1 text-white">{{ auth()->user()->name ?? '' }}</h5>
-                </div>
-            </div>
-            <!-- Sidenav Nav-->
-            <ul class="sidenav-nav ps-0">
-                <li>
-                    <a href="{{ route('mobile.profile') }}"><i class="fa fa-user  me-2"></i>My Profile</a>
-                </li>
-                <li>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i
-                            class="fa fa-toggle-off me-2"></i>Sign Out
-                    </a>
-                </li>
-                <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
-            </ul>
         </div>
     </div>
     <!-- PWA Install Alert -->
     <div class="page-content-wrapper">
-        @yield('content')
-    </div>
+        <div class="container">
+            {!! Form::open(['route' => 'mobile.register-store', 'method' => 'POST', 'id' => 'dform']) !!}
+            <!-- Checkout Wrapper-->
+            <div class="checkout-wrapper-area py-3">
+                <!-- Billing Address-->
+                <div class="billing-information-card mb-3">
+                    <div class="card billing-information-title-card bg-warning">
+                        <div class="card-body text-center">
+                            <img src="{{ asset('app_local/img/logo.png') }}" class="img-fluid"
+                                style="max-height: 100px;" alt="">
+                            <h6 class="text-center mb-0">Register</h6>
+                        </div>
+                    </div>
+                    <div class="card user-data-card">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="title mb-2"><i class="lni lni-user"></i><span>Username</span>
+                                </div>
+                                {!! Form::text('username', null, [
+                                    'class' => in_array('username', $errors->keys()) ? 'form-control is-invalid' : 'form-control',
+                                    'placeholder' => 'Username',
+                                ]) !!}
+                            </div>
+                            <div class="mb-3">
+                                <div class="title mb-2"><i class="lni lni-user"></i><span>Nama
+                                        Lengkap</span>
+                                </div>
+                                {!! Form::text('name', null, [
+                                    'class' => in_array('name', $errors->keys()) ? 'form-control is-invalid' : 'form-control',
+                                    'placeholder' => 'Name',
+                                ]) !!}
+                            </div>
+                            <div class="mb-3">
+                                <div class="title mb-2"><i class="lni lni-envelope"></i><span>Email</span>
+                                </div>
+                                {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Email']) !!}
+                            </div>
+                            <div class="mb-3">
+                                <div class="title mb-2"><i class="lni lni-phone"></i><span>Whatsapp</span>
+                                </div>
+                                {!! Form::text('nowa', null, ['class' => 'form-control', 'placeholder' => 'WhatsApp Number']) !!}
+                            </div>
 
-
-    <!-- Internet Connection Status-->
-    <div class="internet-connection-status" id="internetStatus"></div>
-    <!-- Footer Nav-->
-
-    <div class="footer-nav-area" id="footerNav">
-        <div class="suha-footer-nav">
-            <ul class="h-100 d-flex align-items-center justify-content-between ps-0 d-flex rtl-flex-d-row-r px-5">
-                <li class="{{ $title == 'Home' ? 'active' : '' }}">
-                    <a href="{{ route('mobile.index') }}"><i class="fa-solid fa-house"></i><br>Home</a>
-                </li>
-                <li class="{{ $title == 'Cart' ? 'active' : '' }}">
-                    <a href="{{ route('mobile.cart') }}"><i class="fa-solid fa-bag-shopping"></i><br>Keranjang</a>
-                </li>
-                <li class="{{ $title == 'History' ? 'active' : '' }}">
-                    <a href="{{ route('mobile.history') }}"><i class="fa-solid fa-receipt"></i><br>History</a>
-                </li>
-
-            </ul>
+                            <div class="mb-3">
+                                <div class="title mb-2"><i class="lni lni-pencil"></i><span>Password</span></div>
+                                {!! Form::password('password', [
+                                    'class' => in_array('password', $errors->keys()) ? 'form-control is-invalid' : 'form-control',
+                                    'placeholder' => 'Password',
+                                ]) !!}
+                            </div>
+                        </div>
+                        <!-- Cart Amount Area-->
+                        <div class="card cart-amount-area">
+                            <div class="card-body mb-2 justify-content-between">
+                                <a href="{{ route('mobile.index') }}" class="btn btn-danger">Batal</a>
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {!! Form::close() !!}
         </div>
     </div>
+
     <!-- All JavaScript Files-->
 
     <script src="{{ asset('mobile-asset/js/waypoints.min.js') }}"></script>

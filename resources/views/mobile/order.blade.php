@@ -7,7 +7,7 @@
         <div class="checkout-wrapper-area py-3">
             <!-- Billing Address-->
             <div class="billing-information-card mb-3">
-                <div class="card billing-information-title-card bg-danger">
+                <div class="card billing-information-title-card bg-primary">
                     <div class="card-body">
                         <h6 class="text-center mb-0 text-white">Detail Pemesanan</h6>
                     </div>
