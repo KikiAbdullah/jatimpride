@@ -12,18 +12,18 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <!-- The above tags *must* come first in the head, any other head content must come *after* these tags -->
     <!-- Title -->
-    <title>{{ env('APP_NAME') }}</title>
+    <title>{{ $title ?? (env('APP_NAME') ?? '') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet">
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('mobile-asset/img/icons/icon-72x72.png') }}">
+    <link rel="icon" href="{{ asset('app_local/img/favicon.png') }}">
     <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="{{ asset('mobile-asset/img/icons/icon-96x96.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('mobile-asset/img/icons/icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="167x167" href="{{ asset('mobile-asset/img/icons/icon-167x167.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('mobile-asset/img/icons/icon-180x180.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('app_local/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('app_local/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="167x167" href="{{ asset('app_local/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('app_local/img/favicon.png') }}">
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('mobile-asset/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('mobile-asset/css/animate.css') }}">
@@ -78,7 +78,7 @@
         <div class="container h-100 d-flex align-items-center justify-content-between d-flex rtl-flex-d-row-r">
             <!-- Logo Wrapper -->
             <div class="logo-wrapper"><a href="{{ route('mobile.index') }}"><img
-                        src="{{ asset('app_local/img/logo.png') }}" class="img-fluid" style="max-height: 50px;"
+                        src="{{ asset('app_local/img/logo.png') }}" class="img-fluid" style="max-height: 30px;"
                         alt=""></a>
             </div>
             <div class="navbar-logo-container d-flex align-items-center">
@@ -99,10 +99,11 @@
         <div class="offcanvas-body">
             <!-- Sidenav Profile-->
             <div class="sidenav-profile">
-                <div class="user-profile"><img src="{{ asset('mobile-asset/img/bg-img/9.jpg') }}" alt="">
-                </div>
                 <div class="user-info">
-                    <h5 class="user-name mb-1 text-white">{{ auth()->user()->name ?? '' }}</h5>
+                    <img src="{{ asset('app_local/img/logo.png') }}" class="img-fluid mb-5" style="max-height: 30px;"
+                        alt="">
+
+                    <h5 class="user-name mb-1">{{ auth()->user()->name ?? '' }}</h5>
                 </div>
             </div>
             <!-- Sidenav Nav-->
@@ -132,7 +133,7 @@
     <div class="internet-connection-status" id="internetStatus"></div>
     <!-- Footer Nav-->
 
-    <div class="footer-nav-area" id="footerNav">
+    <div class="footer-nav-area bg-warning" id="footerNav">
         <div class="suha-footer-nav">
             <ul class="h-100 d-flex align-items-center justify-content-between ps-0 d-flex rtl-flex-d-row-r px-5">
                 <li class="{{ $title == 'Home' ? 'active' : '' }}">

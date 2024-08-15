@@ -93,8 +93,6 @@
                 <div class="billing-information-card mb-3">
                     <div class="card billing-information-title-card bg-warning">
                         <div class="card-body text-center">
-                            <img src="{{ asset('app_local/img/logo.png') }}" class="img-fluid"
-                                style="max-height: 100px;" alt="">
                             <h6 class="text-center mb-0">Register</h6>
                         </div>
                     </div>

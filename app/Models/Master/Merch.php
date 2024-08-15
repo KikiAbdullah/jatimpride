@@ -21,4 +21,14 @@ class Merch extends Model
         'thumbnail',
         'created_by',
     ];
+
+    public function getNameSizeAttribute()
+    {
+        return $this->name . ' - ' . strtoupper($this->size);
+    }
+
+    public function getHargaFormattedAttribute()
+    {
+        return 'Rp ' . cleanNumber($this->harga);
+    }
 }

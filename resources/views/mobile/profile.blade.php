@@ -10,7 +10,7 @@
                     <div class="user-profile me-3"><img src="{{ asset('mobile-asset/img/bg-img/9.jpg') }}" alt="">
                     </div>
                     <div class="user-info">
-                        <p class="mb-0 text-white">{{ $item->username }}</p>
+                        <p class="mb-0 ">{{ $item->username }}</p>
                         <h5 class="mb-0">{{ $item->name }}</h5>
                     </div>
                 </div>

@@ -103,12 +103,10 @@
                                 </div>
                                 <div class="flex-fill">
                                     {!! $log->message ?? '' !!}
-                                    <div class="text-muted fs-sm">{{ time_elapsed_string($log->created_at) }}</div>
+                                    <div class="text-muted fs-sm">{{ $log->created_at }}</div>
                                 </div>
                             </div>
                         @endforeach
-
-
                     </div>
                 </div>
             </div>

@@ -2,20 +2,24 @@
 
 
 @section('content')
-    <div class="container">
-        <div class="cart-wrapper-area py-3">
+    <div class="container py-3">
+        <div class="section-heading d-flex align-items-center justify-content-between">
+            <h6>Keranjang</h6>
+        </div>
+
+        <div class="cart-wrapper-area">
             <div class="cart-table card mb-3">
                 <div class="table-responsive card-body">
                     <table class="table mb-0">
                         <tbody>
                             @forelse ($items as $item)
                                 <tr>
-                                    <th scope="row">
-                                        <a class="remove-product"
+                                    <th scope="row" class="text-center">
+                                        <a class="remove-product bg-danger"
                                             onclick="RemoveLines('{{ route('mobile.cart-delete', $item->id) }}', event)"
                                             href="#"><i class="fa fa-x"></i></a>
                                     </th>
-                                    <td>
+                                    <td class="text-start">
                                         <a href="{{ route('mobile.product-detail', $item->merch_id) }}">
                                             {{ $item->merch->name ?? '' }} - {{ $item->merch->size ?? '' }}
                                             <span>
@@ -23,7 +27,7 @@
                                             </span>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td class="text-end">
                                         <div class="quantity">
                                             <input class="merch-id" type="hidden" value="{{ $item->merch_id }}">
                                             <input class="harga-text" type="hidden" value="{{ $item->merch->harga }}">
@@ -33,22 +37,25 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    Belum Ada Transaksi
+                                    <p>Belum Ada Transaksi</p>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!-- Coupon Area-->
 
             @if ($items->isNotEmpty())
                 <!-- Cart Amount Area-->
                 <div class="card cart-amount-area">
+                    <div class="container py-3">
+                        <small><span class="fw-semibold">NB</span>: Sebelum melanjutkan ke pembayaran, pastikan jumlah item
+                            terlebih dahulu</small>
+                    </div>
                     <div class="card-body d-flex align-items-center justify-content-between">
+                        <a class="btn btn-warning" onclick="CheckoutBtn(this, event)">Lanjutkan Pembayaran</a>
                         <h5 class="total-price mb-0">Rp<span class="counter">{{ cleanNumber($items->sum('total')) }}</span>
                         </h5>
-                        <a class="btn btn-warning" onclick="CheckoutBtn(this, event)">Lanjutkan Pembayaran</a>
                     </div>
                 </div>
             @endif

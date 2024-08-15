@@ -11,7 +11,7 @@
     <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>{{ $title . ' - ' . env('APP_NAME') }}</title>
 
-    <link rel="icon" href="{{ asset('assets/images/logo_icon.svg') }}" />
+    <link rel="icon" href="{{ asset('app_local/img/favicon.png') }}" />
 
     <!-- Global stylesheets -->
     <link href="{{ asset('assets/fonts/inter/inter.css') }}" rel="stylesheet" type="text/css">

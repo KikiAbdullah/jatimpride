@@ -358,47 +358,6 @@
                         </table>
                     </td>
                 </tr><!-- end tr -->
-                <tr>
-                    <td valign="middle" style="text-align:left; padding: 1em 2.5em;">
-                    <p><a href="{{ route('mobile.history-detail', $item->id) }}" class="btn btn-primary">Lihat Detail</a></p>
-                    </td>
-                    </tr>
-                <tr>
-                    <table class="bg_white" role="presentation" border="0" cellpadding="0" cellspacing="0"
-                        width="100%">
-                        <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-                            <th width="60%"
-                                style="text-align:left; padding: 0 2.5em; color: #000; padding-bottom: 20px">Item</th>
-                            <th width="40%"
-                                style="text-align:right; padding: 0 2.5em; color: #000; padding-bottom: 20px">Harga</th>
-                        </tr>
-                        @foreach ($item->lines as $line)
-                            <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-                                <td valign="middle" width="60%" style="text-align:left; padding: 0 2.5em;">
-                                    <div class="product-entry" style="width: 100%">
-                                        <div class="text">
-                                            <h3>{{ $line->merch->name ?? '' }}</h3>
-                                            <span>{{ $line->size }}</span>
-                                            <p>Rp {{ cleanNumber($line->harga) }} @ {{ cleanNumber($line->qty) }} Pcs
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td valign="middle" width="40%" style="text-align:right; padding: 0 2.5em;">
-                                    <span class="price" style="color: #000; font-size: 15px; font-weight:500;">Rp
-                                        {{ cleanNumber($line->total) }}</span>
-                                </td>
-                            </tr>
-                        @endforeach
-                        <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-                            <th width="60%"
-                                style="text-align:left; padding: 0 2.5em; color: #000; padding-bottom: 20px">Total</th>
-                            <th width="40%"
-                                style="text-align:right; padding: 0 2.5em; color: #000; padding-bottom: 20px">
-                                Rp {{ cleanNumber($item->lines->sum('total')) }}</th>
-                        </tr>
-                    </table>
-                </tr><!-- end tr -->
                 <!-- 1 Column Text + Button : END -->
             </table>
 

@@ -25,33 +25,12 @@
         <div class="product-title-meta-data bg-white mb-3 py-3">
             <div class="container d-flex justify-content-between rtl-flex-d-row-r">
                 <div class="p-title-price">
-                    <h5 class="mb-1">{{ $item->name }}</h5>
+                    <h5 class="mb-1">{{ $item->name_size }}</h5>
                     <p class="sale-price mb-0 lh-1">Rp {{ cleanNumber($item->harga) }}</p>
                 </div>
             </div>
         </div>
         <!-- Selection Panel-->
-        <div class="selection-panel bg-white mb-3 py-3">
-            <div class="container d-flex align-items-center justify-content-between">
-                <!-- Choose Size-->
-                <div class="choose-size-wrapper">
-                    <p class="mb-1 font-weight-bold">Size</p>
-                    <div class="choose-size-radio d-flex align-items-center">
-                        @foreach ($data['size'] as $merchId => $size)
-                            <!-- Single Radio Input-->
-                            <div class="form-check mb-0 me-2">
-                                <input class="form-check-input size-product" id="size-product-{{ $merchId }}"
-                                    type="radio" name="size" value="{{ $merchId }}"
-                                    {{ $item->size == $size ? 'checked' : '' }}>
-                                <label class="form-check-label"
-                                    for="size-product-{{ $merchId }}">{{ $size }}</label>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Add To Cart-->
 
         <div class="cart-form-wrapper bg-white mb-3 py-3">
             <div class="container">
@@ -59,10 +38,11 @@
                     <div class="order-plus-minus d-flex align-items-center">
                         <div class="quantity-button-handler">-</div>
                         <input class="form-control cart-quantity-input" type="text" step="1" name="quantity"
-                            value="3">
+                            value="1">
                         <div class="quantity-button-handler">+</div>
                     </div>
-                    <button class="btn btn-danger ms-3" onclick="addToCart(event)">Add To Cart</button>
+                    <button class="btn btn-danger ms-3" onclick="addToCart('{{ $item->id }}',event)">Add To
+                        Cart</button>
                 </form>
             </div>
         </div>
@@ -70,27 +50,48 @@
         <div class="p-specification bg-white mb-3 py-3">
             <div class="container">
                 <h6>Description</h6>
-                <p>{{ $item->text }}</p>
+                <span>{{ $item->text }}</span>
             </div>
         </div>
-        <div class="pb-3"></div>
+        <div class="bg-white mb-3 py-3">
+            <div class="container">
+                <div class="section-heading d-flex align-items-center justify-content-between">
+                    <h6>Related Products</h6>
+                </div>
+                <div class="row g-2 rtl-flex-d-row-r">
+
+                    @foreach ($data['list_product'] as $product)
+                        <!-- Product Card -->
+                        <div class="col-6 col-md-4">
+                            <div class="card product-card">
+                                <div class="card-body">
+                                    <a class="product-thumbnail d-block"
+                                        href="{{ route('mobile.product-detail', $product->id) }}">
+                                        <img class="mb-2" src="{{ asset('mobile-asset/img/product/11.png') }}"
+                                            alt="">
+                                    </a>
+                                    <!-- Product Title --><a class="product-title"
+                                        href="{{ route('mobile.product-detail', $product->id) }}">{{ $product->name_size }}</a>
+                                    <!-- Product Price -->
+                                    <p class="sale-price">{{ $product->harga_formatted }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
     </div>
 @endsection
 
 
 @section('customjs')
     <script>
-        function addToCart(e) {
-            var merchId = $('.size-product:checked').val();
+        function addToCart(merchId, e) {
             let qty = $('.cart-quantity-input').val();
             var errorMessage = '';
             var isValid = true;
-
-
-            if (merchId == '') {
-                var isValid = false;
-                errorMessage += 'Size harus dipilih.\n';
-            }
 
             if (qty == '') {
                 var isValid = false;

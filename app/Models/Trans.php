@@ -129,6 +129,37 @@ class Trans extends Model
     }
 
 
+    public function getStatusIconMobileAttribute()
+    {
+        $icon      = '';
+        $color      = '';
+
+        switch ($this->status) {
+            case 'open':
+                $icon      = 'fa-circle-info';
+                $color      = 'text-info';
+                break;
+            case 'confirm':
+                $icon      = 'fa-check';
+                $color      = 'text-secondary';
+                break;
+            case 'closed':
+                $icon      = 'fa-circle-check';
+                $color      = 'text-success';
+                break;
+            case 'rejected':
+                $icon      = 'fa-circle-xmark';
+                $color      = 'text-danger';
+                break;
+        }
+        return '<div style="font-size: 30px;" class="' . $color . '">
+                    <i class="fa-solid ' . $icon . '"></i>
+                </div>';
+    }
+
+
+
+
     public function getAlamatProvAttribute()
     {
         $result = $this->provinsi->nama_provinsi ?? "";

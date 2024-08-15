@@ -30,6 +30,13 @@ class MobileWebController extends Controller
         $this->withTrashed      = true;
     }
 
+    public function formData()
+    {
+        return [
+            'list_product' => Merch::all(),
+        ];
+    }
+
     public function index(Request $request)
     {
         $view  = [
@@ -44,19 +51,36 @@ class MobileWebController extends Controller
         return view($this->generateViewName(__FUNCTION__))->with($view);
     }
 
-    public function productDetail(Request $request)
+    public function product(Request $request)
     {
-        $merch = Merch::get();
+        $merch      = Merch::all();
 
         $view  = [
             'title'     => $this->title,
             'subtitle'  => $this->subtitle,
             'data'      => [
-                'size' => $merch->pluck('size', 'id'),
+                'product' => $merch,
             ],
-            'item'      => (clone $merch)->first(),
+            'items'      => $merch,
 
         ];
+        return view($this->generateViewName('product'))->with($view);
+    }
+
+
+    public function productDetail(Request $request, $id)
+    {
+        $merch = Merch::find($id);
+
+        $view  = [
+            'title'     => $this->title,
+            'subtitle'  => $this->subtitle,
+            'data'      => [
+                'list_product' => Merch::where('id', '<>', $id)->get(),
+            ],
+            'item'      => $merch,
+        ];
+
         return view($this->generateViewName('product-detail'))->with($view);
     }
 
@@ -66,7 +90,7 @@ class MobileWebController extends Controller
             'title'     => $this->title,
             'subtitle'  => $this->subtitle,
             'data'      => [],
-            'items'     => $this->model->with(['lines'])->where('customer_id', auth()->user()->id)->get(),
+            'items'     => $this->model->with(['lines'])->where('customer_id', auth()->user()->id)->orderBy('id', 'desc')->get(),
         ];
         return view($this->generateViewName(__FUNCTION__))->with($view);
     }
@@ -74,11 +98,9 @@ class MobileWebController extends Controller
     ///cart
     public function cart(Request $request)
     {
-        $carts = CartMerch::with(['merch'])->where('created_by', auth()->user()->id)->get();
-
         $view  = [
-            'title'     => $this->title,
-            'subtitle'  => $this->subtitle,
+            'title'     => 'Cart',
+            'subtitle'  => 'Cart',
             'data'      => [],
             'items'     => CartMerch::with(['merch'])->where('created_by', auth()->user()->id)->get(),
 
@@ -97,6 +119,40 @@ class MobileWebController extends Controller
                 'item'      => $item,
             ];
             return view($this->generateViewName('history-detail'))->with($view);
+        }
+    }
+    public function historyReject(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $trans = $this->model->with(['lines'])->find($id);
+
+            if (!empty($trans)) {
+                $trans->update([
+                    'status' => 'rejected',
+                    'text_reject' => 'Pembatalan oleh Customer',
+                    'rejected_by' => auth()->user()->id,
+                    'rejected_at' => date('Y-m-d H:i:s'),
+                ]);
+            }
+
+            DB::commit();
+
+            $response           = [
+                'status'            => true,
+                'msg'               => 'Data Saved.',
+            ];
+            return response()->json($response);
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $response           = [
+                'status'            => false,
+                'msg'               => $e->getMessage(),
+            ];
+            return response()->json($response);
         }
     }
 
@@ -237,17 +293,17 @@ class MobileWebController extends Controller
 
 
             $createTrans = [
-                'no' => $this->gen_number($this->model, 'no', 'TR$$-@@#####', date('Y-m-d'), 'tanggal', true),
-                'tanggal' => date('Y-m-d'),
-                'customer_id' => auth()->user()->id,
-                'jenis_pengiriman_id' => $data['jenis_pengiriman_id'],
-                'text' => $data['text'],
-                'provinsi_id' => $data['provinsi_id'],
-                'kabupaten_id' => $data['kabupaten_id'],
-                'kecamatan_id' => $data['kecamatan_id'],
-                'kelurahan_id' => $data['kelurahan_id'],
-                'alamat' => $data['alamat'],
-                'status' => 'open',
+                'no'                    => $this->gen_number($this->model, 'no', 'TR$$-@@#####', date('Y-m-d'), 'tanggal', true),
+                'tanggal'               => date('Y-m-d'),
+                'customer_id'           => auth()->user()->id,
+                'jenis_pengiriman_id'   => $data['jenis_pengiriman_id'],
+                'text'                  => $data['text'],
+                'provinsi_id'           => $data['provinsi_id'],
+                'kabupaten_id'          => $data['kabupaten_id'],
+                'kecamatan_id'          => $data['kecamatan_id'],
+                'kelurahan_id'          => $data['kelurahan_id'],
+                'alamat'                => $data['alamat'],
+                'status'                => 'open',
             ];
 
             $model = $this->model->create($createTrans);
@@ -274,20 +330,19 @@ class MobileWebController extends Controller
             if (!empty($cartToLines)) {
                 TransLine::insert($cartToLines);
 
-
-                $carts->delete();
+                CartMerch::where('created_by', auth()->user()->id)->delete();
             }
 
             if (!empty($model->customer->email)) {
                 $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
                 $subject = "Pemesanan Diterima";
-                $email = Mail::to($model->customer->email)->send(new FileMail($subject, $filePath, $model));
+                Mail::to($model->customer->email)->send(new FileMail($subject, $filePath, $model));
             }
 
 
             DB::commit();
 
-            return redirect()->route($this->generateUrl('history'))
+            return redirect()->route($this->generateUrl('history-detail'), $model->id)
                 ->withSuccess('Pemesanan Telah Berhasil');
         } catch (Exception $e) {
 

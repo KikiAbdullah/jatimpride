@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/',                 'Mobile\MobileWebController@index')->name('index');
         Route::get('/history',          'Mobile\MobileWebController@history')->name('history');
         Route::get('/history-detail/{id}',          'Mobile\MobileWebController@historyDetail')->name('history-detail');
+        Route::get('/history-reject/{id}',          'Mobile\MobileWebController@historyReject')->name('history-reject');
 
         Route::get('/product-detail/{id}',   'Mobile\MobileWebController@productDetail')->name('product-detail');
 
