@@ -41,9 +41,10 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th class="text-center">Thumb</th>
                                     <th>Name</th>
                                     <th>Size</th>
-                                    <th>Harga</th>
+                                    <th>Harga[Rp]</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,7 +59,6 @@
             </div>
 
         </div>
-
     </div>
     <!-- /content area -->
 @endsection
@@ -87,6 +87,9 @@
                 "ajax": urlAjax,
                 "columns": [{
                         data: 'id'
+                    },
+                    {
+                        data: 'thumbnail'
                     },
                     {
                         data: 'name'

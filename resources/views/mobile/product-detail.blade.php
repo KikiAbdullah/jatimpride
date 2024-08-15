@@ -5,14 +5,10 @@
     <div class="product-slide-wrapper">
         <!-- Product Slides-->
         <div class="product-slides owl-carousel">
+
             <!-- Single Hero Slide-->
-            <div class="single-product-slide" style="background-image: url('{{ asset('mobile-asset/img/bg-img/6.jpg') }}')">
-            </div>
-            <!-- Single Hero Slide-->
-            <div class="single-product-slide" style="background-image: url('{{ asset('mobile-asset/img/bg-img/10.jpg') }}')">
-            </div>
-            <!-- Single Hero Slide-->
-            <div class="single-product-slide" style="background-image: url('{{ asset('mobile-asset/img/bg-img/11.jpg') }}')">
+            <div class="single-product-slide"
+                style="background-image: url('{{ $item->thumb_mobile }}');background-size: contain;background-repeat: no-repeat;">
             </div>
         </div>
         <!-- Video Button-->
@@ -67,8 +63,7 @@
                                 <div class="card-body">
                                     <a class="product-thumbnail d-block"
                                         href="{{ route('mobile.product-detail', $product->id) }}">
-                                        <img class="mb-2" src="{{ asset('mobile-asset/img/product/11.png') }}"
-                                            alt="">
+                                        <img class="mb-2" src="{{ $product->thumb_mobile }}" alt="">
                                     </a>
                                     <!-- Product Title --><a class="product-title"
                                         href="{{ route('mobile.product-detail', $product->id) }}">{{ $product->name_size }}</a>

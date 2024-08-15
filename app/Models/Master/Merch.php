@@ -5,6 +5,7 @@ namespace App\Models\Master;
 use App\Models\Traits\CreatedByTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Merch extends Model
 {
@@ -21,6 +22,16 @@ class Merch extends Model
         'thumbnail',
         'created_by',
     ];
+
+    public function getThumbMobileAttribute()
+    {
+        $path = 'thumbnail/' . $this->id . '/' . $this->thumbnail;
+        if (Storage::exists('public/' . $path)) {
+            return asset('storage/' . $path);
+        } else {
+            return asset('app_local/img/tshirt-placeholder.jpg');
+        }
+    }
 
     public function getNameSizeAttribute()
     {

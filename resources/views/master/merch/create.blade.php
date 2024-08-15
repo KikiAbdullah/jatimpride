@@ -4,7 +4,7 @@
     </div>
 
     <div class="card-body">
-        {!! Form::open(['route' => $url['store'], 'method' => 'POST', 'id' => 'dform']) !!}
+        {!! Form::open(['route' => $url['store'], 'method' => 'POST', 'id' => 'dform', 'files' => true]) !!}
         @include($form)
         <div class="d-flex justify-content-end align-items-center">
             <button type="submit" class="btn btn-primary btn-labeled btn-labeled-start rounded-pill">
