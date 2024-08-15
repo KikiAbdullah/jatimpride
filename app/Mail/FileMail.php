@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Storage;
 
 class FileMail extends Mailable
 {
@@ -38,8 +39,13 @@ class FileMail extends Mailable
             'item' => $this->trans,
         ];
 
-        return $this->subject($this->subject)
-            ->view('emails.confirmed', $data) // Ganti dengan view yang kamu inginkan
-            ->attach($this->file);
+        if (Storage::exists($this->file)) {
+            return $this->subject($this->subject)
+                ->view('emails.confirmed', $data) // Ganti dengan view yang kamu inginkan
+                ->attach($this->file);
+        } else {
+            return $this->subject($this->subject)
+                ->view('emails.confirmed', $data);
+        }
     }
 }
