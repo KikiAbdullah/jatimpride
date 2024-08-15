@@ -46,12 +46,17 @@ Created: December 15, 2019
 body,
 html {
     font-family: "Hind Siliguri", sans-serif;
-    color: #ffffff;
+    color: #2c2d33;
     overflow-x: hidden;
     background-color: #e9eeff;
     scrollbar-width: thin;
     padding-right: 0 !important;
     letter-spacing: -0.5px;
+}
+
+[theme-color="dark"] body,
+html {
+    color: #ffffff;
 }
 
 h1,

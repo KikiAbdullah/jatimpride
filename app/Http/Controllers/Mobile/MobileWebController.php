@@ -348,6 +348,8 @@ class MobileWebController extends Controller
 
             DB::rollback();
 
+            dd($e->getMessage());
+
             return $this->redirectBackWithError($e->getMessage());
         }
     }
