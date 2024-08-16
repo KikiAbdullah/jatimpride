@@ -21,9 +21,8 @@ class FileMail extends Mailable
      *
      * @return void
      */
-    public function __construct($subject, $file, $trans)
+    public function __construct($file, $trans)
     {
-        $this->subject = $subject;
         $this->file = $file;
         $this->trans = $trans;
     }
@@ -35,17 +34,45 @@ class FileMail extends Mailable
      */
     public function build()
     {
+
+        $text = '';
+        $subject = '';
+
+        switch ($this->trans->status) {
+            case 'open':
+                $subject = 'Pemesanan ' . $this->trans->no . ' Diterima';
+                $text   = 'Pesanan Anda sudah masuk. Kami sedang menyiapkannya, harap tunggu email konfirmasi.';
+                break;
+            case 'confirm':
+                $subject = 'Pemesanan ' . $this->trans->no . ' Dikonfirmasi';
+                $text   = 'Pesanan Anda telah dikonfirmasi. Kami akan segera memprosesnya dan mengirimkan detail lebih lanjut.';
+                break;
+            case 'closed':
+                $subject = 'Pemesanan ' . $this->trans->no . ' Selesai';
+                $text   = 'Pesanan Anda telah selesai dan dikirimkan. Terima kasih telah berbelanja dengan kami!';
+                break;
+            case 'reject':
+                $subject = 'Pemesanan ' . $this->trans->no . ' Ditolak';
+                $text   = 'Sayangnya, pesanan Anda telah ditolak. Jika Anda memiliki pertanyaan, silakan hubungi layanan pelanggan kami.';
+                break;
+        }
+
         $data = [
+            // 'logo'  => imgToBase64(public_path('app_local/img/logo.png')),
+            'logo'  => asset('app_local/img/logo.png'),
             'item' => $this->trans,
+            'subject'  => $subject,
+            'text'  => $text,
         ];
 
+
         if (Storage::exists($this->file)) {
-            return $this->subject($this->subject)
-                ->view('emails.confirmed', $data) // Ganti dengan view yang kamu inginkan
+            return $this->subject($subject)
+                ->view('emails.jatimpride', $data) // Ganti dengan view yang kamu inginkan
                 ->attach($this->file);
         } else {
-            return $this->subject($this->subject)
-                ->view('emails.confirmed', $data);
+            return $this->subject($subject)
+                ->view('emails.jatimpride', $data);
         }
     }
 }

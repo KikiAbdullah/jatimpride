@@ -1,3 +1,9 @@
+@if (array_key_exists('resend', $url))
+    <a href="{{ route($url['resend'], $id) }}" data-title="Resend Email" data-icon="question" data-tipe="resend"
+        class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
+            class="ph-envelope text-warning"></i>Resend Email</a>
+@endif
+
 @if (array_key_exists('confirm-view', $url))
     <a href="{{ route($url['confirm-view'], $id) }}" onclick="confirmTrans(this, event)"
         class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold"><i
@@ -5,7 +11,8 @@
 @endif
 
 @if (array_key_exists('unconfirm', $url))
-    <a href="{{ route($url['unconfirm'], $id) }}" data-title="Batal Konfirmasi" data-icon="question" data-tipe="unconfirm"
+    <a href="{{ route($url['unconfirm'], $id) }}" data-title="Batal Konfirmasi" data-icon="question"
+        data-tipe="unconfirm"
         class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnOption"><i
             class="ph-arrow-u-up-left  text-danger"></i>Batal Konfirmasi</a>
 @endif

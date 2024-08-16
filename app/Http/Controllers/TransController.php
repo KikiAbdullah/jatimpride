@@ -32,6 +32,8 @@ class TransController extends Controller
 
         switch ($model->status) {
             case 'open':
+                $btn['resend']                = $this->generateUrl('resend');
+
                 $btn['edit']                = $this->generateUrl('edit');
                 $btn['destroy']             = $this->generateUrl('destroy');
 
@@ -41,16 +43,22 @@ class TransController extends Controller
 
 
             case 'confirm':
+                $btn['resend']                = $this->generateUrl('resend');
+
                 $btn['unconfirm']       = $this->generateUrl('unconfirm');
                 $btn['closed']          = $this->generateUrl('closed');
                 $btn['rejected']          = $this->generateUrl('rejected');
                 break;
 
             case 'closed':
+                $btn['resend']                = $this->generateUrl('resend');
+
                 $btn['unclosed']    = $this->generateUrl('unclosed');
                 break;
 
             case 'rejected':
+                $btn['resend']                = $this->generateUrl('resend');
+
                 $btn['unrejected']    = $this->generateUrl('unrejected');
                 break;
         }
@@ -101,7 +109,6 @@ class TransController extends Controller
             'id'            => $id,
             'item'            => $model,
             'url'            => $this->generateUrl('confirm'),
-
         ];
 
         $response           = [
@@ -129,10 +136,8 @@ class TransController extends Controller
 
             if (!empty($model->customer->email)) {
                 $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
-                $subject = "Konfirmasi Pemesanan";
-                $email = Mail::to($model->customer->email)->send(new FileMail($subject, $filePath, $model));
+                $email = Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
-
 
             DB::commit();
 
@@ -189,6 +194,12 @@ class TransController extends Controller
                 'closed_at' => date('Y-m-d H:i:s'),
 
             ]);
+
+            if (!empty($model->customer->email)) {
+                $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
+                $email = Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
+            }
+
             $response           = [];
 
             DB::commit();
@@ -244,8 +255,13 @@ class TransController extends Controller
                 'text_reject' => $data['text_reject'],
                 'rejected_by' => auth()->user()->id,
                 'rejected_at' => date('Y-m-d H:i:s'),
-
             ]);
+
+            if (!empty($model->customer->email)) {
+                $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
+                $email = Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
+            }
+
             $response           = [];
 
             DB::commit();
@@ -285,4 +301,47 @@ class TransController extends Controller
             return response()->json($e->getMessage());
         }
     }
+
+    ///RESEND EMAIL
+    public function resend(Request $request, $id)
+    {
+        $response           = [];
+
+        $model           = $this->model->with($this->relation)->find($id);
+
+        if (!empty($model)) {
+            if (!empty($model->customer->email)) {
+                $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
+                Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
+
+                return response()->json(responseSuccess('Berhasil', $response));
+            }
+        } else {
+            return response()->json(responseFailed());
+        }
+
+        try {
+
+            DB::beginTransaction();
+
+
+            $model->update([
+                'status' => 'confirm',
+                'confirm_by' => auth()->user()->id,
+                'confirm_at' => date('Y-m-d H:i:s'),
+
+            ]);
+            $response           = [];
+
+
+
+
+            DB::commit();
+        } catch (Exception $e) {
+
+            DB::rollback();
+        }
+    }
+    ///RESEND EMAIL
+
 }

@@ -336,7 +336,7 @@ class MobileWebController extends Controller
             if (!empty($model->customer->email)) {
                 $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
                 $subject = "Pemesanan Diterima";
-                Mail::to($model->customer->email)->send(new FileMail($subject, $filePath, $model));
+                Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
 
 

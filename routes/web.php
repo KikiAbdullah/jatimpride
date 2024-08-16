@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('rejected/{id}',         'TransController@rejected')->name('rejected');
             Route::post('unrejected/{id}',         'TransController@unrejected')->name('unrejected');
 
+            Route::post('resend/{id}',         'TransController@resend')->name('resend');
 
             Route::group(['prefix' => 'lines', 'as' => 'lines.'], function () {});
         });

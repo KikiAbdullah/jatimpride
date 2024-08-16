@@ -95,3 +95,18 @@ if (!function_exists('responseFailed')) {
         ];
     }
 }
+
+
+if (!function_exists('imgToBase64')) {
+
+    function imgToBase64($image)
+    {
+        $imageContent = file_get_contents($image);
+        // Mengonversi gambar ke base64
+        $base64 = base64_encode($imageContent);
+        // Menambahkan tipe konten gambar untuk penggunaan yang lebih mudah
+        $mimeType = mime_content_type($image);
+
+        return  'data:' . $mimeType . ';base64,' . $base64;
+    }
+}
