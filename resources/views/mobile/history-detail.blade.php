@@ -51,7 +51,12 @@
                         <div class="single-profile-data d-flex align-items-center justify-content-between">
                             <div class="title d-flex align-items-center"><span>Status</span>
                             </div>
-                            <div class="data-content">{!! $item->status_formatted ?? '' !!}</div>
+                            <div class="data-content">
+                                {!! $item->status_formatted ?? '' !!}
+                                @if ($item->status == 'rejected')
+                                    <br><small>{{ $item->text_reject ?? '' }}</small>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

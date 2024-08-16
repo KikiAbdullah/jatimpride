@@ -3,8 +3,7 @@
     <div class="container-fluid">
         <div class="flex-1">
             <a href="{{ route('siteurl') }}" class="d-inline-flex align-items-center">
-                <img src="{{ asset('app_local/img/logo.png') }}" class="img-fluid" style="max-height: 30px;"
-                alt="">
+                <img src="{{ asset('app_local/img/logo.png') }}" class="img-fluid" style="max-height: 30px;" alt="">
             </a>
         </div>
 
@@ -45,6 +44,11 @@
                                     class="dropdown-item {{ $title == 'Merch' ? 'active' : '' }}">
                                     <i class="ph-stack me-2"></i>
                                     Merch
+                                </a>
+                                <a href="{{ route('master.merch-foto.index') }}"
+                                    class="dropdown-item {{ $title == 'Merch Foto' ? 'active' : '' }}">
+                                    <i class="ph-stack me-2"></i>
+                                    Merch Foto
                                 </a>
                             @endcan
                             @can('master_payment')
@@ -119,12 +123,11 @@
                         <i class="ph-moon me-2"></i>
                         Dark Theme
                         <div class="form-check form-switch form-check-reverse ms-auto">
-                            <input type="checkbox" class="form-check-input" id="sc_ls_c"
-                                onchange="setTheme(this)">
+                            <input type="checkbox" class="form-check-input" id="sc_ls_c" onchange="setTheme(this)">
                         </div>
                     </label>
 
-                  
+
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('permission.list') }}" class="dropdown-item"><i class="ph-user-list me-2"></i>
                         Permissions List</a>

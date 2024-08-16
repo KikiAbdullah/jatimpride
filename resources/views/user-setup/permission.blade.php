@@ -41,7 +41,7 @@
         @include('layouts.alert')
         <!-- Card -->
         <div class="card w-lg-75 table-responsive">
-            <table class="table table-xxs table-striped" id="dtable">
+            <table class="table table-xxs" id="dtable">
                 <thead class="bg-indigo text-white">
                     <tr>
                         <th width="5%">No</th>

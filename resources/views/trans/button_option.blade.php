@@ -4,6 +4,12 @@
             class="ph-envelope text-warning"></i>Resend Email</a>
 @endif
 
+@if (array_key_exists('print', $url))
+    <a href="{{ route($url['print'], $id) }}" target="_blank" data-title="Print" data-icon="question" data-tipe="print"
+        class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold"><i
+            class="ph-file-pdf text-danger"></i>Print</a>
+@endif
+
 @if (array_key_exists('confirm-view', $url))
     <a href="{{ route($url['confirm-view'], $id) }}" onclick="confirmTrans(this, event)"
         class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold"><i

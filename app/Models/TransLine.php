@@ -20,6 +20,10 @@ class TransLine extends Model
         'harga',
     ];
 
+    protected $appends = [
+        'total',
+    ];
+
     public function trans()
     {
         return $this->belongsTo(Trans::class);

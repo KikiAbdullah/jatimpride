@@ -59,6 +59,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('merch',        'Master\MerchController')->middleware('can:master_merch');
             //MERCH
 
+            //MERCH
+            Route::group(['prefix' => 'merch-foto', 'as' => 'merch-foto.'], function () {
+                Route::get('get-data',      'Master\MerchFotoController@ajaxData')->name('get-data');
+            });
+            Route::resource('merch-foto',        'Master\MerchFotoController')->middleware('can:master_merch');
+            //MERCH
+
             //PAYMENT
             Route::group(['prefix' => 'payment', 'as' => 'payment.'], function () {
                 Route::get('get-data',      'Master\PaymentController@ajaxData')->name('get-data');
@@ -92,6 +99,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('unrejected/{id}',         'TransController@unrejected')->name('unrejected');
 
             Route::post('resend/{id}',         'TransController@resend')->name('resend');
+            Route::get('print/{id}',         'TransController@print')->name('print');
 
             Route::group(['prefix' => 'lines', 'as' => 'lines.'], function () {});
         });

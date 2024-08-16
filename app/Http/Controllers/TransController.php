@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use DB;
 use App\Mail\FileMail;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Mail;
 
 class TransController extends Controller
@@ -63,6 +64,8 @@ class TransController extends Controller
                 break;
         }
         $btn['show']                = $this->generateUrl('show');
+        $btn['print']               = $this->generateUrl('print');
+
 
         $view         = [
             'status'             => true,
@@ -319,29 +322,27 @@ class TransController extends Controller
         } else {
             return response()->json(responseFailed());
         }
-
-        try {
-
-            DB::beginTransaction();
-
-
-            $model->update([
-                'status' => 'confirm',
-                'confirm_by' => auth()->user()->id,
-                'confirm_at' => date('Y-m-d H:i:s'),
-
-            ]);
-            $response           = [];
-
-
-
-
-            DB::commit();
-        } catch (Exception $e) {
-
-            DB::rollback();
-        }
     }
     ///RESEND EMAIL
 
+
+    ///PRINT PDF
+    public function print(Request $request, $id)
+    {
+        $response           = [];
+
+        $model           = $this->model->with($this->relation)->find($id);
+
+        if (!empty($model)) {
+
+            $data['item']           = $model;
+            return view('trans.print', $data);
+
+            $pdf                    = Pdf::loadView('trans.print', $data);
+            return $pdf->stream();
+        } else {
+            return response()->json(responseFailed());
+        }
+    }
+    ///PRINT PDF
 }

@@ -37,7 +37,7 @@
                 <!-- Card -->
                 <div class="card">
                     <div class="table-responsive">
-                        <table class="table table-xxs table-striped" id="dtable">
+                        <table class="table table-xxs" id="dtable">
                             <thead>
                                 <tr>
                                     <th>ID</th>

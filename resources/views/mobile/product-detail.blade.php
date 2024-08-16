@@ -30,15 +30,15 @@
 
         <div class="cart-form-wrapper bg-white mb-3 py-3">
             <div class="container">
+                <h6>Masukan Jumlah</h6>
                 <form class="cart-form" action="#" method="">
                     <div class="order-plus-minus d-flex align-items-center">
+                        <br>
                         <div class="quantity-button-handler">-</div>
                         <input class="form-control cart-quantity-input" type="text" step="1" name="quantity"
                             value="1">
                         <div class="quantity-button-handler">+</div>
                     </div>
-                    <button class="btn btn-danger ms-3" onclick="addToCart('{{ $item->id }}',event)">Add To
-                        Cart</button>
                 </form>
             </div>
         </div>
@@ -74,6 +74,12 @@
                         </div>
                     @endforeach
                 </div>
+            </div>
+        </div>
+        <div class="p-specification bg-white mb-3 py-3">
+            <div class="container">
+                <button class="btn btn-danger w-50 ms-3" onclick="addToCart('{{ $item->id }}',event)">Add To
+                    Cart</button>
             </div>
         </div>
 

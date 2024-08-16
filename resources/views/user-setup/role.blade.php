@@ -310,7 +310,7 @@
             <div class="col-lg-4">
                 <!-- Card -->
                 <div class="card">
-                    <table class="table table-xxs table-striped table-hover" id="dtable">
+                    <table class="table table-xxs table-hover" id="dtable">
                         <thead>
                             <tr>
                                 <th>Role Name</th>
