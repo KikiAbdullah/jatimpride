@@ -61,7 +61,7 @@ class FileMail extends Mailable
             // 'logo'  => imgToBase64(public_path('app_local/img/logo.png')),
             'logo'  => asset('app_local/img/logo.png'),
             'item' => $this->trans,
-            'subject'  => $subject,
+            'title'  => $subject,
             'text'  => $text,
         ];
 
