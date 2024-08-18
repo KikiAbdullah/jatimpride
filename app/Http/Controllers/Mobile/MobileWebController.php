@@ -289,65 +289,71 @@ class MobileWebController extends Controller
         try {
             DB::beginTransaction();
 
-            $data  = $this->getRequest();
+            $data = $this->getRequest();
+            $pengirimanRequiredFields = ['alamat', 'provinsi_id', 'kabupaten_id', 'kecamatan_id', 'kelurahan_id'];
 
+            if ($data['jenis_pengiriman_id'] == 1) {
+                foreach ($pengirimanRequiredFields as $field) {
+                    if (empty($data[$field])) {
+                        return $this->redirectBackWithError('Alamat wajib diinputkan untuk data pengiriman');
+                    }
+                }
+            }
+
+            if (!$request->hasFile('bukti_pengiriman')) {
+                return $this->redirectBackWithError('Bukti Pengiriman wajib diinputkan');
+            }
 
             $createTrans = [
-                'no'                    => $this->gen_number($this->model, 'no', 'TR$$-@@#####', date('Y-m-d'), 'tanggal', true),
-                'tanggal'               => date('Y-m-d'),
-                'customer_id'           => auth()->user()->id,
-                'jenis_pengiriman_id'   => $data['jenis_pengiriman_id'],
-                'text'                  => $data['text'],
-                'provinsi_id'           => $data['provinsi_id'],
-                'kabupaten_id'          => $data['kabupaten_id'],
-                'kecamatan_id'          => $data['kecamatan_id'],
-                'kelurahan_id'          => $data['kelurahan_id'],
-                'alamat'                => $data['alamat'],
-                'status'                => 'open',
+                'no'                  => $this->gen_number($this->model, 'no', 'TR$$-@@#####', date('Y-m-d'), 'tanggal', true),
+                'tanggal'             => date('Y-m-d'),
+                'customer_id'         => auth()->user()->id,
+                'jenis_pengiriman_id' => $data['jenis_pengiriman_id'],
+                'text'                => $data['text'],
+                'provinsi_id'         => $data['provinsi_id'],
+                'kabupaten_id'        => $data['kabupaten_id'],
+                'kecamatan_id'        => $data['kecamatan_id'],
+                'kelurahan_id'        => $data['kelurahan_id'],
+                'alamat'              => $data['alamat'],
+                'status'              => 'open',
             ];
 
             $model = $this->model->create($createTrans);
 
             if ($request->hasFile('bukti_pengiriman')) {
                 $filename = $this->saveFoto($request->bukti_pengiriman, 'bukti_pengiriman/' . $model->id);
-                $model->bukti = $filename;
-                $model->save();
+                $model->update(['bukti' => $filename]);
             }
 
-            $cartToLines = [];
-
-            $carts = CartMerch::where('created_by', auth()->user()->id)->get();
-            foreach ($carts as  $cart) {
-                $cartToLines[] = [
-                    'trans_id' => $model->id,
-                    'merch_id' => $cart->merch_id,
-                    'size' => $cart->merch->size,
-                    'qty'  => $cart->qty,
-                    'harga' => $cart->merch->harga,
-                ];
-            }
+            $cartToLines = CartMerch::where('created_by', auth()->user()->id)
+                ->get()
+                ->map(function ($cart) use ($model) {
+                    return [
+                        'trans_id' => $model->id,
+                        'merch_id' => $cart->merch_id,
+                        'size'     => $cart->merch->size,
+                        'qty'      => $cart->qty,
+                        'harga'    => $cart->merch->harga,
+                    ];
+                })
+                ->toArray();
 
             if (!empty($cartToLines)) {
                 TransLine::insert($cartToLines);
-
                 CartMerch::where('created_by', auth()->user()->id)->delete();
             }
 
             if (!empty($model->customer->email)) {
-                $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
-                $subject = "Pemesanan Diterima";
+                $filePath = storage_path('app/public/sample.pdf');
                 Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
-
 
             DB::commit();
 
             return redirect()->route($this->generateUrl('history-detail'), $model->id)
                 ->withSuccess('Pemesanan Telah Berhasil');
         } catch (Exception $e) {
-
             DB::rollback();
-
             return $this->redirectBackWithError($e->getMessage());
         }
     }

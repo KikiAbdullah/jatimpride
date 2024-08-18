@@ -5,6 +5,13 @@
         {!! Form::open(['route' => 'mobile.order-store', 'method' => 'POST', 'id' => 'dform', 'files' => true]) !!}
         <!-- Checkout Wrapper-->
         <div class="checkout-wrapper-area py-3">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        {!! $error . '<br/>' !!}
+                    @endforeach
+                </div>
+            @endif
             <!-- Billing Address-->
             <div class="billing-information-card mb-3">
                 <div class="card billing-information-title-card bg-warning">

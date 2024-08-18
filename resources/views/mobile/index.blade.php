@@ -10,15 +10,18 @@
                 <div class="hero-slides owl-carousel">
                     <!-- Single Hero Slide-->
                     <div class="single-hero-slide"
-                        style="background-image: url('{{ asset('app_local/img/artwork.png') }}'); background-color:black;">
+                        style="background-image: url('{{ asset('app_local/img/slide/1.png') }}'); background-color:black;">
                         <div class="slide-content h-100 d-flex align-items-center">
                         </div>
                     </div>
-                    <!-- Single Hero Slide-->
-                    <div class="single-hero-slide" style="background-image: url('{{ asset('app_local/img/logo.png') }}')">
-                        <div class="slide-content h-100 d-flex align-items-center">
+
+                    @for ($i = 1; $i <= 4; $i++)
+                        <div class="single-hero-slide"
+                            style="background-image: url('{{ asset('app_local/img/slide/' . $i . '.jpg') }}'); background-color:black;">
+                            <div class="slide-content h-100 d-flex align-items-center">
+                            </div>
                         </div>
-                    </div>
+                    @endfor
                 </div>
             </div>
         </div>
@@ -31,7 +34,9 @@
             </div>
         </div>
     </div>
-
+    <div class="container py-3">
+        <img class="mb-4" src="{{ asset('app_local/img/size-chart.jpg') }}" alt="">
+    </div>
     <div class="container py-3">
         <div class="section-heading d-flex align-items-center justify-content-between">
             <h6>Merchandise</h6>

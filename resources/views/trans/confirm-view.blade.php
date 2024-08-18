@@ -16,7 +16,19 @@
         <div class="row mb-1">
             <label class="col-lg-3 text-lg-end fw-normal text-muted form-custom-head">Customer</label>
             <div class="col-lg-9 mb-1">
-                <div class="fw-semibold form-control-plaintext">{{ ucwords($item->customer->name) }}</div>
+                <div class="fw-semibold form-control-plaintext">
+                    {{ ucwords($item->customer->name) }}
+                </div>
+            </div>
+        </div>
+        <div class="row mb-1">
+            <label class="col-lg-3 text-lg-end fw-normal text-muted form-custom-head">Jenis
+                Pengiriman</label>
+            <div class="col-lg-9 mb-1">
+                <div class="form-control-plaintext">
+                    {{ ucwords($item->jenisPengiriman->name) }}
+                </div>
+                <small><cite>{{ $item->jenisPengiriman->text }}</cite></small>
             </div>
         </div>
         <div class="row mb-1">
@@ -37,7 +49,7 @@
             <div class="col-lg-9 mb-1">
                 <div class="form-control-plaintext">{!! $item->status_formatted !!}</div>
             </div>
-        </div>
+        </div>z
     </div>
     <div class="col-md-3 text-center">
         <div class="card">
