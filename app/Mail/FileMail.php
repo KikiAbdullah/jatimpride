@@ -65,11 +65,15 @@ class FileMail extends Mailable
             'text'  => $text,
         ];
 
-
-        if (Storage::exists($this->file)) {
-            return $this->subject($subject)
-                ->view('emails.jatimpride', $data) // Ganti dengan view yang kamu inginkan
-                ->attach($this->file);
+        if ($this->file != '') {
+            if (Storage::exists('public/' . $this->file)) {
+                return $this->subject($subject)
+                    ->view('emails.jatimpride', $data) // Ganti dengan view yang kamu inginkan
+                    ->attach(storage_path('app/public/' . $this->file));
+            } else {
+                return $this->subject($subject)
+                    ->view('emails.jatimpride', $data);
+            }
         } else {
             return $this->subject($subject)
                 ->view('emails.jatimpride', $data);

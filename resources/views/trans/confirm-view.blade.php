@@ -49,7 +49,7 @@
             <div class="col-lg-9 mb-1">
                 <div class="form-control-plaintext">{!! $item->status_formatted !!}</div>
             </div>
-        </div>z
+        </div>
     </div>
     <div class="col-md-3 text-center">
         <div class="card">

@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Modern Angles Invoice: #1023</title>
+    <title>INVOICE - {{ $item->no }}</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:inter,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
@@ -150,6 +150,7 @@
                             <td class="text-right">
                                 <span class="small-head">Detail:</span><br />
                                 {{ $item->jenisPengiriman->name ?? '' }}<br />
+                                {{ $item->text ?? '' }}<br />
                             </td>
                         </tr>
                     </table>

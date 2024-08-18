@@ -9,6 +9,7 @@ use DB;
 use App\Mail\FileMail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class TransController extends Controller
 {
@@ -138,8 +139,8 @@ class TransController extends Controller
             $response           = [];
 
             if (!empty($model->customer->email)) {
-                $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
-                $email = Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
+                $filePath = '';
+                Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
 
             DB::commit();
@@ -159,7 +160,7 @@ class TransController extends Controller
 
             DB::beginTransaction();
 
-            $model           = $this->model->find($id);
+            $model           = $this->model->with($this->relation)->find($id);
 
             $model->update([
                 'status' => 'open',
@@ -199,8 +200,9 @@ class TransController extends Controller
             ]);
 
             if (!empty($model->customer->email)) {
-                $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
-                $email = Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
+                $filePath = 'invoice/' . $model->id . '/invoice - ' . $model->no . '.pdf';
+
+                Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
 
             $response           = [];
@@ -311,10 +313,16 @@ class TransController extends Controller
         $response           = [];
 
         $model           = $this->model->with($this->relation)->find($id);
-
+        $filePath = '';
         if (!empty($model)) {
             if (!empty($model->customer->email)) {
-                $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
+
+                if ($model->status == 'open') {
+                    $filePath = 'invoice/' . $model->id . '/invoice - ' . $model->no . '.pdf';
+                } else if ($model->status == 'closed') {
+                    $filePath = 'invoice/' . $model->id . '/invoice - ' . $model->no . '.pdf';
+                }
+
                 Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
 
                 return response()->json(responseSuccess('Berhasil', $response));
@@ -336,13 +344,30 @@ class TransController extends Controller
         if (!empty($model)) {
 
             $data['item']           = $model;
-            return view('trans.print', $data);
 
             $pdf                    = Pdf::loadView('trans.print', $data);
             return $pdf->stream();
         } else {
             return response()->json(responseFailed());
         }
+    }
+
+    public function makePdfInvoice($model)
+    {
+        $view['item']           = $model;
+
+        $pdf = Pdf::loadView('trans.print', $view);
+        $pdf->setOption('enable-javascript', true);
+        $pdf->setOption('javascript-delay', 5000);
+        $pdf->setOption('enable-smart-shrinking', true);
+        $pdf->setOption('no-stop-slow-scripts', true);
+
+        $content    = $pdf->download()->getOriginalContent();
+        $pdf_name   = 'invoice - ' . $model->no . '.pdf';
+
+        Storage::put('public/invoice/' . $model->id . '/' . $pdf_name, $content);
+
+        return $pdf_name;
     }
     ///PRINT PDF
 }

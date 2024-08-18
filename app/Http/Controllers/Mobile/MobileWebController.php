@@ -11,10 +11,12 @@ use App\Models\Master\Merch;
 use App\Models\Trans;
 use App\Models\TransLine;
 use App\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use DB;
 use Exception;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class MobileWebController extends Controller
 {
@@ -163,6 +165,14 @@ class MobileWebController extends Controller
 
             $data  = $this->getRequest();
 
+            if ($data['qty'] < 1) {
+                $response           = [
+                    'status'            => false,
+                    'msg'               => 'Jumlah tidak boleh 0',
+                ];
+                return response()->json($response);
+            }
+
             $model = CartMerch::where([
                 'created_by' => auth()->user()->id,
                 'merch_id' => $data['merch_id'],
@@ -205,6 +215,15 @@ class MobileWebController extends Controller
             $data  = $this->getRequest();
 
             foreach ($data['items'] as $item) {
+
+                if ($item['qty'] < 1) {
+                    $response           = [
+                        'status'            => false,
+                        'msg'               => 'Jumlah tidak boleh 0',
+                    ];
+                    return response()->json($response);
+                }
+
                 $model = CartMerch::where([
                     'created_by' => auth()->user()->id,
                     'merch_id' => $item['merch_id'],
@@ -344,9 +363,12 @@ class MobileWebController extends Controller
             }
 
             if (!empty($model->customer->email)) {
-                $filePath = storage_path('app/public/sample.pdf');
+                $pdfName = $this->makePdfInvoice($model);
+
+                $filePath = 'invoice/' . $model->id . '/' . $pdfName;
                 Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
+
 
             DB::commit();
 
@@ -356,6 +378,24 @@ class MobileWebController extends Controller
             DB::rollback();
             return $this->redirectBackWithError($e->getMessage());
         }
+    }
+
+    public function makePdfInvoice($model)
+    {
+        $view['item']           = $model;
+
+        $pdf = Pdf::loadView('trans.print', $view);
+        $pdf->setOption('enable-javascript', true);
+        $pdf->setOption('javascript-delay', 5000);
+        $pdf->setOption('enable-smart-shrinking', true);
+        $pdf->setOption('no-stop-slow-scripts', true);
+
+        $content    = $pdf->download()->getOriginalContent();
+        $pdf_name   = 'invoice - ' . $model->no . '.pdf';
+
+        Storage::put('public/invoice/' . $model->id . '/' . $pdf_name, $content);
+
+        return $pdf_name;
     }
 
 
