@@ -18,12 +18,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet">
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('mobile-asset/img/icons/icon-72x72.png') }}">
+    <link rel="icon" href="{{ asset('app_local/img/favicon.png') }}">
     <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="{{ asset('mobile-asset/img/icons/icon-96x96.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('mobile-asset/img/icons/icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="167x167" href="{{ asset('mobile-asset/img/icons/icon-167x167.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('mobile-asset/img/icons/icon-180x180.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('app_local/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('app_local/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="167x167" href="{{ asset('app_local/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('app_local/img/favicon.png') }}">
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('mobile-asset/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('mobile-asset/css/animate.css') }}">
@@ -98,6 +98,13 @@
                     </div>
                     <div class="card user-data-card">
                         <div class="card-body">
+                            @if (count($errors) > 0)
+                                <div class="alert alert-danger">
+                                    @foreach ($errors->all() as $error)
+                                        {!! $error . '<br/>' !!}
+                                    @endforeach
+                                </div>
+                            @endif
                             <div class="mb-3">
                                 <div class="title mb-2"><i class="lni lni-user"></i><span>Username</span>
                                 </div>

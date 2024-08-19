@@ -23,6 +23,10 @@ class Merch extends Model
         'created_by',
     ];
 
+    protected $appends = [
+        'thumb_mobile',
+    ];
+
     public function getThumbMobileAttribute()
     {
         $path = 'thumbnail/' . $this->id . '/' . $this->thumbnail;

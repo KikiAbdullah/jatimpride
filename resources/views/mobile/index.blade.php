@@ -49,7 +49,7 @@
                     <div class="card product-card">
                         <div class="card-body">
                             <a class="product-thumbnail d-block" href="{{ route('mobile.product-detail', $product->id) }}">
-                                <img class="mb-2" src="{{ $product->thumb_mobile }}" alt="">
+                                <img class="mb-2" src="{{ $product->thumb_mobile ?? '' }}" alt="">
                             </a>
                             <!-- Product Title --><a class="product-title"
                                 href="{{ route('mobile.product-detail', $product->id) }}">{{ $product->name_size }}</a>

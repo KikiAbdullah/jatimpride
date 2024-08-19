@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', function () {
-        return redirect()->route('siteurl');
+        return redirect()->route('front.index');
     });
 
     Route::group(['prefix' => 'admin'], function () {
@@ -142,13 +142,4 @@ Route::get('mobile/register',                 'Mobile\MobileWebController@regist
 Route::post('mobile/register-store',                 'Mobile\MobileWebController@registerStore')->name('mobile.register-store');
 
 
-Route::get('/send-mail', function () {
-
-    $trans = Trans::first();
-    $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
-    $subject = "File Attachment Example";
-
-    Mail::to('kikirabdullah@gmail.com')->send(new FileMail($subject, $filePath, $trans));
-
-    return "Email sent successfully!";
-});
+Route::get('/',                 'FrontController@index')->name('front.index');

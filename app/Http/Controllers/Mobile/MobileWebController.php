@@ -15,8 +15,10 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use DB;
 use Exception;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class MobileWebController extends Controller
 {
@@ -497,6 +499,28 @@ class MobileWebController extends Controller
 
             $data  = $this->getRequest();
 
+            $validator                  = Validator::make($request->all(), [
+                'username'              => 'required|unique:users,username',
+                'name'                  => 'required',
+                'email'                 => 'required|email|unique:users,email',
+                'nowa'                  => 'required',
+                'password'              => 'required',
+            ], [
+                'username.required' => 'Username harus diisi.',
+                'username.unique' => 'Username sudah terdaftar.',
+                'name.required' => 'Nama Lengkap harus diisi.',
+                'email.required' => 'Email harus diisi.',
+                'email.email' => 'Email must be a valid email address.',
+                'email.unique' => 'Email sudah terdaftar.',
+                'nowa.required' => 'Whatsapp harus diisi.',
+                'password.required' => 'Password harus diisi.',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->redirectBackWithError($validator->messages()->first());
+            }
+
+
             $model = $this->user->fill($data);
             $model->save();
 
@@ -514,7 +538,7 @@ class MobileWebController extends Controller
                 ];
                 return response()->json($response);
             } else {
-                return redirect()->route($this->generateUrl('index'))
+                return redirect()->route('login')
                     ->withSuccess('Berhasil');
             }
         } catch (Exception $e) {

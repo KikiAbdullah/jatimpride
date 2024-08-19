@@ -7,6 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login - {{ env('APP_NAME') }}</title>
 
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('app_local/img/favicon.png') }}">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="{{ asset('app_local/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('app_local/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="167x167" href="{{ asset('app_local/img/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('app_local/img/favicon.png') }}">
+
     <!-- Global stylesheets -->
     <link href="{{ asset('assets/fonts/inter/inter.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/icons/phosphor/styles.min.css') }}" rel="stylesheet" type="text/css">
@@ -55,6 +63,15 @@
                                         @foreach ($errors->all() as $error)
                                             {!! $error . '<br/>' !!}
                                         @endforeach
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="text-center mb-3">
+
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
                                     </div>
                                 @endif
                             </div>
