@@ -4,13 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Index - Gp Bootstrap Template</title>
+    <title>{{ env('APP_NAME') }}</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
     <!-- Favicons -->
-    <link href="{{ asset('front-asset/img/favicon.png') }}" rel="icon" />
-    <link href="{{ asset('front-asset/img/apple-touch-icon.png') }}" rel="apple-touch-icon" />
+    <link href="{{ asset('app_local/img/favicon.png') }}" rel="icon" />
+    <link href="{{ asset('app_local/img/favicon.png') }}" rel="apple-touch-icon" />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
