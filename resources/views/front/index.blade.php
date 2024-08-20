@@ -236,7 +236,7 @@
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                     <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/flyer/JP_v1.jpg') }}" alt="sample89" />
+                        <img src="{{ asset('app_local/img/flyer/jp_v1.jpg') }}" alt="sample89" />
                         <figcaption>
                             <h1>JATIM PRIDE VOL.1</h1>
                         </figcaption>
@@ -247,7 +247,7 @@
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                     <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/flyer/JP_v2.jpg') }}" alt="sample89" />
+                        <img src="{{ asset('app_local/img/flyer/jp_v2.jpg') }}" alt="sample89" />
                         <figcaption>
                             <h1>JATIM PRIDE VOL.2</h1>
                         </figcaption>
@@ -258,7 +258,7 @@
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                     <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/flyer/JP_v3.jpg') }}" alt="sample89" />
+                        <img src="{{ asset('app_local/img/flyer/jp_v3.jpg') }}" alt="sample89" />
                         <figcaption>
                             <h1>JATIM PRIDE VOL.3</h1>
                         </figcaption>
