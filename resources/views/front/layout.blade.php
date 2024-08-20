@@ -79,24 +79,6 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li>
-                                <i class="bi bi-chevron-right"></i> <a href="#"> About us</a>
-                            </li>
-                            <li>
-                                <i class="bi bi-chevron-right"></i> <a href="#"> Contact</a>
-                            </li>
-                            <li>
-                                <i class="bi bi-chevron-right"></i> <a href="#"> Merchandise</a>
-                            </li>
-                            <li>
-                                <i class="bi bi-chevron-right"></i> <a href="#"> Our Event</a>
-                            </li>
-                        </ul>
-                    </div>
-
                 </div>
             </div>
         </div>
