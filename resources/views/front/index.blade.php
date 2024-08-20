@@ -232,9 +232,9 @@
         <!-- End Section Title -->
 
         <div class="container">
-            <div class="row gy-4">
+            <div class="row justify-content-center gy-4">
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-3 col-md-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                     <figure class="img-hover-text">
                         <img src="{{ asset('app_local/img/flyer/jp_v1.jpg') }}" alt="sample89" />
                         <figcaption>
@@ -245,7 +245,7 @@
                 </div>
                 <!-- End Team Member -->
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-3 col-md-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                     <figure class="img-hover-text">
                         <img src="{{ asset('app_local/img/flyer/jp_v2.jpg') }}" alt="sample89" />
                         <figcaption>
@@ -256,7 +256,7 @@
                 </div>
                 <!-- End Team Member -->
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-3 col-md-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                     <figure class="img-hover-text">
                         <img src="{{ asset('app_local/img/flyer/jp_v3.jpg') }}" alt="sample89" />
                         <figcaption>

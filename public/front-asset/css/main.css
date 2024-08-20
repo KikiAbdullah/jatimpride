@@ -190,28 +190,32 @@ h6 {
     margin: 0 0 0 30px;
     border-radius: 4px;
     transition: 0.3s;
-    border: 2px solid var(--accent-color);
+    background: var(--accent-color);
 }
 
 .header .btn-getstarted:hover,
 .header .btn-getstarted:focus:hover {
+    border: 2px solid var(--accent-color);
+    background: transparent;
     color: var(--default-color);
-    background: var(--accent-color);
 }
 
 .btn-location,
 .btn-location:focus {
     color: var(--contrast-color);
+    font-size: 14px;
     padding: 8px 30px;
+    margin: 0 0 0 30px;
     border-radius: 4px;
     transition: 0.3s;
-    border: 2px solid var(--accent-color);
+    background: var(--accent-color);
 }
 
 .btn-location:hover,
 .btn-location:focus:hover {
+    border: 2px solid var(--accent-color);
+    background: transparent;
     color: var(--default-color);
-    background: var(--accent-color);
 }
 
 @media (max-width: 1200px) {
@@ -1785,7 +1789,7 @@ section,
     -webkit-transition: all 0.35s ease;
     transition: all 0.35s ease;
 }
-
+/* 
 .img-hover-text:before,
 .img-hover-text:after {
     position: absolute;
@@ -1811,7 +1815,7 @@ section,
 .img-hover-text:after {
     -webkit-transform: skew(45deg) translateX(155%);
     transform: skew(45deg) translateX(155%);
-}
+} */
 
 .img-hover-text img {
     backface-visibility: hidden;
@@ -1827,13 +1831,11 @@ section,
     -webkit-transform: translate(-50%, -50%) scale(0.5);
     transform: translate(-50%, -50%) scale(0.5);
     opacity: 0;
-    -webkit-box-shadow: 0 0 10px #000000;
-    box-shadow: 0 0 10px #000000;
 }
 
 .img-hover-text h1 {
-    background-color: #000000;
-    border: 2px solid #fff;
+    /* background-color: #000000; */
+    /* border: 2px solid #fff; */
     color: #fff;
     font-size: 1.5em;
     font-weight: 600;
@@ -1857,7 +1859,7 @@ section,
     opacity: 0.5;
 }
 
-.img-hover-text:hover:before,
+/* .img-hover-text:hover:before,
 .img-hover-text.hover:before {
     -webkit-transform: skew(45deg) translateX(-55%);
     transform: skew(45deg) translateX(-55%);
@@ -1867,7 +1869,7 @@ section,
 .img-hover-text.hover:after {
     -webkit-transform: skew(45deg) translateX(55%);
     transform: skew(45deg) translateX(55%);
-}
+} */
 
 .img-hover-text:hover figcaption,
 .img-hover-text.hover figcaption {
