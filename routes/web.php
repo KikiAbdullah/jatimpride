@@ -139,7 +139,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 Route::get('mobile/register',                 'Mobile\MobileWebController@register')->name('mobile.register');
-Route::post('mobile/register-store',                 'Mobile\MobileWebController@registerStore')->name('mobile.register-store');
+Route::post('mobile/register-store',          'Mobile\MobileWebController@registerStore')->name('mobile.register-store');
 
 
 Route::get('/',                 'FrontController@index')->name('front.index');

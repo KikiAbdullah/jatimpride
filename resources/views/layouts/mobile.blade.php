@@ -140,11 +140,28 @@
                     <a href="{{ route('mobile.index') }}"><i class="fa-solid fa-house"></i><br>Home</a>
                 </li>
                 <li class="{{ $title == 'Cart' ? 'active' : '' }}">
-                    <a href="{{ route('mobile.cart') }}"><i class="fa-solid fa-bag-shopping"></i><br>Keranjang</a>
+                    <a href="{{ route('mobile.cart') }}"><i class="fa-solid fa-bag-shopping"></i>
+                        @if (!empty($data['count_cart']))
+                            <span class="ms-1 badge rounded-pill badge-danger">{{ $data['count_cart'] }}</span>
+                        @endif
+                        <br>Keranjang
+                    </a>
                 </li>
                 <li class="{{ $title == 'History' ? 'active' : '' }}">
                     <a href="{{ route('mobile.history') }}"><i class="fa-solid fa-receipt"></i><br>History</a>
                 </li>
+
+                @if (auth()->check())
+                    <li class="{{ $title == 'Log Out' ? 'active' : '' }}">
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                            <i class="fa-solid fa-sign-out"></i><br>Log Out
+                        </a>
+                        <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                @endif
 
             </ul>
         </div>

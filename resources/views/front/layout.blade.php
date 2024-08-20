@@ -46,7 +46,11 @@
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-            <a class="btn-getstarted" href="{{ route('mobile.index') }}">Registrasi</a>
+            @if ($is_login)
+                <a class="btn-getstarted ms-" href="{{ route('mobile.profile') }}">Profile</a>
+            @else
+                <a class="btn-getstarted" href="{{ route('mobile.index') }}">Login</a>
+            @endif
         </div>
     </header>
 

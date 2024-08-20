@@ -1842,3 +1842,16 @@ section,
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
 }
+
+.badge-number:after{
+  content: attr(data-count);
+  position: absolute;
+  background: red;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border: 2px #fff solid;
+  border-radius: 30px;
+  padding: 3px 5px;
+  font-size: 1.5rem;
+  top: -10px;
+}

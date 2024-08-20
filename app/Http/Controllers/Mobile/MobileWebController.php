@@ -38,6 +38,7 @@ class MobileWebController extends Controller
     {
         return [
             'list_product' => Merch::all(),
+            'count_cart'   => CartMerch::where('created_by', auth()->user()->id)->count()
         ];
     }
 
