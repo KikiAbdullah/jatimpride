@@ -8,35 +8,35 @@
         <div class="container">
             <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-xl-6 col-lg-8">
-                    <img src="{{ asset('app_local/img/jp4.png') }}" class="img-fluid" st alt="" />
+                    <img src="{{ asset('app_local/img/road-to.png') }}" class="img-fluid" st alt="" />
 
                     <div class="row gy-4 justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="col-3" data-aos="fade-up" data-aos-delay="300">
                             <div class="icon-box">
                                 <h1><a href="#!" id="days">0</a></h1>
 
-                                <h3><a href="#!">Days</a></h3>
+                                <h3><a href="#!">Hari</a></h3>
 
                             </div>
                         </div>
                         <div class="col-3" data-aos="fade-up" data-aos-delay="400">
                             <div class="icon-box">
                                 <h1><a href="#!" id="hours">0</a></h1>
-                                <h3><a href="#!">Hours</a></h3>
+                                <h3><a href="#!">Jam</a></h3>
                             </div>
                         </div>
                         <div class="col-3" data-aos="fade-up" data-aos-delay="500">
                             <div class="icon-box">
                                 <h1><a href="#!" id="minutes">0</a></h1>
 
-                                <h3><a href="#!">Minutes</a></h3>
+                                <h3><a href="#!">Menit</a></h3>
                             </div>
                         </div>
                         <div class="col-3" data-aos="fade-up" data-aos-delay="600">
                             <div class="icon-box">
                                 <h1><a href="#!" id="seconds">0</a></h1>
 
-                                <h3><a href="#!">Seconds</a></h3>
+                                <h3><a href="#!">Detik</a></h3>
                             </div>
                         </div>
                     </div>
@@ -57,20 +57,59 @@
     <section id="about" class="about section">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-4">
-                <div class="col-lg-6 order-2 order-lg-2">
-                    <img src="{{ asset('front-asset/img/about.jpg') }}" class="img-fluid" alt="" />
-                </div>
-                <div class="col-lg-6 order-1 order-lg-1 content">
+                <div class="col-lg-3">
                     <!-- Section Title -->
                     <div class="container section-title" data-aos="fade-up">
                         <h2>About</h2>
                         <p>About Us</p>
                     </div>
+                    <img src="{{ asset('front-asset/img/about.jpg') }}" class="img-fluid" alt="" />
+                </div>
+                <div class="col-lg-9 content">
+
                     <!-- End Section Title -->
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure quis sunt, blanditiis iusto
-                        libero rem, dolore deserunt pariatur odio delectus voluptatibus, labore dignissimos unde eum
-                        at quaerat culpa non aperiam.
+                    <p style="text-align: justify;">
+                        Assalamualikum wr.wb.<br>
+                        Salam sejahtera untuk kita semua,
+                        <br>
+                        <br>Salam otomotif !
+                        <br>Salam jatim pride ! All In Untuk Semesta 🔥
+
+                        <br>Puji syukur kehadirat Allah SWT atas segala nikmat dan karunia-Nya sehingga kita semua masih
+                        diberikan kesehatan jasmani maupun rohani dan tetap menjalin silaturahmi dalam satu hobi di dunia
+                        otomotif .
+                        <br>
+                        <br>Perkenalkan saya Mas Fadh Tri Wahyudo S.E. Sering di sapa mas fadh , selaku dari CEO / Leader
+                        Jatim
+                        Pride
+                        <br>
+                        <br>JATIM PRIDE adalah sebuah kegiatan apresiasi dalam bidang otomotif motor di segala merk motor
+                        yang
+                        ada. Banyak nya antusiasme pada akhir akhir ini pemuda pemuda yang menggandrungi hobi dalam bidang
+                        otomotif melalui media sosial yang berkembang pada jaman saat ini. Kami “JATI JAYA ENTERTAINMENT”
+                        mengadakan acara yang bertujuan untuk menyambung tali silaturahmi dan menyambung seduluran diantara
+                        banyaknya jenis jenis motor yang ada. Kegiatan ini akan mengundang seluruh pemuda yang memiliki hobi
+                        yang sama di sekitar Provinsi Jawa Timur. Dari CB, Herex, Matic, Supermoto, Moge, 2 tak dan lain
+                        sebagainya akan turut hadir, karena sebuah perbedaan itu akanme nimbulkan suatu Persaudaraan. Acara
+                        ini memiliki konsep unik dan menarik, serta diikuti dengan konten acara yang berkualitas dengan
+                        mengusung tema “JATIM PRIDE” dengan maksud bahwa kami adalah Kerbanggaan Jawa Timur dengan banyaknya
+                        jenis motor yang menarik, elegan bagi berbagai macam kalangan serta selalu menumbuhkan persatuan dan
+                        persaudaraan terhadap sesama club dengan jenis / merk yang berbeda.
+                        <br>
+                        <br>Alhamdulillaah Jatim pride sudah berada di Volume 4 , ini adalah sebuah semangat luar biasa
+                        pemuda
+                        dibidang otomotif untuk tetap melestarikan di Jawa Timur
+                        Saya mengucapkan terima kasih sebanyak banyaknya kepada seluruh Elemen yang selalu membantu setiap
+                        giat Jatim Pride mulai volume 1-4 ini .
+                        <br>
+                        <br>Semoga kita semua senantiasa di beri kesehatan dan kemudahan dalam segala hal langkah kebaikan
+                        kita
+                        untuk manfaat di masyarakat !
+                        <br>
+                        <br>Ingat tetap jangan arogan di Jalan raya , keep safety dan tunjukkan bahwa kita semua sangat
+                        bermanfaat untuk masyarakat luas di Jawa Timur !
+                        <br>
+                        <br>Salam Jatim Pride ! All in untuk Semesta !
                     </p>
 
                     <a class="btn-location text-white" href="#">Download Proposal PDF</a>
@@ -138,7 +177,7 @@
                     <figure class="img-hover-text">
                         <img src="{{ asset('app_local/img/slide/1.jpg') }}" class="w-100" alt="KONTES OTOMOTIF" />
                         <figcaption>
-                            <h3>KONTES OTOMOTIF</h3>
+                            <h1>KONTES OTOMOTIF</h1>
                         </figcaption>
                         <a href="#"></a>
                     </figure>
@@ -149,7 +188,7 @@
                     <figure class="img-hover-text">
                         <img src="{{ asset('app_local/img/slide/2.jpg') }}" class="w-100" alt="SUNDAY MORNING RIDE" />
                         <figcaption>
-                            <h3>SUNDAY MORNING RIDE</h3>
+                            <h1>SUNDAY MORNING RIDE</h1>
                         </figcaption>
                         <a href="#"></a>
                     </figure>
@@ -160,7 +199,7 @@
                     <figure class="img-hover-text">
                         <img src="{{ asset('app_local/img/slide/3.jpg') }}" class="w-100" alt="BAZZAR UMKM" />
                         <figcaption>
-                            <h3>BAZZAR UMKM</h3>
+                            <h1>BAZZAR UMKM</h1>
                         </figcaption>
                         <a href="#"></a>
                     </figure>
@@ -171,7 +210,7 @@
                     <figure class="img-hover-text">
                         <img src="{{ asset('app_local/img/slide/4.jpg') }}" class="w-100" alt="KONSER MUSIK" />
                         <figcaption>
-                            <h3>KONSER MUSIK</h3>
+                            <h1>KONSER MUSIK</h1>
                         </figcaption>
                         <a href="#"></a>
                     </figure>
@@ -197,9 +236,9 @@
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                     <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/artwork.png') }}" alt="sample89" />
+                        <img src="{{ asset('app_local/img/flyer/JP v1.jpg') }}" alt="sample89" />
                         <figcaption>
-                            <h3>JATIM PRIDE VOL.1</h3>
+                            <h1>JATIM PRIDE VOL.1</h1>
                         </figcaption>
                         <a href="#"></a>
                     </figure>
@@ -208,9 +247,9 @@
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                     <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/artwork.png') }}" alt="sample89" />
+                        <img src="{{ asset('app_local/img/flyer/JP v2.jpg') }}" alt="sample89" />
                         <figcaption>
-                            <h3>JATIM PRIDE VOL.2</h3>
+                            <h1>JATIM PRIDE VOL.2</h1>
                         </figcaption>
                         <a href="#"></a>
                     </figure>
@@ -219,9 +258,9 @@
 
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                     <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/artwork.png') }}" alt="sample89" />
+                        <img src="{{ asset('app_local/img/flyer/JP v3.jpg') }}" alt="sample89" />
                         <figcaption>
-                            <h3>JATIM PRIDE VOL.3</h3>
+                            <h1>JATIM PRIDE VOL.3</h1>
                         </figcaption>
                         <a href="#"></a>
                     </figure>
@@ -292,7 +331,7 @@
 @section('customjs')
     <script>
         // Set the date we're counting down to
-        var countDownDate = new Date("Jan 5, 2025 15:37:25").getTime();
+        var countDownDate = new Date("Sep 29, 2024 07:00:00").getTime();
 
         // Update the count down every 1 second
         var x = setInterval(function() {

@@ -67,12 +67,12 @@
                             <img src="{{ asset('app_local/img/logo.png') }}" alt="">
                         </a>
                         <div class="footer-contact pt-3">
-                            <p>A108 Adam Street</p>
-                            <p>New York, NY 535022</p>
+                            <p>Jati Jaya Garage</p>
+                            <p>Jl. Rambutan, Wringinanom, Jogosari,<br>Kec. Pandaan, Pasuruan, Jawa Timur 67156</p>
                             <p class="mt-3">
-                                <strong>Phone:</strong> <span>+1 5589 55488 55</span>
+                                <strong>Whatsapp:</strong> <span>0822-4528-3892</span>
                             </p>
-                            <p><strong>Email:</strong> <span>info@example.com</span></p>
+                            <p><strong>Email:</strong> <span>officialjatimpride@gmail.com</span></p>
                         </div>
                         <div class="social-links d-flex mt-4">
                             <a href="#!"><i class="bi bi-instagram"></i></a>
@@ -119,6 +119,9 @@
     </a>
 
     <!-- Vendor JS Files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('front-asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('front-asset/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('front-asset/vendor/aos/aos.js') }}"></script>
@@ -132,6 +135,8 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('front-asset/js/main.js') }}"></script>
+
+
 </body>
 
 </html>
