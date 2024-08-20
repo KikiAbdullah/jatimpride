@@ -69,9 +69,9 @@
 
                             <div class="text-center mb-3">
 
-                                @if (session('success'))
+                                @if (\Session::has('success'))
                                     <div class="alert alert-success">
-                                        {{ session('success') }}
+                                        {{ \Session::get('success') }}
                                     </div>
                                 @endif
                             </div>

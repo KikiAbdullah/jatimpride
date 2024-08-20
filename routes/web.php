@@ -143,3 +143,4 @@ Route::post('mobile/register-store',                 'Mobile\MobileWebController
 
 
 Route::get('/',                 'FrontController@index')->name('front.index');
+Route::get('/merchandise',      'FrontController@merchandise')->name('front.merchandise');

@@ -517,7 +517,11 @@ class MobileWebController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return $this->redirectBackWithError($validator->messages()->first());
+                $response           = [
+                    'status'            => false,
+                    'msg'               => $validator->messages()->first(),
+                ];
+                return response()->json($response);
             }
 
 
@@ -531,28 +535,19 @@ class MobileWebController extends Controller
             $log_helper->storeLog('add', $model->no ?? $model->id, $this->subtitle);
 
             DB::commit();
-            if ($request->ajax()) {
-                $response           = [
-                    'status'            => true,
-                    'msg'               => 'Data Saved.',
-                ];
-                return response()->json($response);
-            } else {
-                return redirect()->route('login')
-                    ->withSuccess('Berhasil');
-            }
+            $response           = [
+                'status'            => true,
+                'msg'               => 'Data Saved.',
+            ];
+            return response()->json($response);
         } catch (Exception $e) {
 
             DB::rollback();
-            if ($request->ajax()) {
-                $response           = [
-                    'status'            => false,
-                    'msg'               => $e->getMessage(),
-                ];
-                return response()->json($response);
-            } else {
-                return $this->redirectBackWithError($e->getMessage());
-            }
+            $response           = [
+                'status'            => false,
+                'msg'               => $e->getMessage(),
+            ];
+            return response()->json($response);
         }
     }
 }

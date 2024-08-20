@@ -86,7 +86,7 @@
     <!-- PWA Install Alert -->
     <div class="page-content-wrapper">
         <div class="container">
-            {!! Form::open(['route' => 'mobile.register-store', 'method' => 'POST', 'id' => 'dform']) !!}
+            {!! Form::open(['route' => 'mobile.register-store', 'method' => 'POST', 'id' => 'l-modal-form']) !!}
             <!-- Checkout Wrapper-->
             <div class="checkout-wrapper-area py-3">
                 <!-- Billing Address-->
@@ -171,6 +171,63 @@
     <script src="{{ asset('mobile-asset/js/pwa.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+    <script>
+        $(document).ready(function() {
+            $('body').on("submit", '#l-modal-form', function(e) {
+                e.preventDefault();
+
+                let urlForm = $(this).attr('action');
+                let dataForm = $(this).serialize();
+
+                $.ajax({
+                        type: 'POST',
+                        url: urlForm,
+                        data: dataForm,
+                        dataType: "json",
+                        success: (response) => {
+                            Swal.fire({
+                                toast: true,
+                                title: 'Berhasil',
+                                text: response.msg,
+                                icon: 'cussess',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                willClose: () => {
+                                    window.location.href = '{{ route('login') }}';
+                                }
+                            })
+
+                        },
+                    })
+                    .done(function(data) {
+                        return data;
+                    })
+                    .fail(function(jqXHR, textStatus, errorThrown) {
+
+                        if (jqXHR.status == 422) {
+                            var xhr = JSON.stringify(JSON.parse(jqXHR.responseText).errors);
+                        } else {
+                            var xhr = JSON.stringify(JSON.parse(jqXHR.responseText));
+
+                        }
+
+                        Swal.fire({
+                            toast: true,
+                            title: 'Request Error',
+                            text: xhr.substring(0, 160),
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        })
+
+                        $("#l-modal-form").find('button[type="submit"]').prop('disabled', false);
+                    });
+            });
+        });
+    </script>
 
 
     @yield('customjs')

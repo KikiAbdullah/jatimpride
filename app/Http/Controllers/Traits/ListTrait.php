@@ -19,7 +19,6 @@ trait ListTrait
         return Role::pluck('name', 'id');
     }
 
-
     public function listProvinsi()
     {
         $provinsi = Provinsi::pluck('nama_provinsi', 'id');
