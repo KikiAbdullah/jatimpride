@@ -1856,7 +1856,7 @@ section,
 
 .img-hover-text:hover > img,
 .img-hover-text.hover > img {
-    opacity: 0.5;
+    opacity: 0.2;
 }
 
 /* .img-hover-text:hover:before,

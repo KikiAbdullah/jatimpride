@@ -1,6 +1,74 @@
 @extends('front.layout')
 
 @section('content')
+    <style>
+        .overlay-video {
+            display: none;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            opacity: 0;
+            -ms-transition: opacity 600ms ease-in;
+            transition: opacity 600ms ease-in;
+            -ms-transition: opacity .6s;
+            transition: opacity .6s;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, .7);
+            z-index: 999999;
+        }
+
+        .o1 {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+            opacity: 1;
+            -ms-transition: opacity 600ms ease-out;
+            transition: opacity 600ms ease-out;
+            -ms-transition: opacity .6s;
+            transition: opacity .6s;
+        }
+
+        .videoWrapperExt {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            max-width: 982px;
+            padding: 0 20px;
+        }
+
+        .videoWrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 */
+            height: 0;
+        }
+
+        .videoWrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .close {
+            background-image: url(http://djit.ac/assets/images/news/mark.png);
+            position: absolute;
+            top: -50px;
+            right: 0px;
+            cursor: pointer;
+            z-index: 9999;
+            height: 40px;
+            width: 40px;
+            background-size: 40px;
+
+            @media (max-width: 767px) and (orientation: landscape) {
+                display: none;
+            }
+        }
+    </style>
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
         <img src="{{ asset('app_local/img/slide/1.png') }}" class="hero-img" alt="" data-aos="fade-in" />
@@ -63,7 +131,7 @@
                         <h2>About</h2>
                         <p>About Us</p>
                     </div>
-                    <img src="{{ asset('front-asset/img/about.jpg') }}" class="img-fluid" alt="" />
+                    <img src="{{ asset('app_local/img/mas-fadh.jpg') }}" class="img-fluid" alt="" />
                 </div>
                 <div class="col-lg-9 content">
 
@@ -240,7 +308,7 @@
                         <figcaption>
                             <h1>JATIM PRIDE VOL.1</h1>
                         </figcaption>
-                        <a href="#"></a>
+                        <a href="https://www.youtube.com/embed/5KvTCuj8RVI?rel=0&amp;showinfo=0&amp;autoplay=1" class="overlay-yt"></a>
                     </figure>
                 </div>
                 <!-- End Team Member -->
@@ -251,7 +319,7 @@
                         <figcaption>
                             <h1>JATIM PRIDE VOL.2</h1>
                         </figcaption>
-                        <a href="#"></a>
+                        <a href="https://www.youtube.com/embed/6LPPfqCpTr4?rel=0&amp;showinfo=0&amp;autoplay=1" class="overlay-yt"></a>
                     </figure>
                 </div>
                 <!-- End Team Member -->
@@ -262,7 +330,7 @@
                         <figcaption>
                             <h1>JATIM PRIDE VOL.3</h1>
                         </figcaption>
-                        <a href="#"></a>
+                        <a href="https://www.youtube.com/embed/QCLJQ8ZcDJE?rel=0&amp;showinfo=0&amp;autoplay=1" class="overlay-yt"></a>
                     </figure>
                 </div>
                 <!-- End Team Member -->
@@ -325,6 +393,17 @@
         </div>
     </section>
     <!-- /Clients Section -->
+
+    <div class="overlay-video">
+
+        <div class="videoWrapperExt">
+            <div class="videoWrapper">
+                <div class="close"></div>
+                <iframe id="player" width="853" height="480" src="" frameborder="0"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 @endsection
 
 
@@ -363,5 +442,41 @@
                 document.getElementById("seconds").innerHTML = '0';
             }
         }, 1000);
+
+
+
+        $(".overlay-yt").unbind("click").bind("click", function(e) {
+            e.preventDefault();
+            var src = $(this).attr("href");
+            $(".overlay-video").show();
+            setTimeout(function() {
+                $(".overlay-video").addClass("o1");
+                $("#player").attr("src", src);
+            }, 100);
+        });
+
+
+        $(".overlay-video").click(function(event) {
+            if (!$(event.target).closest(".videoWrapperExt").length) {
+                var PlayingVideoSrc = $("#player").attr("src").replace("&autoplay=1", "");
+                $("#player").attr("src", PlayingVideoSrc);
+                $(".overlay-video").removeClass("o1");
+                setTimeout(function() {
+                    $(".overlay-video").hide();
+                }, 600);
+            }
+        });
+
+        // video overlayer: close it via the X icon
+
+        $(".close").click(function(event) {
+            var PlayingVideoSrc = $("#player").attr("src").replace("&autoplay=1", "");
+            $("#player").attr("src", PlayingVideoSrc);
+            $(".overlay-video").removeClass("o1");
+            setTimeout(function() {
+                $(".overlay-video").hide();
+            }, 600);
+
+        });
     </script>
 @endsection
