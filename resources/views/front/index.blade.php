@@ -308,7 +308,7 @@
                         <figcaption>
                             <h1>JATIM PRIDE VOL.1</h1>
                         </figcaption>
-                        <a href="https://www.youtube.com/embed/5KvTCuj8RVI?rel=0&amp;showinfo=0&amp;autoplay=1" class="overlay-yt"></a>
+                        <a href="#"></a>
                     </figure>
                 </div>
                 <!-- End Team Member -->
@@ -319,7 +319,7 @@
                         <figcaption>
                             <h1>JATIM PRIDE VOL.2</h1>
                         </figcaption>
-                        <a href="https://www.youtube.com/embed/6LPPfqCpTr4?rel=0&amp;showinfo=0&amp;autoplay=1" class="overlay-yt"></a>
+                        <a href="#"></a>
                     </figure>
                 </div>
                 <!-- End Team Member -->
@@ -330,7 +330,7 @@
                         <figcaption>
                             <h1>JATIM PRIDE VOL.3</h1>
                         </figcaption>
-                        <a href="https://www.youtube.com/embed/QCLJQ8ZcDJE?rel=0&amp;showinfo=0&amp;autoplay=1" class="overlay-yt"></a>
+                        <a href="#"></a>
                     </figure>
                 </div>
                 <!-- End Team Member -->

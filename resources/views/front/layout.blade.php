@@ -63,22 +63,30 @@
             <div class="container">
                 <div class="row gy-4">
                     <div class="col-lg-6 col-md-6 footer-about">
-                        <a href="{{ route('front.index') }}" class="logo d-flex align-items-center">
-                            <img src="{{ asset('app_local/img/logo.png') }}" alt="">
-                        </a>
                         <div class="footer-contact pt-3">
-                            <p>Jati Jaya Garage</p>
+                            <h2>Jati Jaya Garage</h2>
                             <p>Jl. Rambutan, Wringinanom, Jogosari,<br>Kec. Pandaan, Pasuruan, Jawa Timur 67156</p>
                             <p class="mt-3">
                                 <strong>Whatsapp:</strong> <span>0822-4528-3892</span>
                             </p>
-                            <p><strong>Email:</strong> <span>officialjatimpride@gmail.com</span></p>
+                            <p><strong>Email:</strong> <span><a href="mailto:officialjatimpride@gmail.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer">officialjatimpride@gmail.com</a></span></p>
                         </div>
                         <div class="social-links d-flex mt-4">
-                            <a href="#!"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.instagram.com/jatim.pride" target="_blank"><i
+                                    class="bi bi-instagram"></i></a>
+                            <a href="https://www.tiktok.com/@jatijayagarage" target="_blank"><i
+                                    class="bi bi-tiktok"></i></a>
+                            <a href="https://youtube.com/@jatijayagarage5108?si=_f8iPep27QHP87hS" target="_blank"><i
+                                    class="bi bi-youtube"></i></a>
                         </div>
                     </div>
-
+                    <div class="col-lg-6">
+                        <a href="{{ route('front.index') }}">
+                            <img src="{{ asset('app_local/img/logo.png') }}" class="img-fluid" style="opacity: 0.5" alt="">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
