@@ -40,7 +40,7 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="{{ route('front.index') }}#about">About Us</a></li>
-                    <li><a href="{{ route('front.index') }}#contact">Contact Us</a></li>
+                    <li><a href="https://wa.me/6282245283892" target="_blank">Contact Us</a></li>
                     <li><a href="{{ route('front.index') }}#merchandise">Merchandise</a></li>
                     <li><a href="{{ route('front.index') }}#event">Our Event</a></li>
                     <li><a href="#">Ticket</a></li>
