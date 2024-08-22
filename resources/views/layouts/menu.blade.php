@@ -58,7 +58,7 @@
                     </li>
                 @endcanany
 
-                @canany(['master_merch', 'master_jenis_pengiriman'])
+                @canany(['master_merch', 'master_jenis_pengiriman', 'master_crew'])
                     <li class="nav-item nav-item-dropdown-xl dropdown">
                         <a href="#"
                             class="navbar-nav-link dropdown-toggle rounded {{ in_array($title, ['Merch', 'Payment', 'Jenis Pengiriman']) ? 'active' : '' }}"
@@ -86,6 +86,34 @@
                                     class="dropdown-item {{ $title == 'Jenis Pengiriman' ? 'active' : '' }}">
                                     <i class="ph-stack me-2"></i>
                                     Jenis Pengiriman
+                                </a>
+                            @endcan
+                            @can('master_crew')
+                                <a href="{{ route('master.crew.index') }}"
+                                    class="dropdown-item {{ $title == 'Crew' ? 'active' : '' }}">
+                                    <i class="ph-users-three me-2"></i>
+                                    Crew
+                                </a>
+                            @endcan
+                            @can('master_event')
+                                <a href="{{ route('master.event.index') }}"
+                                    class="dropdown-item {{ $title == 'Event' ? 'active' : '' }}">
+                                    <i class="ph-stack me-2"></i>
+                                    Event
+                                </a>
+                            @endcan
+                            @can('master_sponsor')
+                                <a href="{{ route('master.sponsor.index') }}"
+                                    class="dropdown-item {{ $title == 'Sponsor' ? 'active' : '' }}">
+                                    <i class="ph-stack me-2"></i>
+                                    Sponsor
+                                </a>
+                            @endcan
+                            @can('master_activity')
+                                <a href="{{ route('master.activity.index') }}"
+                                    class="dropdown-item {{ $title == 'Activity' ? 'active' : '' }}">
+                                    <i class="ph-stack me-2"></i>
+                                    Activity
                                 </a>
                             @endcan
                         </div>

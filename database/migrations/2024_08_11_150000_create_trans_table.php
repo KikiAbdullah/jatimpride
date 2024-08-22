@@ -20,10 +20,10 @@ class CreateTransTable extends Migration
             $table->integer('customer_id')->nullable();
             $table->integer('jenis_pengiriman_id')->nullable();
             $table->integer('payment_id')->nullable();
-            $table->integer('provinsi_id')->nullable();
-            $table->integer('kabupaten_id')->nullable();
-            $table->integer('kecamatan_id')->nullable();
-            $table->integer('kelurahan_id')->nullable();
+            $table->string('provinsi_id')->nullable();
+            $table->string('kabupaten_id')->nullable();
+            $table->string('kecamatan_id')->nullable();
+            $table->string('kelurahan_id')->nullable();
             $table->text('alamat')->nullable();
             $table->text('bukti')->nullable()->comment('bukti pembayaran');
             $table->string('noresi')->nullable();

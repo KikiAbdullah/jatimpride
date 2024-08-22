@@ -80,6 +80,38 @@ Route::group(['middleware' => ['auth']], function () {
             });
             Route::resource('jenis-pengiriman',        'Master\JenisPengirimanController')->middleware('can:master_jenis_pengiriman');
             //JENIS PENGIRIMAN
+
+
+            //CREW
+            Route::group(['prefix' => 'crew', 'as' => 'crew.'], function () {
+                Route::get('get-data',      'Master\CrewController@ajaxData')->name('get-data');
+            });
+            Route::resource('crew',        'Master\CrewController')->middleware('can:master_crew');
+            //CREW
+
+
+            //EVENT
+            Route::group(['prefix' => 'event', 'as' => 'event.'], function () {
+                Route::get('get-data',      'Master\EventController@ajaxData')->name('get-data');
+            });
+            Route::resource('event',        'Master\EventController')->middleware('can:master_event');
+            //EVENT
+
+
+            //ACTIVITY
+            Route::group(['prefix' => 'activity', 'as' => 'activity.'], function () {
+                Route::get('get-data',      'Master\ActivityController@ajaxData')->name('get-data');
+            });
+            Route::resource('activity',        'Master\ActivityController')->middleware('can:master_activity');
+            //ACTIVITY
+
+
+            //SPONSOR
+            Route::group(['prefix' => 'sponsor', 'as' => 'sponsor.'], function () {
+                Route::get('get-data',      'Master\SponsorController@ajaxData')->name('get-data');
+            });
+            Route::resource('sponsor',        'Master\SponsorController')->middleware('can:master_sponsor');
+            //SPONSOR
         });
         //MASTER
 
