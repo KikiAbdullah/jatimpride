@@ -45,9 +45,8 @@ class MobileWebController extends Controller
     public function index(Request $request)
     {
         if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
-            return redirect()->route('dashboard');
+            return redirect()->route('siteurl');
         }
-
 
         $view  = [
             'title'         => 'Home',
