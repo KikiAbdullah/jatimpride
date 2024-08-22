@@ -129,14 +129,14 @@
                     <!-- Section Title -->
                     <img src="{{ asset('app_local/img/mas-fadh.jpg') }}" class="img-fluid" alt="" />
                     <div class="container section-title mt-3" data-aos="fade-up">
-                        <h6 >CEO / LEADER JATIM PRIDE</h6>
+                        <h6>CEO / LEADER JATIM PRIDE</h6>
                         <p>Mas Fadh Tri Wahyudo S.E.</p>
                     </div>
                 </div>
                 <div class="col-lg-9 content">
 
                     <!-- End Section Title -->
-                    <p style="text-align: justify;">
+                    <p class="text" style="text-align: justify;">
                         Assalamualikum wr.wb.<br>
                         Salam sejahtera untuk kita semua,
                         <br>
@@ -148,22 +148,24 @@
                         otomotif .
                         <br>
                         <br>Perkenalkan saya Mas Fadh Tri Wahyudo S.E. Sering di sapa mas fadh , selaku dari CEO / Leader
-                        Jatim
-                        Pride
+                        Jatim Pride
                         <br>
                         <br>JATIM PRIDE adalah sebuah kegiatan apresiasi dalam bidang otomotif motor di segala merk motor
-                        yang
-                        ada. Banyak nya antusiasme pada akhir akhir ini pemuda pemuda yang menggandrungi hobi dalam bidang
+                        yang ada. Banyak nya antusiasme pada akhir akhir ini pemuda pemuda yang menggandrungi hobi dalam
+                        bidang
                         otomotif melalui media sosial yang berkembang pada jaman saat ini. Kami “JATI JAYA ENTERTAINMENT”
                         mengadakan acara yang bertujuan untuk menyambung tali silaturahmi dan menyambung seduluran diantara
-                        banyaknya jenis jenis motor yang ada. Kegiatan ini akan mengundang seluruh pemuda yang memiliki hobi
+                        banyaknya jenis jenis motor yang ada.
+                    </p>
+                    <span class="dots">...</span>
+                    <span class="more-text" style="display: none;">
+                        Kegiatan ini akan mengundang seluruh pemuda yang memiliki hobi
                         yang sama di sekitar Provinsi Jawa Timur. Dari CB, Herex, Matic, Supermoto, Moge, 2 tak dan lain
                         sebagainya akan turut hadir, karena sebuah perbedaan itu akanme nimbulkan suatu Persaudaraan. Acara
                         ini memiliki konsep unik dan menarik, serta diikuti dengan konten acara yang berkualitas dengan
                         mengusung tema “JATIM PRIDE” dengan maksud bahwa kami adalah Kerbanggaan Jawa Timur dengan banyaknya
                         jenis motor yang menarik, elegan bagi berbagai macam kalangan serta selalu menumbuhkan persatuan dan
                         persaudaraan terhadap sesama club dengan jenis / merk yang berbeda.
-                        <br>
                         <br>Alhamdulillaah Jatim pride sudah berada di Volume 4 , ini adalah sebuah semangat luar biasa
                         pemuda
                         dibidang otomotif untuk tetap melestarikan di Jawa Timur
@@ -178,7 +180,9 @@
                         bermanfaat untuk masyarakat luas di Jawa Timur !
                         <br>
                         <br>Salam Jatim Pride ! All in untuk Semesta !
-                    </p>
+                    </span>
+                    <br>
+                    <a href="javascript:void(0);" class="read-more">Read more</a>
                 </div>
             </div>
         </div>
@@ -442,39 +446,20 @@
         }, 1000);
 
 
+        document.querySelector('.read-more').addEventListener('click', function() {
+            var moreText = document.querySelector('.more-text');
+            var dots = document.querySelector('.dots');
+            var readMoreLink = this;
 
-        $(".overlay-yt").unbind("click").bind("click", function(e) {
-            e.preventDefault();
-            var src = $(this).attr("href");
-            $(".overlay-video").show();
-            setTimeout(function() {
-                $(".overlay-video").addClass("o1");
-                $("#player").attr("src", src);
-            }, 100);
-        });
-
-
-        $(".overlay-video").click(function(event) {
-            if (!$(event.target).closest(".videoWrapperExt").length) {
-                var PlayingVideoSrc = $("#player").attr("src").replace("&autoplay=1", "");
-                $("#player").attr("src", PlayingVideoSrc);
-                $(".overlay-video").removeClass("o1");
-                setTimeout(function() {
-                    $(".overlay-video").hide();
-                }, 600);
+            if (moreText.style.display === 'none') {
+                moreText.style.display = 'inline';
+                dots.style.display = 'none';
+                readMoreLink.textContent = 'Read less';
+            } else {
+                moreText.style.display = 'none';
+                dots.style.display = 'inline';
+                readMoreLink.textContent = 'Read more';
             }
-        });
-
-        // video overlayer: close it via the X icon
-
-        $(".close").click(function(event) {
-            var PlayingVideoSrc = $("#player").attr("src").replace("&autoplay=1", "");
-            $("#player").attr("src", PlayingVideoSrc);
-            $(".overlay-video").removeClass("o1");
-            setTimeout(function() {
-                $(".overlay-video").hide();
-            }, 600);
-
         });
     </script>
 @endsection
