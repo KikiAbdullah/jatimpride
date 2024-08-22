@@ -28,7 +28,37 @@
                     </li>
                 @endcan
 
-                @canany(['master_merch'])
+                @canany(['report_transaksi'])
+                    <li class="nav-item nav-item-dropdown-xl dropdown">
+                        <a href="#"
+                            class="navbar-nav-link dropdown-toggle rounded {{ in_array($title, ['Transaksi']) ? 'active' : '' }}"
+                            data-bs-toggle="dropdown">
+                            <i class="ph-files me-2"></i>
+                            Report
+                        </a>
+
+                        <div class="dropdown-menu">
+                            <div class="dropdown-header">Report</div>
+                            @can('report_transaksi')
+                                <a href="{{ route('report.transaksi.index') }}"
+                                    class="dropdown-item {{ $title == 'Transaksi' ? 'active' : '' }}">
+                                    <i class="ph-files me-2"></i>
+                                    Transaksi
+                                </a>
+                            @endcan
+
+                            @can('report_stok_merch')
+                                <a href="{{ route('report.stok-merch.index') }}"
+                                    class="dropdown-item {{ $title == 'Stok Merch' ? 'active' : '' }}">
+                                    <i class="ph-files me-2"></i>
+                                    Stok Merch
+                                </a>
+                            @endcan
+                        </div>
+                    </li>
+                @endcanany
+
+                @canany(['master_merch', 'master_jenis_pengiriman'])
                     <li class="nav-item nav-item-dropdown-xl dropdown">
                         <a href="#"
                             class="navbar-nav-link dropdown-toggle rounded {{ in_array($title, ['Merch', 'Payment', 'Jenis Pengiriman']) ? 'active' : '' }}"
@@ -49,13 +79,6 @@
                                     class="dropdown-item {{ $title == 'Merch Foto' ? 'active' : '' }}">
                                     <i class="ph-stack me-2"></i>
                                     Merch Foto
-                                </a>
-                            @endcan
-                            @can('master_payment')
-                                <a href="{{ route('master.payment.index') }}"
-                                    class="dropdown-item {{ $title == 'Payment' ? 'active' : '' }}">
-                                    <i class="ph-stack me-2"></i>
-                                    Payment
                                 </a>
                             @endcan
                             @can('master_jenis_pengiriman')

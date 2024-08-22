@@ -140,6 +140,11 @@ class MobileWebController extends Controller
                     'rejected_by' => auth()->user()->id,
                     'rejected_at' => date('Y-m-d H:i:s'),
                 ]);
+
+                foreach ($trans->lines as $key => $line) {
+                    $merch = Merch::find($line->merch_id);
+                    $merch->increment('stok', $line->qty);
+                }
             }
 
             DB::commit();
@@ -166,93 +171,94 @@ class MobileWebController extends Controller
         try {
             DB::beginTransaction();
 
-            $data  = $this->getRequest();
+            $data = $this->getRequest();
+            $userId = auth()->user()->id;
 
+            // Validate quantity
             if ($data['qty'] < 1) {
-                $response           = [
-                    'status'            => false,
-                    'msg'               => 'Jumlah tidak boleh 0',
-                ];
-                return response()->json($response);
+                return response()->json([
+                    'status' => false,
+                    'msg'    => 'Jumlah tidak boleh 0',
+                ]);
             }
 
-            $model = CartMerch::where([
-                'created_by' => auth()->user()->id,
-                'merch_id' => $data['merch_id'],
-            ])->first();
-
+            // Update or create cart item
             $model = CartMerch::updateOrCreate(
                 [
-                    'created_by' => auth()->user()->id,
-                    'merch_id' => $data['merch_id'],
+                    'created_by' => $userId,
+                    'merch_id'   => $data['merch_id'],
                 ],
                 [
-                    'qty' => ($model->qty ?? 0) + $data['qty'],
+                    'qty' => DB::raw('COALESCE(qty, 0) + ' . $data['qty']),
                 ]
             );
 
             DB::commit();
 
-            $response           = [
-                'status'            => true,
-                'msg'               => 'Data Saved.',
-            ];
-            return response()->json($response);
+            return response()->json([
+                'status' => true,
+                'msg'    => 'Data Saved.',
+            ]);
         } catch (Exception $e) {
-
             DB::rollback();
 
-            $response           = [
-                'status'            => false,
-                'msg'               => $e->getMessage(),
-            ];
-            return response()->json($response);
+            return response()->json([
+                'status' => false,
+                'msg'    => $e->getMessage(),
+            ]);
         }
     }
+
 
     public function cartUpdate(Request $request)
     {
         try {
             DB::beginTransaction();
 
-            $data  = $this->getRequest();
+            $data = $this->getRequest();
+            $userId = auth()->user()->id;
 
             foreach ($data['items'] as $item) {
+                $merch = Merch::find($item['merch_id']);
 
-                if ($item['qty'] < 1) {
-                    $response           = [
-                        'status'            => false,
-                        'msg'               => 'Jumlah tidak boleh 0',
-                    ];
-                    return response()->json($response);
+                // Validate quantity
+                if ($item['qty'] > $merch->stok) {
+                    return response()->json([
+                        'status' => false,
+                        'msg'    => 'Maks. Pembelian barang ini ' . $merch->stok . ', kurangi pembelianmu, ya!',
+                    ]);
                 }
 
-                $model = CartMerch::where([
-                    'created_by' => auth()->user()->id,
-                    'merch_id' => $item['merch_id'],
-                ])->update([
-                    'qty' => $item['qty'],
-                ]);
+                if ($item['qty'] < 1) {
+                    return response()->json([
+                        'status' => false,
+                        'msg'    => 'Jumlah tidak boleh 0',
+                    ]);
+                }
+
+                // Update cart item quantity
+                CartMerch::where([
+                    'created_by' => $userId,
+                    'merch_id'   => $item['merch_id'],
+                ])->update(['qty' => $item['qty']]);
             }
 
             DB::commit();
 
-            $response           = [
-                'status'            => true,
-                'msg'               => 'Data Saved.',
-            ];
-            return response()->json($response);
+            return response()->json([
+                'status' => true,
+                'msg'    => 'Data Saved.',
+            ]);
         } catch (Exception $e) {
-
             DB::rollback();
 
-            $response           = [
-                'status'            => false,
-                'msg'               => $e->getMessage(),
-            ];
-            return response()->json($response);
+            return response()->json([
+                'status' => false,
+                'msg'    => $e->getMessage(),
+            ]);
         }
     }
+
 
     public function cartDelete(Request $request, $id)
     {
@@ -314,6 +320,7 @@ class MobileWebController extends Controller
             $data = $this->getRequest();
             $pengirimanRequiredFields = ['alamat', 'provinsi_id', 'kabupaten_id', 'kecamatan_id', 'kelurahan_id'];
 
+            // Validate shipping address for specific delivery type
             if ($data['jenis_pengiriman_id'] == 1) {
                 foreach ($pengirimanRequiredFields as $field) {
                     if (empty($data[$field])) {
@@ -322,59 +329,72 @@ class MobileWebController extends Controller
                 }
             }
 
+            // Validate shipping proof
             if (!$request->hasFile('bukti_pengiriman')) {
                 return $this->redirectBackWithError('Bukti Pengiriman wajib diinputkan');
             }
 
+            // Check stock availability
+            $cartMerch = CartMerch::where('created_by', auth()->user()->id)->get();
+            foreach ($cartMerch as $cart) {
+                if ($cart->qty > $cart->merch->stok) {
+                    return $this->redirectBackWithError('Stok sudah berkurang, Maks. Pembelian barang ini ' . $cart->merch->stok . ', kurangi pembelianmu, ya!');
+                }
+            }
+
+            // Create transaction
             $createTrans = [
                 'no'                  => $this->gen_number($this->model, 'no', 'TR$$-@@#####', date('Y-m-d'), 'tanggal', true),
                 'tanggal'             => date('Y-m-d'),
                 'customer_id'         => auth()->user()->id,
                 'jenis_pengiriman_id' => $data['jenis_pengiriman_id'],
                 'text'                => $data['text'],
-                'provinsi_id'         => $data['provinsi_id'],
-                'kabupaten_id'        => $data['kabupaten_id'],
-                'kecamatan_id'        => $data['kecamatan_id'],
-                'kelurahan_id'        => $data['kelurahan_id'],
-                'alamat'              => $data['alamat'],
+                'provinsi_id'         => isset($data['provinsi_id']) ? $data['provinsi_id'] : null,
+                'kabupaten_id'        => isset($data['kabupaten_id']) ? $data['kabupaten_id'] : null,
+                'kecamatan_id'        => isset($data['kecamatan_id']) ? $data['kecamatan_id'] : null,
+                'kelurahan_id'        => isset($data['kelurahan_id']) ? $data['kelurahan_id'] : null,
+                'alamat'              => isset($data['alamat']) ? $data['alamat'] : null,
                 'status'              => 'open',
             ];
-
             $model = $this->model->create($createTrans);
 
+            // Save shipping proof
             if ($request->hasFile('bukti_pengiriman')) {
                 $filename = $this->saveFoto($request->bukti_pengiriman, 'bukti_pengiriman/' . $model->id);
                 $model->update(['bukti' => $filename]);
             }
 
-            $cartToLines = CartMerch::where('created_by', auth()->user()->id)
-                ->get()
-                ->map(function ($cart) use ($model) {
-                    return [
-                        'trans_id' => $model->id,
-                        'merch_id' => $cart->merch_id,
-                        'size'     => $cart->merch->size,
-                        'qty'      => $cart->qty,
-                        'harga'    => $cart->merch->harga,
-                    ];
-                })
-                ->toArray();
+            // Process cart items to transaction lines and update stock
+            $cartToLines = [];
+            foreach ($cartMerch as $cart) {
+                $cartToLines[] = [
+                    'trans_id' => $model->id,
+                    'merch_id' => $cart->merch_id,
+                    'size'     => $cart->merch->size,
+                    'qty'      => $cart->qty,
+                    'harga'    => $cart->merch->harga,
+                ];
+            }
 
             if (!empty($cartToLines)) {
                 TransLine::insert($cartToLines);
+
+                foreach ($cartToLines as $cartLine) {
+                    $merch = Merch::find($cartLine['merch_id']);
+                    $merch->decrement('stok', $cartLine['qty']);
+                }
+
                 CartMerch::where('created_by', auth()->user()->id)->delete();
             }
 
+            // Send invoice email
             if (!empty($model->customer->email)) {
                 $pdfName = $this->makePdfInvoice($model);
-
                 $filePath = 'invoice/' . $model->id . '/' . $pdfName;
                 Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
 
-
             DB::commit();
-
             return redirect()->route($this->generateUrl('history-detail'), $model->id)
                 ->withSuccess('Pemesanan Telah Berhasil');
         } catch (Exception $e) {
@@ -382,6 +402,8 @@ class MobileWebController extends Controller
             return $this->redirectBackWithError($e->getMessage());
         }
     }
+
+
 
     public function makePdfInvoice($model)
     {

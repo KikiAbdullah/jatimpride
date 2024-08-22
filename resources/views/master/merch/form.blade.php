@@ -43,6 +43,17 @@
         ]) !!}
     </div>
 </div>
+
+<div class="row mb-3">
+    <label class="col-lg-3 col-form-label text-lg-end d-none d-lg-block">Stok</label>
+    <div class="col-lg-9">
+        {!! Form::number('stok', null, [
+            'class' => in_array('stok', $errors->keys()) ? 'form-control is-invalid' : 'form-control',
+            'placeholder' => 'Stok',
+        ]) !!}
+    </div>
+</div>
+
 <div class="row mb-3">
     <label class="col-lg-3 col-form-label text-lg-end d-none d-lg-block">Harga</label>
     <div class="col-lg-9">
@@ -50,8 +61,8 @@
     </div>
 </div>
 <div class="row mb-3">
-    <label class="col-lg-3 col-form-label text-lg-end d-none d-lg-block">Text</label>
+    <label class="col-lg-3 col-form-label text-lg-end d-none d-lg-block">Keterangan</label>
     <div class="col-lg-9">
-        {!! Form::textarea('text', null, ['class' => 'form-control', 'placeholder' => 'Harga', 'rows' => 2]) !!}
+        {!! Form::textarea('text', null, ['class' => 'form-control', 'placeholder' => 'Keterangan', 'rows' => 2]) !!}
     </div>
 </div>

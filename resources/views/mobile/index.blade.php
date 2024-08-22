@@ -55,6 +55,7 @@
                                 href="{{ route('mobile.product-detail', $product->id) }}">{{ $product->name_size }}</a>
                             <!-- Product Price -->
                             <p class="sale-price">{{ $product->harga_formatted }}</p>
+                            <small>Stok : <span class="fw-semibold">{{ $product->stok }} Pcs</span></small>
                         </div>
                     </div>
                 </div>

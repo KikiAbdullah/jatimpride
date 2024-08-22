@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
-|--------------------------------------------------------------------------mo
+|--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
@@ -105,6 +105,17 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::resource('trans',        'TransController');
         //TRANSACTION
+
+        //REPORT
+        Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
+            Route::get('transaksi',             'ReportController@transaksiIndex')->name('transaksi.index');
+            Route::post('transaksi/result',     'ReportController@transaksiResult')->name('transaksi.result');
+
+            Route::get('stock-merch',             'ReportController@stokMerchIndex')->name('stok-merch.index');
+            Route::post('stock-merch/result',     'ReportController@stokMerchResult')->name('stok-merch.result');
+        });
+        //REPORT
+
     });
 
     Route::group(['prefix' => 'mobile', 'as' => 'mobile.'], function () {

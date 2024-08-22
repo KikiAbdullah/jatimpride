@@ -53,6 +53,7 @@ class MerchController extends Controller
             }
 
             $model = $this->model->fill($data);
+            $model->stok = 0;
 
             $model->save();
 

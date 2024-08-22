@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use DB;
 use App\Mail\FileMail;
+use App\Models\Master\Merch;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -253,7 +254,7 @@ class TransController extends Controller
 
             $data = $request->all();
 
-            $model           = $this->model->find($id);
+            $model           = $this->model->with(['lines'])->find($id);
 
             $model->update([
                 'status' => 'rejected',
@@ -261,6 +262,13 @@ class TransController extends Controller
                 'rejected_by' => auth()->user()->id,
                 'rejected_at' => date('Y-m-d H:i:s'),
             ]);
+
+
+            //stok update 
+            foreach ($model->lines as $key => $line) {
+                $merch = Merch::find($line->merch_id);
+                $merch->increment('stok', $line->qty);
+            }
 
             if (!empty($model->customer->email)) {
                 $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu

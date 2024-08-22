@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Traits;
 
+use App\Models\Master\JenisPengiriman;
 use App\Models\Master\Kabupaten;
 use App\Models\Master\Kecamatan;
 use App\Models\Master\Kelurahan;
+use App\Models\Master\Merch;
 use App\Models\Master\Provinsi;
 use App\UserLog;
 use DB;
@@ -65,5 +67,30 @@ trait ListTrait
     public function listUserLog()
     {
         return UserLog::orderBy('created_at', 'desc')->limit(10)->get();
+    }
+
+    public function listStatus()
+    {
+        return [
+            'open' => 'Open',
+            'confirm' => 'Confirmed',
+            'closed' => 'Closed',
+            'rejected' => 'Rejected',
+        ];
+    }
+
+    public function listJenisPengiriman()
+    {
+        return JenisPengiriman::pluck('name', 'id');
+    }
+
+    public function listMerch()
+    {
+        return Merch::get()->pluck('name_size', 'id');
+    }
+
+    public function listSize()
+    {
+        return Merch::get()->pluck('size', 'id');
     }
 }

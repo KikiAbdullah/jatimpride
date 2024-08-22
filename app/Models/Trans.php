@@ -101,6 +101,32 @@ class Trans extends Model
         return $this->belongsTo(Kelurahan::class);
     }
 
+    public function getStatusStrAttribute()
+    {
+        $title      = '';
+
+        switch ($this->status) {
+            case 'open':
+                $title      = 'Open';
+                break;
+            case 'confirm':
+                $title      = 'Confirmed';
+                break;
+            case 'closed':
+                $title      = 'Closed';
+                break;
+            case 'rejected':
+                $title      = 'Rejected';
+                break;
+
+            default:
+                $title = ucwords($this->status);
+                break;
+        }
+
+        return $title;
+    }
+
     public function getStatusFormattedAttribute()
     {
         $title      = '';
@@ -127,7 +153,6 @@ class Trans extends Model
 
         return '<span class="badge bg-' . $badge . '">' . $title . '</span>';
     }
-
 
     public function getStatusIconMobileAttribute()
     {
@@ -157,9 +182,6 @@ class Trans extends Model
                 </div>';
     }
 
-
-
-
     public function getAlamatProvAttribute()
     {
         $result = $this->provinsi->nama_provinsi ?? "";
@@ -172,5 +194,26 @@ class Trans extends Model
         }
         $result .= $this->kecamatan->nama_kecamatan ?? "";
         return $result;
+    }
+
+    public function getTotalAttribute()
+    {
+        $total = $this->lines->sum('total');
+
+        return $total;
+    }
+
+    public function scopeReportTransaksiFilter($query, $data)
+    {
+        if (!empty($data['jenis_pengiriman_id'])) {
+            $query->where('jenis_pengiriman_id', $data['jenis_pengiriman_id']);
+        }
+
+        if (!empty($data['status'])) {
+            $query->whereIn('status', $data['status']);
+        }
+
+
+        return $query;
     }
 }

@@ -127,11 +127,11 @@
             <div class="row gy-4">
                 <div class="col-lg-3">
                     <!-- Section Title -->
-                    <div class="container section-title" data-aos="fade-up">
-                        <h2>About</h2>
-                        <p>About Us</p>
-                    </div>
                     <img src="{{ asset('app_local/img/mas-fadh.jpg') }}" class="img-fluid" alt="" />
+                    <div class="container section-title mt-3" data-aos="fade-up">
+                        <h6 >CEO / LEADER JATIM PRIDE</h6>
+                        <p>Mas Fadh Tri Wahyudo S.E.</p>
+                    </div>
                 </div>
                 <div class="col-lg-9 content">
 
@@ -179,8 +179,6 @@
                         <br>
                         <br>Salam Jatim Pride ! All in untuk Semesta !
                     </p>
-
-                    <a class="btn-location text-white" href="#">Download Proposal PDF</a>
                 </div>
             </div>
         </div>
@@ -345,46 +343,46 @@
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="swiper init-swiper">
                 <script type="application/json" class="swiper-config">
-          {
-            "loop": true,
-            "speed": 600,
-            "autoplay": {
-              "delay": 5000
-            },
-            "slidesPerView": "auto",
-            "pagination": {
-              "el": ".swiper-pagination",
-              "type": "bullets",
-              "clickable": true
-            },
-            "breakpoints": {
-              "320": {
-                "slidesPerView": 2,
-                "spaceBetween": 40
-              },
-              "480": {
-                "slidesPerView": 3,
-                "spaceBetween": 60
-              },
-              "640": {
-                "slidesPerView": 4,
-                "spaceBetween": 80
-              },
-              "992": {
-                "slidesPerView": 6,
-                "spaceBetween": 120
-              }
-            }
-          }
-        </script>
-                <div class="swiper-wrapper align-items-center tex">
-                    <div class="swiper-slide">
+                    {
+                        "loop": true,
+                        "speed": 600,
+                        "autoplay": {
+                          "delay": 5000
+                        },
+                        "slidesPerView": "auto",
+                        "pagination": {
+                          "el": ".swiper-pagination",
+                          "type": "bullets",
+                          "clickable": true
+                        },
+                        "breakpoints": {
+                          "320": {
+                            "slidesPerView": 2,
+                            "spaceBetween": 40
+                          },
+                          "480": {
+                            "slidesPerView": 3,
+                            "spaceBetween": 60
+                          },
+                          "640": {
+                            "slidesPerView": 4,
+                            "spaceBetween": 80
+                          },
+                          "992": {
+                            "slidesPerView": 6,
+                            "spaceBetween": 120
+                          }
+                        }
+                      }
+                </script>
+                <div class="swiper-wrapper align-items-center text-center">
+                    <div class="swiper-slide text-center">
                         <img src="{{ asset('app_local/img/sponsor/jne.png') }}" class="img-fluid" alt="" />
                     </div>
-                    <div class="swiper-slide">
+                    <div class="swiper-slide text-center">
                         <img src="{{ asset('app_local/img/sponsor/kilap.png') }}" class="img-fluid" alt="" />
                     </div>
-                    <div class="swiper-slide">
+                    <div class="swiper-slide text-center">
                         <img src="{{ asset('app_local/img/sponsor/surya.png') }}" class="img-fluid" alt="" />
                     </div>
                 </div>

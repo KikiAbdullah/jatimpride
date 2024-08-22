@@ -44,6 +44,7 @@
                                     <th class="text-center">Thumb</th>
                                     <th>Name</th>
                                     <th>Size</th>
+                                    <th>Stok</th>
                                     <th>Harga[Rp]</th>
                                 </tr>
                             </thead>
@@ -96,6 +97,9 @@
                     },
                     {
                         data: 'size'
+                    },
+                    {
+                        data: 'stok'
                     },
                     {
                         data: 'harga'

@@ -43,6 +43,7 @@
                     <li><a href="{{ route('front.index') }}#contact">Contact Us</a></li>
                     <li><a href="{{ route('front.index') }}#merchandise">Merchandise</a></li>
                     <li><a href="{{ route('front.index') }}#event">Our Event</a></li>
+                    <li><a href="#">Ticket</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

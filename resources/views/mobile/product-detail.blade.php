@@ -17,7 +17,7 @@
         </a> --}}
     </div>
     <div class="product-description pb-3">
-        <!-- Product Title & Meta Data-->
+
         <div class="product-title-meta-data bg-white mb-3 py-3">
             <div class="container d-flex justify-content-between rtl-flex-d-row-r">
                 <div class="p-title-price">
@@ -31,7 +31,7 @@
         <div class="cart-form-wrapper bg-white mb-3 py-3">
             <div class="container">
                 <h6>Masukan Jumlah</h6>
-                <form class="cart-form" action="#" method="">
+                <form class="cart-form my-2" action="#" method="">
                     <div class="order-plus-minus d-flex align-items-center">
                         <br>
                         <div class="quantity-button-handler">-</div>
@@ -40,7 +40,10 @@
                         <div class="quantity-button-handler">+</div>
                     </div>
                 </form>
+                <h6> Stok: {{ $item->stok }} Pcs</h6>
+
             </div>
+
         </div>
         <!-- Product Specification-->
         <div class="p-specification bg-white mb-3 py-3">
@@ -69,6 +72,7 @@
                                         href="{{ route('mobile.product-detail', $product->id) }}">{{ $product->name_size }}</a>
                                     <!-- Product Price -->
                                     <p class="sale-price">{{ $product->harga_formatted }}</p>
+                                    <small>Stok : <span class="fw-semibold">{{ $product->stok }} Pcs</span></small>
                                 </div>
                             </div>
                         </div>
@@ -90,13 +94,24 @@
 @section('customjs')
     <script>
         function addToCart(merchId, e) {
-            let qty = $('.cart-quantity-input').val();
+            let stok = parseInt('{{ $item->stok }}', 10); // Ensure stok is a number
+            let qty = parseInt($('.cart-quantity-input').val(), 10); // Ensure qty is a number
             var errorMessage = '';
             var isValid = true;
 
-            if (qty == '') {
-                var isValid = false;
+            if (isNaN(qty) || qty === '') {
+                isValid = false;
                 errorMessage += 'Qty harus diisi.\n';
+            }
+
+            if (qty > stok) {
+                isValid = false;
+                errorMessage += 'Maks. Pembelian barang ini ' + stok + ', kurangi pembelianmu, ya!.\n';
+            }
+
+            if (qty < 1) {
+                isValid = false;
+                errorMessage += 'Qty kurang dari 0\n';
             }
 
 
@@ -178,7 +193,7 @@
                         } else {
                             Swal.fire({
                                 toast: true,
-                                title: 'Error',
+                                title: 'Gagal',
                                 text: result.value.msg.substring(0, 160),
                                 icon: 'error',
                                 showConfirmButton: false,
