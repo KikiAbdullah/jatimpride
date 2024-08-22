@@ -85,7 +85,8 @@
                     </div>
                     <div class="col-lg-6">
                         <a href="{{ route('front.index') }}">
-                            <img src="{{ asset('app_local/img/logo.png') }}" class="img-fluid" style="opacity: 0.5" alt="">
+                            <img src="{{ asset('app_local/img/logo.png') }}" class="img-fluid" style="opacity: 0.5"
+                                alt="">
                         </a>
                     </div>
                 </div>
