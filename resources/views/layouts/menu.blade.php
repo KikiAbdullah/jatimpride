@@ -28,7 +28,7 @@
                     </li>
                 @endcan
 
-                @canany(['report_transaksi'])
+                @canany(['report_transaksi', 'report_stok_merch'])
                     <li class="nav-item nav-item-dropdown-xl dropdown">
                         <a href="#"
                             class="navbar-nav-link dropdown-toggle rounded {{ in_array($title, ['Transaksi']) ? 'active' : '' }}"
@@ -119,6 +119,17 @@
                         </div>
                     </li>
                 @endcanany
+
+                @can('master_setting')
+                    <li class="nav-item">
+                        <a href="{{ route('master.setting.edit', 1) }}"
+                            class="navbar-nav-link rounded {{ $title == 'Setting' ? 'active' : '' }}">
+                            <i class="ph-gear me-2"></i>
+                            Setting
+                        </a>
+                    </li>
+                @endcan
+
 
                 @canany(['view_permimssions', 'view_roles', 'view_users'])
                     <li class="nav-item nav-item-dropdown-xl dropdown">

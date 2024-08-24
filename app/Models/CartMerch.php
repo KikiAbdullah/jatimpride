@@ -19,6 +19,12 @@ class CartMerch extends Model
         'created_by',
     ];
 
+    protected $appends = [
+        'total',
+        'total_formatted',
+        'harga_formatted',
+    ];
+
     public function merch()
     {
         return $this->belongsTo(Merch::class, 'merch_id', 'id');
@@ -27,5 +33,15 @@ class CartMerch extends Model
     public function getTotalAttribute()
     {
         return $this->merch->harga * $this->qty;
+    }
+
+    public function getTotalFormattedAttribute()
+    {
+        return 'Rp ' . cleanNumber($this->total);
+    }
+
+    public function getHargaFormattedAttribute()
+    {
+        return 'Rp ' . cleanNumber($this->harga);
     }
 }

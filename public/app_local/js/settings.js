@@ -19,6 +19,15 @@ $(function () {
         },
     });
 
+    $(".daterange-single-time").daterangepicker({
+        singleDatePicker: true,
+        timePicker: true,
+        timePicker24Hour: true,
+        locale: {
+            format: "DD-MM-YYYY hh:mm:ss",
+        },
+    });
+
     $(".daterange").daterangepicker({
         locale: {
             format: "DD/MM/YYYY",

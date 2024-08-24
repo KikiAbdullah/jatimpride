@@ -112,6 +112,10 @@ Route::group(['middleware' => ['auth']], function () {
             });
             Route::resource('sponsor',        'Master\SponsorController')->middleware('can:master_sponsor');
             //SPONSOR
+
+            //SETTINGS
+            Route::resource('setting',        'Master\SettingController')->middleware('can:master_setting');
+            //SETTINGS
         });
         //MASTER
 
@@ -119,6 +123,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => 'trans', 'as' => 'trans.'], function () {
             Route::get('get-data',      'TransController@ajaxData')->name('get-data');
             Route::get('button-option',      'TransController@buttonOption')->name('button-option');
+
+            Route::get('form-create',      'TransController@formCreate')->name('form-create');
+
 
             Route::get('confirm-view/{id}',      'TransController@confirmView')->name('confirm-view');
             Route::post('confirm/{id}',         'TransController@confirm')->name('confirm');
@@ -150,40 +157,51 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
-    Route::group(['prefix' => 'mobile', 'as' => 'mobile.'], function () {
-        Route::get('/',                 'Mobile\MobileWebController@index')->name('index');
-        Route::get('/history',          'Mobile\MobileWebController@history')->name('history');
-        Route::get('/history-detail/{id}',          'Mobile\MobileWebController@historyDetail')->name('history-detail');
-        Route::get('/history-reject/{id}',          'Mobile\MobileWebController@historyReject')->name('history-reject');
+    // Route::group(['prefix' => 'mobile', 'as' => 'mobile.'], function () {
+    //     Route::get('/',                 'Mobile\MobileWebController@index')->name('index');
+    //     Route::get('/history',          'Mobile\MobileWebController@history')->name('history');
+    //     Route::get('/history-detail/{id}',          'Mobile\MobileWebController@historyDetail')->name('history-detail');
+    //     Route::get('/history-reject/{id}',          'Mobile\MobileWebController@historyReject')->name('history-reject');
 
-        Route::get('/product-detail/{id}',   'Mobile\MobileWebController@productDetail')->name('product-detail');
+    //     Route::get('/product-detail/{id}',   'Mobile\MobileWebController@productDetail')->name('product-detail');
 
-        Route::post('/cart-store',              'Mobile\MobileWebController@cartStore')->name('cart-store');
-        Route::post('/cart-update',              'Mobile\MobileWebController@cartUpdate')->name('cart-update');
-        Route::get('/cart-delete/{id}',              'Mobile\MobileWebController@cartDelete')->name('cart-delete');
-        Route::get('/cart',                     'Mobile\MobileWebController@cart')->name('cart');
+    //     Route::post('/cart-store',              'Mobile\MobileWebController@cartStore')->name('cart-store');
+    //     Route::post('/cart-update',              'Mobile\MobileWebController@cartUpdate')->name('cart-update');
+    //     Route::get('/cart-delete/{id}',              'Mobile\MobileWebController@cartDelete')->name('cart-delete');
+    //     Route::get('/cart',                     'Mobile\MobileWebController@cart')->name('cart');
 
 
 
-        Route::get('/order',            'Mobile\MobileWebController@order')->name('order');
-        Route::post('/order-store',     'Mobile\MobileWebController@orderStore')->name('order-store');
+    //     Route::get('/order',            'Mobile\MobileWebController@order')->name('order');
+    //     Route::post('/order-store',     'Mobile\MobileWebController@orderStore')->name('order-store');
 
-        Route::get('/profile',          'Mobile\MobileWebController@profile')->name('profile');
-        Route::get('/profile-edit',     'Mobile\MobileWebController@profileEdit')->name('profile-edit');
-        Route::post('profile-update/{id}',   'Mobile\MobileWebController@profileUpdate')->name('profile-update');
-    });
+    //     Route::get('/profile',          'Mobile\MobileWebController@profile')->name('profile');
+    //     Route::get('/profile-edit',     'Mobile\MobileWebController@profileEdit')->name('profile-edit');
+    //     Route::post('profile-update/{id}',   'Mobile\MobileWebController@profileUpdate')->name('profile-update');
+    // });
 
     // STATE
     Route::get('get-kota', 'AjaxController@listKota')->name('get.kota');
     Route::get('get-kecamatan', 'AjaxController@listKecamatan')->name('get.kecamatan');
     Route::get('get-kelurahan', 'AjaxController@listKelurahan')->name('get.kelurahan');
     //STATE
+
+    //FRONT LOGIN
+    Route::get('profile',           'FrontController@profile')->name('front.profile');
+    Route::get('order',             'FrontController@order')->name('front.order');
+    Route::post('order-store',      'FrontController@orderStore')->name('front.order-store');
+    Route::get('payment',           'FrontController@payment')->name('front.payment');
+    Route::post('payment-store',    'FrontController@paymentStore')->name('front.payment-store');
+    Route::get('history/{id}',       'FrontController@history')->name('front.history');
+
+    //FRONT LOGIN
 });
 
 
-Route::get('mobile/register',                 'Mobile\MobileWebController@register')->name('mobile.register');
-Route::post('mobile/register-store',          'Mobile\MobileWebController@registerStore')->name('mobile.register-store');
 
 
 Route::get('/',                 'FrontController@index')->name('front.index');
-Route::get('/merchandise',      'FrontController@merchandise')->name('front.merchandise');
+Route::get('merchandise',       'FrontController@merchandise')->name('front.merchandise');
+Route::get('crew',              'FrontController@crew')->name('front.crew');
+Route::get('register',          'FrontController@register')->name('front.register');
+Route::post('register-store',   'FrontController@registerStore')->name('front.register-store');

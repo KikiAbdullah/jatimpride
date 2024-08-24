@@ -25,6 +25,13 @@ class TransController extends Controller
         $this->withTrashed      = true;
     }
 
+    public function formData()
+    {
+        return [
+            'list_merch' => $this->listMerch(),
+        ];
+    }
+
     public function buttonOption(Request $request)
     {
         $btn            = [];
@@ -104,6 +111,27 @@ class TransController extends Controller
             ->toJson();
     }
 
+    public function formCreate(Request $request)
+    {
+        $view['form']   = $this->generateViewName('form');
+
+        $view['url']    = [
+            'store'         => $this->generateUrl('store')
+        ];
+
+        $view['data']   = [
+            'list_jenis_pengiriman' => $this->listJenisPengiriman(),
+            'list_provinsi'         => $this->listProvinsi(),
+            'list_merch'            => $this->listMerch(),
+        ];
+
+        $response       = [
+            'status'            => true,
+            'view'              => view($this->generateViewName('create'))->with($view)->render(),
+        ];
+
+        return response()->json($response);
+    }
 
     ///confirmView 
     public function confirmView(Request $request, $id)
@@ -181,7 +209,9 @@ class TransController extends Controller
             return response()->json($e->getMessage());
         }
     }
+    ///confirm
 
+    //closed
     public function closed(Request $request, $id)
     {
         try {
@@ -245,7 +275,9 @@ class TransController extends Controller
             return response()->json($e->getMessage());
         }
     }
+    //closed
 
+    //rejected
     public function rejected(Request $request, $id)
     {
         try {
@@ -314,6 +346,7 @@ class TransController extends Controller
             return response()->json($e->getMessage());
         }
     }
+    //rejected
 
     ///RESEND EMAIL
     public function resend(Request $request, $id)

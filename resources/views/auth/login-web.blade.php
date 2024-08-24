@@ -104,7 +104,7 @@
 
                             <div class="d-flex align-items-center mb-3">
                                 <label class="form-check">
-                                    <input type="checkbox" name="remember" class="form-check-input" checked>
+                                    <input type="checkbox" name="remember" class="  -check-input" checked>
                                     <span class="form-check-label">Remember</span>
                                 </label>
                             </div>
@@ -113,7 +113,7 @@
                                 <button type="submit" class="btn btn-primary w-100">Sign in</button>
                             </div>
                             <div class="mb-3">
-                                <a href="{{ route('mobile.register') }}" target="_blank"
+                                <a href="{{ route('front.register') }}" target="_blank"
                                     rel="noopener noreferrer">Register</a>
                             </div>
                         </div>

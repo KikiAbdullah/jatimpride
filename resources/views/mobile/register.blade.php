@@ -86,7 +86,12 @@
     <!-- PWA Install Alert -->
     <div class="page-content-wrapper">
         <div class="container">
-            {!! Form::open(['route' => 'mobile.register-store', 'method' => 'POST', 'id' => 'l-modal-form']) !!}
+            {!! Form::open([
+                'route' => 'front.register-store',
+                'method' => 'POST',
+                'class' => 'form-login',
+                'id' => 'l-modal-form',
+            ]) !!}
             <!-- Checkout Wrapper-->
             <div class="checkout-wrapper-area py-3">
                 <!-- Billing Address-->

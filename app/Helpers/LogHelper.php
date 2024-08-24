@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Helpers;
 
@@ -8,13 +8,26 @@ use App\User;
 
 class LogHelper
 {
+	public function storeLogCustomMessage($msg, $type)
+	{
+		$name = auth()->user()->name ?? "System";
+		$item 	= [
+			'user_id' 		=> auth()->user()->id ?? "1",
+			'action' 		=> $this->typeFormatted($type),
+			'message' 		=> $msg
+		];
+
+		UserLog::create($item);
+		return true;
+	}
+
 	public function storeLogMsg($msg, $type)
 	{
-		$name = auth()->user()->name??"System";
+		$name = auth()->user()->name ?? "System";
 		$item 	= [
-			'user_id' 		=> auth()->user()->id??"1",
+			'user_id' 		=> auth()->user()->id ?? "1",
 			'action' 		=> $this->typeFormatted($type),
-			'message' 		=> $name." melakukan ".$msg
+			'message' 		=> $name . " melakukan " . $msg
 		];
 
 		UserLog::create($item);
@@ -23,11 +36,11 @@ class LogHelper
 
 	public function storeLogMsgWebApi($userid, $msg, $type)
 	{
-		$name = User::find($userid)->name??"System";
+		$name = User::find($userid)->name ?? "System";
 		$item 	= [
-			'user_id' 		=> $userid??"1",
+			'user_id' 		=> $userid ?? "1",
 			'action' 		=> $this->typeFormatted($type),
-			'message' 		=> $name." melakukan ".$msg
+			'message' 		=> $name . " melakukan " . $msg
 		];
 
 		UserLog::create($item);
@@ -37,10 +50,10 @@ class LogHelper
 	public function storeLog($type, $nomor, $menu)
 	{
 		$item 	= [
-			'user_id' 		=> auth()->user()->id??"1",
+			'user_id' 		=> auth()->user()->id ?? "1",
 			'menu' 			=> $menu,
 			'action' 		=> $this->typeFormatted($type),
-			'message' 		=> $this->makeLogMessage(auth()->user()->name??"System", $type , $nomor, $menu),
+			'message' 		=> $this->makeLogMessage(auth()->user()->name ?? "System", $type, $nomor, $menu),
 		];
 
 		UserLog::create($item);
@@ -53,7 +66,7 @@ class LogHelper
 			'user_id' 		=> $user,
 			'menu' 			=> $menu,
 			'action' 		=> $this->typeFormatted($type),
-			'message' 		=> $this->makeLogMessage($name, $type , $nomor, $menu),
+			'message' 		=> $this->makeLogMessage($name, $type, $nomor, $menu),
 		];
 
 		UserLog::create($item);
@@ -62,7 +75,7 @@ class LogHelper
 
 	public function makeLogMessage($name, $type, $nomor, $menu)
 	{
-		$message 		= '<p>User <b>'.$name.'</b> melakukan '.$this->typeFormatted($type);
+		$message 		= '<p>User <b>' . $name . '</b> melakukan ' . $this->typeFormatted($type);
 
 		$message 		.= $this->textMenuDanNomor($menu, $nomor);
 		// $message 		.= $this->textTanggal();
@@ -120,11 +133,11 @@ class LogHelper
 
 	public function textTanggal()
 	{
-		return ' pada tanggal <b>'.Carbon::now()->format('d F Y H:i:s').'</b> </p>';
+		return ' pada tanggal <b>' . Carbon::now()->format('d F Y H:i:s') . '</b> </p>';
 	}
 
 	public function textMenuDanNomor($menu, $nomor)
 	{
-		return ' data di menu <b>'.ucwords($menu).'</b> dan id/nomor <b>'.$nomor.'</b>';
+		return ' data di menu <b>' . ucwords($menu) . '</b> dan id/nomor <b>' . $nomor . '</b>';
 	}
 }

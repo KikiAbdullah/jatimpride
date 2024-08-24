@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Master\Setting;
 use Carbon\Carbon;
 
 function st_aktif($var)
@@ -108,5 +109,15 @@ if (!function_exists('imgToBase64')) {
         $mimeType = mime_content_type($image);
 
         return  'data:' . $mimeType . ';base64,' . $base64;
+    }
+}
+
+
+
+if (!function_exists('setting')) {
+
+    function setting($column)
+    {
+        return Setting::first()->{$column} ?? '';
     }
 }

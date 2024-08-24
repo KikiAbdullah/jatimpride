@@ -22,6 +22,8 @@ class TransLine extends Model
 
     protected $appends = [
         'total',
+        'total_formatted',
+        'harga_formatted',
     ];
 
     public function trans()
@@ -37,5 +39,15 @@ class TransLine extends Model
     public function getTotalAttribute()
     {
         return $this->harga * $this->qty;
+    }
+
+    public function getTotalFormattedAttribute()
+    {
+        return 'Rp ' . cleanNumber($this->total);
+    }
+
+    public function getHargaFormattedAttribute()
+    {
+        return 'Rp ' . cleanNumber($this->harga);
     }
 }

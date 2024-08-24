@@ -21,6 +21,11 @@
 
             <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
                 <div class="hstack gap-0 mb-3 mb-lg-0">
+                    <a href="{{ route('trans.form-create') }}"
+                        class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold addBtn"><i
+                            class="ph-plus-circle ph-2x text-indigo"></i>Transaksi Baru
+                    </a>
+
                     <span class="menuoption"></span>
                 </div>
             </div>
@@ -74,7 +79,6 @@
             '<a href="#!" class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnBack"><i class="ph-caret-left ph-2x text-indigo"></i>CANCEL</a>';
 
         $(document).ready(function($) {
-
             dtable = $('#dtable').DataTable({
                 "select": {
                     style: "single",
@@ -148,6 +152,32 @@
             $("body").on("submit", "#dform", function(e) {
                 $(this).find('.submit_loader').removeAttr('class').addClass(
                     'ph-spinner spinner submit_loader');
+            });
+
+            $("body").on("click", ".addBtn", function(e) {
+                $("#mymodal").find('.modal-body').html(
+                    '<center><i class="ph-spinner spinner"></i></center>');
+                $("#mymodal").find('.modal-title').html('Transaksi Baru');
+                $("#mymodal").find('.modal-dialog').removeAttr('class').attr('class',
+                    'modal-dialog modal-xl');
+                $("#mymodal").modal({
+                    backdrop: 'static',
+                }).modal('show');
+                $.ajax({
+                    url: $(this).attr('href'),
+                    type: 'GET',
+                    dataType: 'JSON',
+                    data: {},
+                    success: function(response) {
+                        if (response.status) {
+                            $("#mymodal").find('.modal-body').html(response.view);
+                            $("#mymodal").find('select.select').select2({
+                                dropdownParent: $('#mymodal')
+                            });
+                        }
+                    }
+                });
+                e.preventDefault();
             });
 
             $("body").on("click", ".editBtn", function(e) {
@@ -346,7 +376,6 @@
                     }
                 });
             });
-
         });
 
         function confirmTrans(el, e) {
@@ -400,6 +429,71 @@
             button_temp = $('.btnBack').clone();
             $('.menuoption').find('.btnBack').remove();
             $('.select').select2();
+        }
+
+        function toggleAddressRow(el) {
+            // Get the selected value of the radio buttons
+            var selectedJenisPengiriman = $(el).val();
+
+            // Show or hide #alamat-row based on the selected value
+            if (selectedJenisPengiriman == 1) {
+                $('.dikirim-row').show();
+            } else {
+                $('.dikirim-row').hide();
+            }
+        }
+
+
+        const getKota = '{{ route('get.kota') }}';
+        const getKecamatan = '{{ route('get.kecamatan') }}';
+        const getKelurahan = '{{ route('get.kelurahan') }}';
+
+        function stateChange(url_type = null, el = null, to_element = null, to_element_hidden = null) {
+            if (url_type !== null) {
+                $.ajax({
+                    type: "GET",
+                    url: "" + getUrl(url_type),
+                    data: {
+                        id: $(el).val(),
+                        _token: _csrf_token
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        $('.' + to_element).find('option').remove().end();
+                        $('.' + to_element).append($("<option></option>")
+                            .attr('value', '')
+                            .text('Pilih')
+                            .attr('selected', 'selected'));
+                        $.each(response, function(key, value) {
+                            $("." + to_element)
+                                .append($("<option></option>")
+                                    .attr("value", key)
+                                    .text(value));
+                        });
+                    },
+                    fail: function(errMsg) {
+                        // alert(errMsg);
+                    }
+                });
+            }
+        }
+
+        function getUrl(url_type) {
+            var new_url = '';
+
+            if (url_type == '/get-kota') {
+                new_url = getKota;
+            }
+
+            if (url_type == '/get-kecamatan') {
+                new_url = getKecamatan;
+            }
+
+            if (url_type == '/get-kelurahan') {
+                new_url = getKelurahan;
+            }
+
+            return new_url;
         }
     </script>
 @endsection

@@ -1,74 +1,6 @@
 @extends('front.layout')
 
 @section('content')
-    <style>
-        .overlay-video {
-            display: none;
-            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-            opacity: 0;
-            -ms-transition: opacity 600ms ease-in;
-            transition: opacity 600ms ease-in;
-            -ms-transition: opacity .6s;
-            transition: opacity .6s;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, .7);
-            z-index: 999999;
-        }
-
-        .o1 {
-            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-            opacity: 1;
-            -ms-transition: opacity 600ms ease-out;
-            transition: opacity 600ms ease-out;
-            -ms-transition: opacity .6s;
-            transition: opacity .6s;
-        }
-
-        .videoWrapperExt {
-            position: relative;
-            top: 50%;
-            left: 50%;
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            max-width: 982px;
-            padding: 0 20px;
-        }
-
-        .videoWrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            /* 16:9 */
-            height: 0;
-        }
-
-        .videoWrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .close {
-            background-image: url(http://djit.ac/assets/images/news/mark.png);
-            position: absolute;
-            top: -50px;
-            right: 0px;
-            cursor: pointer;
-            z-index: 9999;
-            height: 40px;
-            width: 40px;
-            background-size: 40px;
-
-            @media (max-width: 767px) and (orientation: landscape) {
-                display: none;
-            }
-        }
-    </style>
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
         <img src="{{ asset('app_local/img/slide/1.png') }}" class="hero-img" alt="" data-aos="fade-in" />
@@ -76,7 +8,7 @@
         <div class="container">
             <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-xl-6 col-lg-8">
-                    <img src="{{ asset('app_local/img/road-to.png') }}" class="img-fluid" st alt="" />
+                    <img src="{{ setting('event_logo_url') ?? '' }}" class="img-fluid" st alt="" />
 
                     <div class="row gy-4 justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="col-3" data-aos="fade-up" data-aos-delay="300">
@@ -111,8 +43,8 @@
                 </div>
                 <div class="col-xl-12 text-center">
                     <br>
-                    <a class="btn-location text-white" href="https://maps.app.goo.gl/ThygBK4LbCH5sobU9"
-                        target="_blank">Lihat Lokasi Acara</a>
+                    <a class="btn-location text-white" href="{{ setting('event_gmaps') ?? '' }}" target="_blank">Lihat Lokasi
+                        Acara</a>
                 </div>
             </div>
 
@@ -127,62 +59,20 @@
             <div class="row gy-4">
                 <div class="col-lg-3">
                     <!-- Section Title -->
-                    <img src="{{ asset('app_local/img/mas-fadh.jpg') }}" class="img-fluid" alt="" />
+                    <img src="{{ setting('about_foto_url') ?? '' }}" class="img-fluid" alt="" />
                     <div class="container section-title mt-3" data-aos="fade-up">
-                        <h6>CEO / LEADER JATIM PRIDE</h6>
-                        <p>Mas Fadh Tri Wahyudo S.E.</p>
+                        <h6>{{ setting('about_jabatan') ?? '' }}</h6>
+                        <p>{{ setting('about_name') ?? '' }}</p>
                     </div>
                 </div>
                 <div class="col-lg-9 content">
 
                     <!-- End Section Title -->
                     <p class="text" style="text-align: justify;">
-                        Assalamualikum wr.wb.<br>
-                        Salam sejahtera untuk kita semua,
-                        <br>
-                        <br>Salam otomotif !
-                        <br>Salam jatim pride ! All In Untuk Semesta 🔥
-
-                        <br>Puji syukur kehadirat Allah SWT atas segala nikmat dan karunia-Nya sehingga kita semua masih
-                        diberikan kesehatan jasmani maupun rohani dan tetap menjalin silaturahmi dalam satu hobi di dunia
-                        otomotif .
-                        <br>
-                        <br>Perkenalkan saya Mas Fadh Tri Wahyudo S.E. Sering di sapa mas fadh , selaku dari CEO / Leader
-                        Jatim Pride
-                        <br>
-                        <br>JATIM PRIDE adalah sebuah kegiatan apresiasi dalam bidang otomotif motor di segala merk motor
-                        yang ada. Banyak nya antusiasme pada akhir akhir ini pemuda pemuda yang menggandrungi hobi dalam
-                        bidang
-                        otomotif melalui media sosial yang berkembang pada jaman saat ini. Kami “JATI JAYA ENTERTAINMENT”
-                        mengadakan acara yang bertujuan untuk menyambung tali silaturahmi dan menyambung seduluran diantara
-                        banyaknya jenis jenis motor yang ada.
+                        {!! setting('about_text') ?? '' !!}
                     </p>
-                    <span class="dots">...</span>
-                    <span class="more-text" style="display: none;">
-                        Kegiatan ini akan mengundang seluruh pemuda yang memiliki hobi
-                        yang sama di sekitar Provinsi Jawa Timur. Dari CB, Herex, Matic, Supermoto, Moge, 2 tak dan lain
-                        sebagainya akan turut hadir, karena sebuah perbedaan itu akanme nimbulkan suatu Persaudaraan. Acara
-                        ini memiliki konsep unik dan menarik, serta diikuti dengan konten acara yang berkualitas dengan
-                        mengusung tema “JATIM PRIDE” dengan maksud bahwa kami adalah Kerbanggaan Jawa Timur dengan banyaknya
-                        jenis motor yang menarik, elegan bagi berbagai macam kalangan serta selalu menumbuhkan persatuan dan
-                        persaudaraan terhadap sesama club dengan jenis / merk yang berbeda.
-                        <br>Alhamdulillaah Jatim pride sudah berada di Volume 4 , ini adalah sebuah semangat luar biasa
-                        pemuda
-                        dibidang otomotif untuk tetap melestarikan di Jawa Timur
-                        Saya mengucapkan terima kasih sebanyak banyaknya kepada seluruh Elemen yang selalu membantu setiap
-                        giat Jatim Pride mulai volume 1-4 ini .
-                        <br>
-                        <br>Semoga kita semua senantiasa di beri kesehatan dan kemudahan dalam segala hal langkah kebaikan
-                        kita
-                        untuk manfaat di masyarakat !
-                        <br>
-                        <br>Ingat tetap jangan arogan di Jalan raya , keep safety dan tunjukkan bahwa kita semua sangat
-                        bermanfaat untuk masyarakat luas di Jawa Timur !
-                        <br>
-                        <br>Salam Jatim Pride ! All in untuk Semesta !
-                    </span>
                     <br>
-                    <a href="javascript:void(0);" class="read-more">Read more</a>
+                    {{-- <a href="javascript:void(0);" class="read-more">Read more</a> --}}
                 </div>
             </div>
         </div>
@@ -243,49 +133,17 @@
 
         <div class="container">
             <div class="row gy-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="col-lg-6 col-md-6">
-                    <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/slide/1.jpg') }}" class="w-100" alt="KONTES OTOMOTIF" />
-                        <figcaption>
-                            <h1>KONTES OTOMOTIF</h1>
-                        </figcaption>
-                        <a href="#"></a>
-                    </figure>
-                </div>
-                <!-- End Portfolio Item -->
-
-                <div class="col-lg-6 col-md-6">
-                    <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/slide/2.jpg') }}" class="w-100" alt="SUNDAY MORNING RIDE" />
-                        <figcaption>
-                            <h1>SUNDAY MORNING RIDE</h1>
-                        </figcaption>
-                        <a href="#"></a>
-                    </figure>
-                </div>
-                <!-- End Portfolio Item -->
-
-                <div class="col-lg-6 col-md-6">
-                    <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/slide/3.jpg') }}" class="w-100" alt="BAZZAR UMKM" />
-                        <figcaption>
-                            <h1>BAZZAR UMKM</h1>
-                        </figcaption>
-                        <a href="#"></a>
-                    </figure>
-                </div>
-                <!-- End Portfolio Item -->
-
-                <div class="col-lg-6 col-md-6">
-                    <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/slide/4.jpg') }}" class="w-100" alt="KONSER MUSIK" />
-                        <figcaption>
-                            <h1>KONSER MUSIK</h1>
-                        </figcaption>
-                        <a href="#"></a>
-                    </figure>
-                </div>
-                <!-- End Portfolio Item -->
+                @foreach ($activity as $itemAct)
+                    <div class="col-lg-6 col-md-6">
+                        <figure class="img-hover-text">
+                            <img src="{{ $itemAct->foto_url }}" class="w-100" alt="{{ $itemAct->name ?? '' }}" />
+                            <figcaption>
+                                <h1>{{ $itemAct->name ?? '' }}</h1>
+                            </figcaption>
+                            <a href="#"></a>
+                        </figure>
+                    </div>
+                @endforeach
             </div>
             <!-- End Portfolio Container -->
         </div>
@@ -304,38 +162,17 @@
         <div class="container">
             <div class="row justify-content-center gy-4">
 
-                <div class="col-lg-3 col-md-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-                    <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/flyer/jp_v1.jpg') }}" alt="sample89" />
-                        <figcaption>
-                            <h1>JATIM PRIDE VOL.1</h1>
-                        </figcaption>
-                        <a href="#"></a>
-                    </figure>
-                </div>
-                <!-- End Team Member -->
-
-                <div class="col-lg-3 col-md-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-                    <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/flyer/jp_v2.jpg') }}" alt="sample89" />
-                        <figcaption>
-                            <h1>JATIM PRIDE VOL.2</h1>
-                        </figcaption>
-                        <a href="#"></a>
-                    </figure>
-                </div>
-                <!-- End Team Member -->
-
-                <div class="col-lg-3 col-md-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-                    <figure class="img-hover-text">
-                        <img src="{{ asset('app_local/img/flyer/jp_v3.jpg') }}" alt="sample89" />
-                        <figcaption>
-                            <h1>JATIM PRIDE VOL.3</h1>
-                        </figcaption>
-                        <a href="#"></a>
-                    </figure>
-                </div>
-                <!-- End Team Member -->
+                @foreach ($event as $itemEvent)
+                    <div class="col-lg-3 col-md-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                        <figure class="img-hover-text">
+                            <img src="{{ $itemEvent->foto_url ?? '' }}" alt="{{ $itemEvent->name ?? '' }}" />
+                            <figcaption>
+                                <h1>{{ $itemEvent->name ?? '' }}</h1>
+                            </figcaption>
+                            <a href="#"></a>
+                        </figure>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -345,6 +182,16 @@
     <!-- Clients Section -->
     <section id="clients" class="clients section">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row justify-content-center gy-4 mb-3">
+                @foreach ($sponsor_utama as $itemSponsor)
+                    <div class="col-lg-4 col-md-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                        <div class="swiper-slide d-flex justify-content-center align-items-center">
+                            <img src="{{ $itemSponsor->foto_url ?? '' }}" alt="{{ $itemSponsor->name ?? '' }}"
+                                class="img-fluid" />
+                        </div>
+                    </div>
+                @endforeach
+            </div>
             <div class="swiper init-swiper">
                 <script type="application/json" class="swiper-config">
                     {
@@ -380,39 +227,25 @@
                       }
                 </script>
                 <div class="swiper-wrapper align-items-center text-center">
-                    <div class="swiper-slide text-center">
-                        <img src="{{ asset('app_local/img/sponsor/jne.png') }}" class="img-fluid" alt="" />
-                    </div>
-                    <div class="swiper-slide text-center">
-                        <img src="{{ asset('app_local/img/sponsor/kilap.png') }}" class="img-fluid" alt="" />
-                    </div>
-                    <div class="swiper-slide text-center">
-                        <img src="{{ asset('app_local/img/sponsor/surya.png') }}" class="img-fluid" alt="" />
-                    </div>
+                    @foreach ($sponsor as $itemSponsor)
+                        <div class="swiper-slide text-center">
+                            <img src="{{ $itemSponsor->foto_url ?? '' }}" class="img-fluid"
+                                alt="{{ $itemSponsor->name ?? '' }}" />
+                        </div>
+                    @endforeach
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
     <!-- /Clients Section -->
-
-    <div class="overlay-video">
-
-        <div class="videoWrapperExt">
-            <div class="videoWrapper">
-                <div class="close"></div>
-                <iframe id="player" width="853" height="480" src="" frameborder="0"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
 @endsection
 
 
 @section('customjs')
     <script>
         // Set the date we're counting down to
-        var countDownDate = new Date("Sep 29, 2024 07:00:00").getTime();
+        var countDownDate = new Date("{{ setting('event_date') ?? '' }}").getTime();
 
         // Update the count down every 1 second
         var x = setInterval(function() {
@@ -446,20 +279,20 @@
         }, 1000);
 
 
-        document.querySelector('.read-more').addEventListener('click', function() {
-            var moreText = document.querySelector('.more-text');
-            var dots = document.querySelector('.dots');
-            var readMoreLink = this;
+        // document.querySelector('.read-more').addEventListener('click', function() {
+        //     var moreText = document.querySelector('.more-text');
+        //     var dots = document.querySelector('.dots');
+        //     var readMoreLink = this;
 
-            if (moreText.style.display === 'none') {
-                moreText.style.display = 'inline';
-                dots.style.display = 'none';
-                readMoreLink.textContent = 'Read less';
-            } else {
-                moreText.style.display = 'none';
-                dots.style.display = 'inline';
-                readMoreLink.textContent = 'Read more';
-            }
-        });
+        //     if (moreText.style.display === 'none') {
+        //         moreText.style.display = 'inline';
+        //         dots.style.display = 'none';
+        //         readMoreLink.textContent = 'Read less';
+        //     } else {
+        //         moreText.style.display = 'none';
+        //         dots.style.display = 'inline';
+        //         readMoreLink.textContent = 'Read more';
+        //     }
+        // });
     </script>
 @endsection

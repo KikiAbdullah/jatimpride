@@ -63,8 +63,8 @@
                             Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla
                             at esse enim cum deserunt eius.
                         </p>
-                        <br>    
-                        <a class="btn-location text-white" href="#">Beli Sekarang</a>
+                        <br>
+                        <a class="btn-location text-white" href="{{ route('front.order') }}">Beli Sekarang</a>
                     </div>
                 </div>
 

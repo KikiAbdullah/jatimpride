@@ -9,8 +9,8 @@
     <meta name="keywords" content="" />
 
     <!-- Favicons -->
-    <link href="{{ asset('app_local/img/favicon.png') }}" rel="icon" />
-    <link href="{{ asset('app_local/img/favicon.png') }}" rel="apple-touch-icon" />
+    <link href="{{ setting('icon_url') ?? '' }}" rel="icon" />
+    <link href="{{ setting('icon_url') ?? '' }}" rel="apple-touch-icon" />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -28,29 +28,46 @@
 
     <!-- Main CSS File -->
     <link href="{{ asset('front-asset/css/main.css') }}" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        const _csrf_token = "{{ csrf_token() }}";
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': _csrf_token
+                }
+            });
+        });
+    </script>
 </head>
 
 <body class="index-page dark-background">
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
             <a href="{{ route('front.index') }}" class="logo d-flex align-items-center me-auto me-lg-0">
-                <img src="{{ asset('app_local/img/logo.png') }}" alt="">
+                <img src="{{ setting('logo_url') }}" alt="">
             </a>
 
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="{{ route('front.index') }}#about">About Us</a></li>
                     <li><a href="https://wa.me/6282245283892" target="_blank">Contact Us</a></li>
-                    <li><a href="{{ route('front.index') }}#merchandise">Merchandise</a></li>
+                    <li><a class="{{ @$title == 'mechandise' ? 'active' : '' }}"
+                            href="{{ route('front.index') }}#merchandise">Merchandise</a></li>
                     <li><a href="{{ route('front.index') }}#event">Our Event</a></li>
+                    <li><a class="{{ @$title == 'crew' ? 'active' : '' }}" href="{{ route('front.crew') }}">Our
+                            Crew</a></li>
                     <li><a href="#">Ticket</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-            @if ($is_login)
-                <a class="btn-getstarted ms-" href="{{ route('mobile.profile') }}">Profile</a>
+            @if (Auth::check())
+                <a class="btn-getstarted ms-" href="{{ route('front.profile') }}">Profile</a>
             @else
-                <a class="btn-getstarted" href="{{ route('mobile.index') }}">Login</a>
+                <a class="btn-getstarted" href="{{ route('login') }}">Login</a>
             @endif
         </div>
     </header>
@@ -65,27 +82,27 @@
                 <div class="row gy-4">
                     <div class="col-lg-6 col-md-6 footer-about">
                         <div class="footer-contact pt-3">
-                            <h2>Jati Jaya Garage</h2>
-                            <p>Jl. Rambutan, Wringinanom, Jogosari,<br>Kec. Pandaan, Pasuruan, Jawa Timur 67156</p>
+                            <h2>{{ setting('contact_name') ?? '' }}</h2>
+                            <p>{{ setting('contact_alamat') ?? '' }}</p>
                             <p class="mt-3">
-                                <strong>Whatsapp:</strong> <span>0822-4528-3892</span>
+                                <strong>Whatsapp:</strong> <span>{{ setting('contact_whatsapp') ?? '' }}</span>
                             </p>
-                            <p><strong>Email:</strong> <span><a href="mailto:officialjatimpride@gmail.com"
+                            <p><strong>Email:</strong> <span><a href="mailto:{{ setting('contact_email') ?? '' }}"
                                         target="_blank"
-                                        rel="noopener noreferrer">officialjatimpride@gmail.com</a></span></p>
+                                        rel="noopener noreferrer">{{ setting('contact_email') ?? '' }}</a></span></p>
                         </div>
                         <div class="social-links d-flex mt-4">
-                            <a href="https://www.instagram.com/jatim.pride" target="_blank"><i
+                            <a href="{{ setting('contact_instagram') ?? '' }}" target="_blank"><i
                                     class="bi bi-instagram"></i></a>
-                            <a href="https://www.tiktok.com/@jatijayagarage" target="_blank"><i
+                            <a href="{{ setting('contact_tiktok') ?? '' }}" target="_blank"><i
                                     class="bi bi-tiktok"></i></a>
-                            <a href="https://youtube.com/@jatijayagarage5108?si=_f8iPep27QHP87hS" target="_blank"><i
+                            <a href="{{ setting('contact_youtube') ?? '' }}" target="_blank"><i
                                     class="bi bi-youtube"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <a href="{{ route('front.index') }}">
-                            <img src="{{ asset('app_local/img/logo.png') }}" class="img-fluid" style="opacity: 0.5"
+                            <img src="{{ setting('logo_url') ?? '' }}" class="img-fluid" style="opacity: 0.5"
                                 alt="">
                         </a>
                     </div>
@@ -111,17 +128,16 @@
     </a>
 
     <!-- Vendor JS Files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script src="{{ asset('front-asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('front-asset/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('front-asset/vendor/aos/aos.js') }}"></script>
     <script src="{{ asset('front-asset/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('front-asset/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('front-asset/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('front-asset/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('front-asset/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     @yield('customjs')
 
