@@ -59,7 +59,7 @@ class SettingSeeder extends Seeder
 
         $data = [
             'event_gmaps' => 'https://maps.app.goo.gl/ThygBK4LbCH5sobU9',
-            'event_date' => '2024-09-29 07:00:00',
+            'event_date' => '29-09-2024 07:00:00',
             'about_name' => 'Mas Fadh Tri Wahyudo S.E.',
             'about_jabatan' => 'CEO / LEADER JATIM PRIDE',
             'about_text' => $text,
