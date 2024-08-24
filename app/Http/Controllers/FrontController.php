@@ -26,6 +26,12 @@ class FrontController extends Controller
 {
     public function index(Request $request)
     {
+        if (Auth::check()) {
+            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
+                return redirect()->route('siteurl');
+            }
+        }
+
         $data = [
             'title' => 'index',
             'event' => Event::orderBy('urutan')->get(),
@@ -40,6 +46,12 @@ class FrontController extends Controller
 
     public function merchandise(Request $request)
     {
+        if (Auth::check()) {
+            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
+                return redirect()->route('siteurl');
+            }
+        }
+
         $merch = Merch::all();
 
         $data = [
@@ -54,6 +66,12 @@ class FrontController extends Controller
 
     public function crew(Request $request)
     {
+        if (Auth::check()) {
+            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
+                return redirect()->route('siteurl');
+            }
+        }
+
         $data = [
             'title' => 'crew',
         ];
@@ -135,6 +153,12 @@ class FrontController extends Controller
     //PROFILE
     public function profile(Request $request)
     {
+        if (Auth::check()) {
+            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
+                return redirect()->route('siteurl');
+            }
+        }
+
         $data = [
             'title' => 'Profile',
             'data'  => [
@@ -147,6 +171,12 @@ class FrontController extends Controller
 
     public function history(Request $request, $id)
     {
+        if (Auth::check()) {
+            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
+                return redirect()->route('siteurl');
+            }
+        }
+
         $data = [
             'title' => 'Order',
             'item'  => Trans::find($id),
@@ -161,6 +191,12 @@ class FrontController extends Controller
     //ORDER
     public function order(Request $request)
     {
+        if (Auth::check()) {
+            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
+                return redirect()->route('siteurl');
+            }
+        }
+
         $data = [
             'title' => 'Order',
             'data'  => [
@@ -223,6 +259,12 @@ class FrontController extends Controller
 
     public function payment(Request $request)
     {
+        if (Auth::check()) {
+            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
+                return redirect()->route('siteurl');
+            }
+        }
+
         $data = [
             'title' => 'Payment',
             'data'  => [
