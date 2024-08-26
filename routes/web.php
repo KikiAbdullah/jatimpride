@@ -113,6 +113,21 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('sponsor',        'Master\SponsorController')->middleware('can:master_sponsor');
             //SPONSOR
 
+            //FG
+            Route::group(['prefix' => 'fg-support', 'as' => 'fg-support.'], function () {
+                Route::get('get-data',      'Master\FgSupportController@ajaxData')->name('get-data');
+            });
+            Route::resource('fg-support',        'Master\FgSupportController')->middleware('can:master_fg_support');
+            //FG
+
+            //FG
+            Route::group(['prefix' => 'team-support', 'as' => 'team-support.'], function () {
+                Route::get('get-data',      'Master\TeamSupportController@ajaxData')->name('get-data');
+            });
+            Route::resource('team-support',        'Master\TeamSupportController')->middleware('can:master_team_support');
+            //FG
+
+
             //SETTINGS
             Route::resource('setting',        'Master\SettingController')->middleware('can:master_setting');
             //SETTINGS

@@ -109,6 +109,20 @@
                                     Sponsor
                                 </a>
                             @endcan
+                            @can('master_fg_support')
+                                <a href="{{ route('master.fg-support.index') }}"
+                                    class="dropdown-item {{ $title == 'FG Support' ? 'active' : '' }}">
+                                    <i class="ph-stack me-2"></i>
+                                    FG Support
+                                </a>
+                            @endcan
+                            @can('master_team_support')
+                                <a href="{{ route('master.team-support.index') }}"
+                                    class="dropdown-item {{ $title == 'Team Support' ? 'active' : '' }}">
+                                    <i class="ph-stack me-2"></i>
+                                    Team Support
+                                </a>
+                            @endcan
                             @can('master_activity')
                                 <a href="{{ route('master.activity.index') }}"
                                     class="dropdown-item {{ $title == 'Activity' ? 'active' : '' }}">
@@ -185,7 +199,8 @@
                         <i class="ph-moon me-2"></i>
                         Dark Theme
                         <div class="form-check form-switch form-check-reverse ms-auto">
-                            <input type="checkbox" class="form-check-input" id="sc_ls_c" onchange="setTheme(this)">
+                            <input type="checkbox" class="form-check-input" id="sc_ls_c"
+                                onchange="setTheme(this)">
                         </div>
                     </label>
 
