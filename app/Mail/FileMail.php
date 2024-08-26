@@ -34,7 +34,6 @@ class FileMail extends Mailable
      */
     public function build()
     {
-
         $text = '';
         $subject = '';
 

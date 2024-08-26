@@ -103,7 +103,7 @@
                         <table class="container" bgcolor="#fff" width="100%">
                             <tbody>
                                 <tr style="vertical-align: top" align="left">
-                                    <td valign="top" class="logo">
+                                    <td valign="top" align="center" class="logo">
                                         <img src="{{ $logo }}" alt="JATIMPRIDE" class="CToWUd" data-bit="iit" />
                                     </td>
                                 </tr>
@@ -121,7 +121,10 @@
                                             Hai {{ $item->customer->name ?? '' }},
                                         </div>
                                         <div class="header-strong">
-                                            Transaksi Pembelian Merchandise berhasil
+                                            {{ $subject }}
+                                        </div>
+                                        <div style="text-align: justify;">
+                                            <small>{{ $text }}</small>
                                         </div>
                                     </th>
                                 </tr>
@@ -155,20 +158,20 @@
                                     <th style="width: 140px">Jenis Pengiriman</th>
                                     <th>: {{ $item->jenisPengiriman->name ?? '' }}</th>
                                 </tr>
+                                @if ($item->status == 'closed' && $item->jenis_pengiriman_id == 1)
+                                    <tr style="vertical-align: top" align="left">
+                                        <th style="width: 140px">No Resi</th>
+                                        <th>: {{ $item->noresi ?? '' }}</th>
+                                    </tr>
+                                @endif
                                 <tr style="vertical-align: top" align="left">
-                                    <th colspan="2" style="width: 140px">
-                                        Catatan
-                                        <br />
-                                        : {{ $item->text ?? '' }}
-                                    </th>
+                                    <th style="width: 140px">Catatan</th>
+                                    <th>: {{ $item->text ?? '' }}</th>
                                 </tr>
                                 @if ($item->status == 'rejected')
                                     <tr style="vertical-align: top" align="left">
-                                        <th colspan="2" style="width: 140px">
-                                            Alasan Pembatalan
-                                            <br />
-                                            : {{ $item->text_reject ?? '' }}
-                                        </th>
+                                        <th style="width: 140px">Alasan Pembatalan</th>
+                                        <th>: {{ $item->text_reject ?? '' }}</th>
                                     </tr>
                                 @endif
                             </tbody>

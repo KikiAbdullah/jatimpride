@@ -168,7 +168,9 @@ class TransController extends Controller
             $response           = [];
 
             if (!empty($model->customer->email)) {
-                $filePath = '';
+                $pdfName = $this->makePdfInvoice($model);
+                $filePath = 'invoice/' . $model->id . '/' . $pdfName;
+
                 Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
 
@@ -232,7 +234,6 @@ class TransController extends Controller
 
             if (!empty($model->customer->email)) {
                 $filePath = 'invoice/' . $model->id . '/invoice - ' . $model->no . '.pdf';
-
                 Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
 
@@ -303,7 +304,8 @@ class TransController extends Controller
             }
 
             if (!empty($model->customer->email)) {
-                $filePath = storage_path('app/public/sample.pdf'); // Ganti dengan path file kamu
+                $filePath = '';
+
                 $email = Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
 

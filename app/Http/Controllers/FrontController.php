@@ -363,8 +363,8 @@ class FrontController extends Controller
 
             // Send invoice email
             if (!empty($model->customer->email)) {
-                $pdfName = $this->makePdfInvoice($model);
-                $filePath = 'invoice/' . $model->id . '/' . $pdfName;
+                $filePath = '';
+
                 Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
 
