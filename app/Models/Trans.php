@@ -107,16 +107,16 @@ class Trans extends Model
 
         switch ($this->status) {
             case 'open':
-                $title      = 'Open';
+                $title      = 'Menunggu Konfirmasi';
                 break;
             case 'confirm':
-                $title      = 'Confirmed';
+                $title      = 'Dikonfirmasi';
                 break;
             case 'closed':
-                $title      = 'Closed';
+                $title      = 'Selesai';
                 break;
             case 'rejected':
-                $title      = 'Rejected';
+                $title      = 'Dibatalkan';
                 break;
 
             default:
@@ -134,19 +134,19 @@ class Trans extends Model
 
         switch ($this->status) {
             case 'open':
-                $title      = 'Open';
+                $title      = 'Menunggu Konfirmasi';
                 $badge      = 'info';
                 break;
             case 'confirm':
-                $title      = 'Confirmed';
+                $title      = 'Dikonfirmasi';
                 $badge      = 'secondary';
                 break;
             case 'closed':
-                $title      = 'Closed';
+                $title      = 'Selesai';
                 $badge      = 'success';
                 break;
             case 'rejected':
-                $title      = 'Rejected';
+                $title      = 'Dibatalkan';
                 $badge      = 'danger';
                 break;
         }
