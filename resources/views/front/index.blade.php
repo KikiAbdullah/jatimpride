@@ -240,7 +240,7 @@
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-            <div class="row justify-content-center my-3"  data-aos="fade-up">
+            <div class="row justify-content-center my-3" data-aos="fade-up">
                 <div class="col-md-6 row justify-content-center">
                     <div class="col-sm-12">
                         <div class="container section-title text-center">
@@ -249,7 +249,7 @@
                     </div>
                     @foreach ($team_support as $team)
                         <div class="col-sm-6">
-                            <div class="swiper-slide">
+                            <div class="swiper-slide d-flex align-items-center">
                                 <img src="{{ $team->foto_url ?? '' }}" alt="{{ $team->name ?? '' }}"
                                     style="max-width: 200px; max-height:200px;" class="img-fluid" />
                             </div>
@@ -264,7 +264,7 @@
                     </div>
                     @foreach ($fg_support as $fg)
                         <div class="col-sm-6">
-                            <div class="swiper-slide">
+                            <div class="swiper-slide d-flex align-items-center">
                                 <img src="{{ $fg->foto_url ?? '' }}" alt="{{ $fg->name ?? '' }}"
                                     style="max-width: 200px; max-height:200px;" class="img-fluid" />
                             </div>
