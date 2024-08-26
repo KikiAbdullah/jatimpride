@@ -201,12 +201,7 @@
                 }
             });
 
-            var merch = JSON.parse(window.localStorage.getItem('merchandise'));
-
-            if (!merch) {
-                merch = [];
-            }
-
+            var merch = JSON.parse(window.localStorage.getItem('merchandise')) || [];
 
             if (merch.length > 0) {
                 var merchItems = '';
@@ -338,7 +333,7 @@
         });
 
         function RemoveItem(id) {
-            var merch = JSON.parse(window.localStorage.getItem("merchandise"));
+            var merch = JSON.parse(window.localStorage.getItem('merchandise')) || [];
 
             return merch.filter(function(emp) {
                 if (emp.id == id) {
