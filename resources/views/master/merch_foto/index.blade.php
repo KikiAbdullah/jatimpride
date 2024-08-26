@@ -54,7 +54,7 @@
                 <!-- /card -->
             </div>
             <div class="col-md-6" id="dynamic-form">
-                @include('master.sponsor.create')
+                @include('master.merch_foto.create')
             </div>
 
         </div>
@@ -65,7 +65,7 @@
 @section('customjs')
     <script type="text/javascript">
         var dtable;
-        const urlAjax = '{{ route('master.sponsor.get-data') }}';
+        const urlAjax = '{{ route('master.merch-foto.get-data') }}';
         const getButtonOption = '{{ route('get.button-option') }}';
         const buttons = {!! json_encode(['vedit' => $url['edit'], 'destroy' => $url['destroy']]) !!};
         var html_temp = $("#dynamic-form").html();

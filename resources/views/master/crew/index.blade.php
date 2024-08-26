@@ -255,6 +255,10 @@
             $('.menuoption').find('.btnBack').remove();
             $('.select').select2();
         }
+
+        function remove_file(el) {
+            $(el).closest('div').remove();
+        }
     </script>
 @endsection
 

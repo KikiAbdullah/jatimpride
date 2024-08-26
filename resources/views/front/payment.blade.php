@@ -12,8 +12,21 @@
         <!-- End Section Title -->
 
         <div class="container form-login">
-            <div class="row">
-                <div class="col-md-4 col-sm-12 mt-3">
+            <div class="page-title">
+                <nav class="breadcrumbs">
+                    <div class="container">
+                        <ol>
+                            <li><a href="{{ route('front.merchandise') }}">Merchandise</a></li>
+                            <li><a href="{{ route('front.order') }}">Order</a></li>
+                            <li class="current">Payment</li>
+                        </ol>
+                    </div>
+                </nav>
+            </div>
+
+
+            <div class="row my-3">
+                <div class="col-md-4 col-sm-12">
                     <h3 class="h3">Merchandise</h3>
                     <div class="bd-example-snippet bd-code-snippet mb-5">
                         <div class="bd-example m-0 border-0">
@@ -47,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8 col-sm-12 mt-3">
+                <div class="col-md-8 col-sm-12">
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             @foreach ($errors->all() as $error)

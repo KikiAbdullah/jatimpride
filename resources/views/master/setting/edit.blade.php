@@ -89,6 +89,10 @@
                     'ph-spinner spinner submit_loader');
             });
         });
+
+        function remove_file(el) {
+            $(el).closest('div').remove();
+        }
     </script>
 @endsection
 

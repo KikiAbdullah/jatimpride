@@ -193,6 +193,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('payment',           'FrontController@payment')->name('front.payment');
     Route::post('payment-store',    'FrontController@paymentStore')->name('front.payment-store');
     Route::get('history/{id}',       'FrontController@history')->name('front.history');
+    Route::get('reject/{id}',       'FrontController@reject')->name('front.reject');
 
     //FRONT LOGIN
 });

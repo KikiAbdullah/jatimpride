@@ -6,34 +6,67 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>{{ $item->no }}</h2>
-            <p>HISTORY TRANSACTION</p>
+            <h2>HISTORY TRANSACTION</h2>
+            <p>{{ $item->no }}</p>
         </div>
         <!-- End Section Title -->
 
-        <div class="container form-login">
-            <div class="row">
-                <div class="col-md-6 col-sm-12 mt-3">
-                    <h3 class="h3">Transaksi</h3>
-                    <div class="bd-example-snippet bd-code-snippet mb-5">
-                        <ul>
-                            <li><strong>Tanggal</strong>:
-                                {{ $item->created_at->format('d F Y H:i:s') ?? '' }}
-                            </li>
-                            <li><strong>Customer</strong>: {{ $item->customer->name ?? '' }}
-                            </li>
-                            <li>
-                                <strong>Jenis Pengiriman</strong>:
-                                {{ $item->jenisPengiriman->name ?? '' }}
-                            </li>
-                            <li><strong>Total</strong>: Rp {{ cleanNumber($item->total) }}
-                            </li>
-                            <li><strong>Catatan</strong>:<br> {{ $item->text }}
-                            </li>
-                        </ul>
+        <div class="container">
+            <div class="page-title">
+                <nav class="breadcrumbs">
+                    <div class="container">
+                        <ol>
+                            <li><a href="{{ route('front.index') }}">Home</a></li>
+                            <li><a href="{{ route('front.profile') }}">Profile</a></li>
+                            <li class="current">History</li>
+                        </ol>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="row my-3">
+                <div class="col-md-6 col-sm-12">
+                    <div class="portfolio-details">
+                        <div class="portfolio-info aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                            <div class="d-flex justify-content-between">
+                                <h3>{{ $item->no }}</h3>
+
+                                <div>
+                                    {!! $item->status_formatted !!}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ul>
+                                        <li><strong>Tanggal</strong>:
+                                            {{ $item->created_at->format('d F Y H:i:s') ?? '' }}
+                                        </li>
+                                        <li><strong>Customer</strong>: {{ $item->customer->name ?? '' }}
+                                        </li>
+                                        <li>
+                                            <strong>Jenis Pengiriman</strong>:
+                                            {{ $item->jenisPengiriman->name ?? '' }}
+                                        </li>
+                                        <li><strong>Total</strong>: Rp {{ cleanNumber($item->total) }}
+                                        </li>
+                                        <li><strong>Catatan</strong>:<br> {{ $item->text }}
+                                        </li>
+                                        <li><strong>Alasan Reject</strong>:<br> {{ $item->text_reject }}
+                                        </li>
+                                    </ul>
+                                    @if ($item->status == 'open')
+                                        <button
+                                            onclick="BatalPemesanan('{{ route('front.reject', $item->id) }}', event)"class="btn btn-danger">Batalkan
+                                            Pesanan</button>
+                                    @else
+                                        <div></div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-12 mt-3">
+                <div class="col-md-6 col-sm-12">
                     <h3 class="h3">Transaksi</h3>
                     <div class="bd-example-snippet bd-code-snippet mb-5">
                         <div class="bd-example m-0 border-0">
@@ -76,92 +109,65 @@
 
 @section('customjs')
     <script>
-        var payButton = document.getElementById('pay-button');
-        var ticketAmount = 0;
-        var addonAmount = 0;
-        var merchAmount = 0;
-        const getKota = '{{ route('get.kota') }}';
-        const getKecamatan = '{{ route('get.kecamatan') }}';
-        const getKelurahan = '{{ route('get.kelurahan') }}';
+        const BatalPemesanan = (url, e) => {
 
-
-        $(document).ready(function() {
-            // Run toggleAddressRow when the page is loaded
-            toggleAddressRow();
-
-            // Bind the change event to the radio buttons
-            $('input[name="jenis_pengiriman_id"]').change(function() {
-                toggleAddressRow();
-            });
-        });
-
-        function stateChange(url_type = null, el = null, to_element = null, to_element_hidden = null) {
-            if (url_type !== null) {
-                $.ajax({
-                    type: "GET",
-                    url: "" + getUrl(url_type),
-                    data: {
-                        id: $(el).val(),
-                        _token: _csrf_token
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        $('.' + to_element).find('option').remove().end();
-                        $('.' + to_element).append($("<option></option>")
-                            .attr('value', '')
-                            .text('Pilih')
-                            .attr('selected', 'selected'));
-                        $.each(response, function(key, value) {
-                            $("." + to_element)
-                                .append($("<option></option>")
-                                    .attr("value", key)
-                                    .text(value));
+            Swal.fire({
+                toast: true,
+                icon: 'question',
+                title: 'Batalkan Pemesanan?',
+                showCancelButton: true,
+                confirmButtonText: 'Confirm',
+                reverseButtons: true,
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    $.ajax({
+                            type: 'GET',
+                            url: url,
+                            dataType: "json",
+                            success: () => {
+                                window.location.href = "";
+                            },
+                        })
+                        .done(function(data) {
+                            return data;
+                        })
+                        .fail(function(jqXHR, textStatus, errorThrown) {
+                            if (jqXHR.status == 422) {
+                                var xhr = JSON.stringify(JSON.parse(jqXHR.responseText).errors);
+                            } else {
+                                var xhr = JSON.stringify(JSON.parse(jqXHR.responseText));
+                            }
+                            Swal.fire({
+                                title: "Request Error",
+                                toast: true,
+                                text: xhr.substring(0, 160),
+                                icon: "error",
+                            });
                         });
-                    },
-                    fail: function(errMsg) {
-                        // alert(errMsg);
+                },
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.value != null)
+                    if (result.value.status) {
+                        Swal.fire({
+                            toast: true,
+                            title: 'Success',
+                            text: result.value.msg,
+                            icon: 'success',
+                            showConfirmButton: false,
+                        });
+                        window.location.href = "";
+
+                    } else {
+                        Swal.fire({
+                            toast: true,
+                            title: 'Error',
+                            text: result.value.msg.substring(0, 160),
+                            icon: 'error',
+                            showConfirmButton: false,
+                        })
                     }
-                });
-            }
-        }
-
-        function getUrl(url_type) {
-            var new_url = '';
-
-            if (url_type == '/get-kota') {
-                new_url = getKota;
-            }
-
-            if (url_type == '/get-kecamatan') {
-                new_url = getKecamatan;
-            }
-
-            if (url_type == '/get-kelurahan') {
-                new_url = getKelurahan;
-            }
-
-            return new_url;
-        }
-
-        // Function to toggle visibility of #alamat-row based on selected jenis_pengiriman_id
-        function toggleAddressRow() {
-            // Get the selected value of the radio buttons
-            var selectedJenisPengiriman = $('input[name="jenis_pengiriman_id"]:checked').val();
-
-            $('#jenis-pengiriman-id').val(selectedJenisPengiriman);
-
-            // Show or hide #alamat-row based on the selected value
-            if (selectedJenisPengiriman == 1) {
-                $('#alamat-row').show();
-                $('#dikirim-row').hide();
-            } else {
-                $('.provinsi_pribadi').val('').trigger('change');
-                $('.kota').val('').trigger('change');
-                $('.kecamatan').val('').trigger('change');
-                $('.kelurahan').val('').trigger('change');
-                $('#dikirim-row').show();
-                $('#alamat-row').hide();
-            }
+            })
         }
     </script>
 @endsection

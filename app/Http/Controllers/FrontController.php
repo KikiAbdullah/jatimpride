@@ -9,6 +9,7 @@ use App\Models\Master\Activity;
 use App\Models\Master\Crew;
 use App\Models\Master\Event;
 use App\Models\Master\Merch;
+use App\Models\Master\MerchFoto;
 use App\Models\Master\Sponsor;
 use App\Models\Trans;
 use App\Models\TransLine;
@@ -59,6 +60,9 @@ class FrontController extends Controller
             'item' => (clone $merch)->first(),
             'list_size' => implode(', ', (clone $merch)->pluck('size', 'size')->toArray()),
             'harga' => 'Rp ' . cleanNumber((clone $merch)->min('harga')) . ' - Rp ' . cleanNumber((clone $merch)->max('harga')),
+            'data' => [
+                'list_foto' => MerchFoto::orderBy('urutan')->get(),
+            ],
         ];
 
         return view('front.merchandise', $data);
@@ -74,6 +78,9 @@ class FrontController extends Controller
 
         $data = [
             'title' => 'crew',
+            'data' => [
+                'list_crew' => Crew::orderBy('urutan')->get(),
+            ],
         ];
 
         return view('front.crew', $data);
@@ -247,7 +254,6 @@ class FrontController extends Controller
                 $response = responseSuccess();
             }
 
-
             DB::commit();
 
             return response()->json($response);
@@ -362,6 +368,10 @@ class FrontController extends Controller
                 Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
 
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLogCustomMessage('User <b>' . auth()->user()->name . '</b> melakukan transaksi <b>' . $model->no . '/' . $model->id . '</b>', 'add');
+
             DB::commit();
             return redirect()->route('front.history', $model->id)
                 ->withSuccess('Pemesanan Telah Berhasil');
@@ -387,6 +397,51 @@ class FrontController extends Controller
         Storage::put('public/invoice/' . $model->id . '/' . $pdf_name, $content);
 
         return $pdf_name;
+    }
+
+
+    public function reject(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $trans = Trans::with(['lines'])->find($id);
+
+            if (!empty($trans)) {
+                $trans->update([
+                    'status' => 'rejected',
+                    'text_reject' => 'Pembatalan oleh Customer',
+                    'rejected_by' => auth()->user()->id,
+                    'rejected_at' => date('Y-m-d H:i:s'),
+                ]);
+
+                foreach ($trans->lines as $key => $line) {
+                    $merch = Merch::find($line->merch_id);
+                    $merch->increment('stok', $line->qty);
+                }
+            }
+
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLogCustomMessage('User <b>' . auth()->user()->name . '</b> melakukan pembatalan transaksi <b>' . $trans->no . '/' . $trans->id . '</b>', 'delete');
+
+            DB::commit();
+
+            $response           = [
+                'status'            => true,
+                'msg'               => 'Data Saved.',
+            ];
+            return response()->json($response);
+        } catch (Exception $e) {
+
+            DB::rollback();
+
+            $response           = [
+                'status'            => false,
+                'msg'               => $e->getMessage(),
+            ];
+            return response()->json($response);
+        }
     }
     //ORDER
 }

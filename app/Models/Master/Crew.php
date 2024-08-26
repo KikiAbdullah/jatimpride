@@ -18,6 +18,10 @@ class Crew extends Model
         'jabatan',
         'urutan',
         'foto',
+        'instagram',
+        'facebook',
+        'linkedin',
+        'whatsapp',
         'created_by',
     ];
 

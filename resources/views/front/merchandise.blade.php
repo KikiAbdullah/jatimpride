@@ -28,23 +28,11 @@
                             </script>
 
                         <div class="swiper-wrapper align-items-center">
-
-                            <div class="swiper-slide">
-                                <img src="{{ asset('front-asset/img/portfolio/app-1.jpg') }}" alt="">
-                            </div>
-
-                            <div class="swiper-slide">
-                                <img src="{{ asset('front-asset/img/portfolio/product-1.jpg') }}" alt="">
-                            </div>
-
-                            <div class="swiper-slide">
-                                <img src="{{ asset('front-asset/img/portfolio/branding-1.jpg') }}" alt="">
-                            </div>
-
-                            <div class="swiper-slide">
-                                <img src="{{ asset('front-asset/img/portfolio/books-1.jpg') }}" alt="">
-                            </div>
-
+                            @foreach ($data['list_foto'] as $foto)
+                                <div class="swiper-slide">
+                                    <img src="{{ $foto->foto_url }}" alt="">
+                                </div>
+                            @endforeach
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>
