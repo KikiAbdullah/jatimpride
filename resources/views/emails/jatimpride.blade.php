@@ -156,7 +156,10 @@
                                 </tr>
                                 <tr style="vertical-align: top" align="left">
                                     <th style="width: 140px">Jenis Pengiriman</th>
-                                    <th>: {{ $item->jenisPengiriman->name ?? '' }}</th>
+                                    <th>: {{ $item->jenisPengiriman->name ?? '' }}<br>
+                                        {{ $item->alamat_prov ?? '' }}<br>
+                                        {{ $item->alamat ?? '' }}<br>
+                                    </th>
                                 </tr>
                                 @if ($item->status == 'closed' && $item->jenis_pengiriman_id == 1)
                                     <tr style="vertical-align: top" align="left">
