@@ -99,32 +99,23 @@ class LogHelper
 			case 'delete':
 				$str 		= 'Penghapusan';
 				break;
-			case 'approve':
-				$str 		= 'Approve';
+			case 'confirm':
+				$str 		= 'Konfirmasi';
 				break;
-			case 'approve1':
-				$str 		= 'Approve';
+			case 'unconfirm':
+				$str 		= 'Batal Konfirmasi';
 				break;
-			case 'approve2':
-				$str 		= 'Approve';
+			case 'closed':
+				$str 		= 'Selesai';
 				break;
-			case 'approve3':
-				$str 		= 'Approve';
+			case 'unclosed':
+				$str 		= 'Batal Selesai';
 				break;
-			case 'reject':
-				$str 		= 'Reject';
+			case 'rejected':
+				$str 		= 'Pembatalan';
 				break;
-			case 'submit':
-				$str 		= 'Submit';
-				break;
-			case 'delete':
-				$str 		= 'Delete';
-				break;
-			case 'verifikasi':
-				$str 		= 'Verifikasi';
-				break;
-			case 'posting':
-				$str 		= 'Posting';
+			case 'unrejected':
+				$str 		= 'Batal Pembatalan';
 				break;
 		}
 

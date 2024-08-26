@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\LogHelper;
 use App\Models\Trans;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -174,6 +175,11 @@ class TransController extends Controller
                 Mail::to($model->customer->email)->send(new FileMail($filePath, $model));
             }
 
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLog('confirm', $model->id, $this->subtitle);
+
+
             DB::commit();
 
             return response()->json(responseSuccess('Berhasil', $response));
@@ -200,6 +206,11 @@ class TransController extends Controller
 
             ]);
             $response           = [];
+
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLog('unconfirm', $model->id, $this->subtitle);
+
 
             DB::commit();
 
@@ -239,6 +250,11 @@ class TransController extends Controller
 
             $response           = [];
 
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLog('closed', $model->id, $this->subtitle);
+
+
             DB::commit();
 
             return response()->json(responseSuccess('Berhasil', $response));
@@ -265,6 +281,10 @@ class TransController extends Controller
 
             ]);
             $response           = [];
+
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLog('unclosed', $model->id, $this->subtitle);
 
             DB::commit();
 
@@ -311,6 +331,10 @@ class TransController extends Controller
 
             $response           = [];
 
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLog('rejected', $model->id, $this->subtitle);
+
             DB::commit();
 
             return response()->json(responseSuccess('Berhasil', $response));
@@ -337,6 +361,10 @@ class TransController extends Controller
 
             ]);
             $response           = [];
+
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLog('unrejected', $model->id, $this->subtitle);
 
             DB::commit();
 

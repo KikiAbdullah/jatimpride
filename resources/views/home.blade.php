@@ -40,7 +40,7 @@
                                     </a>
                                     <div class="ms-3">
                                         <h5 class="mb-0">{{ $total['open'] ?? 0 }} Transaksi</h5>
-                                        <span class="text-muted">Belum Konfirmasi</span>
+                                        <span class="text-muted">Menunggu Konfirmasi</span>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                     </a>
                                     <div class="ms-3">
                                         <h5 class="mb-0">{{ $total['confirm'] ?? 0 }} Transaksi</h5>
-                                        <span class="text-muted">Sudah Konfirmasi</span>
+                                        <span class="text-muted">Dikonfirmasi</span>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                     </a>
                                     <div class="ms-3">
                                         <h5 class="mb-0">{{ $total['rejected'] ?? 0 }} Transaksi</h5>
-                                        <span class="text-muted">Ditolak</span>
+                                        <span class="text-muted">Dibatalkan</span>
                                     </div>
                                 </div>
                             </div>
@@ -97,9 +97,7 @@
                         @foreach ($userlog as $log)
                             <div class="d-flex mb-3">
                                 <div class="me-3">
-                                    <div class="bg-primary bg-opacity-10 text-primary lh-1 rounded-pill p-2">
-                                        <i class="ph-activity"></i>
-                                    </div>
+                                    {!! $log->action_formatted !!}
                                 </div>
                                 <div class="flex-fill">
                                     {!! $log->message ?? '' !!}
