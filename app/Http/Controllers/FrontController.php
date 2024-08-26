@@ -40,8 +40,8 @@ class FrontController extends Controller
             'event' => Event::orderBy('urutan')->get(),
             'activity' => Activity::orderBy('urutan')->get(),
             'sponsor_utama' => Sponsor::orderBy('urutan')->limit(3)->get(),
-            // 'sponsor' => Sponsor::orderBy('urutan')->offset(3)->limit(PHP_INT_MAX)->get(), // Use a large number to get all remaining records
-            'sponsor' => Sponsor::orderBy('urutan')->get(),
+            'sponsor' => Sponsor::orderBy('urutan')->offset(3)->limit(PHP_INT_MAX)->get(), // Use a large number to get all remaining records
+            // 'sponsor' => Sponsor::orderBy('urutan')->get(),
             'fg_support' => FgSupport::orderBy('urutan')->get(),
             'team_support' => TeamSupport::orderBy('urutan')->get(),
         ];
