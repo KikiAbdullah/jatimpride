@@ -43,7 +43,8 @@
                 </div>
                 <div class="col-xl-12 text-center">
                     <br>
-                    <a class="btn-location text-white" href="{{ setting('event_gmaps') ?? '' }}" target="_blank">Lihat Lokasi
+                    <a class="btn-location text-white" href="{{ setting('event_gmaps') ?? '' }}" target="_blank">Lihat
+                        Lokasi
                         Acara</a>
                 </div>
             </div>
@@ -181,6 +182,9 @@
 
     <!-- Clients Section -->
     <section id="clients" class="clients section">
+        <div class="container section-title text-center" data-aos="fade-up">
+            <p>Our Sponsor</p>
+        </div>
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row justify-content-center gy-4 mb-3">
                 @foreach ($sponsor_utama as $itemSponsor)
@@ -235,6 +239,34 @@
                     @endforeach
                 </div>
                 <div class="swiper-pagination"></div>
+            </div>
+            <div class="row justify-content-center my-3">
+                <div class="col-md-6 row">
+                    <div class="container section-title text-center" data-aos="fade-up">
+                        <p>Team Support</p>
+                    </div>
+                    @foreach ($team_support as $team)
+                        <div class="col-sm-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                            <div class="swiper-slide d-flex justify-content-center align-items-center">
+                                <img src="{{ $team->foto_url ?? '' }}" alt="{{ $team->name ?? '' }}"
+                                    style="max-width: 100px; max-height:100px;" class="img-fluid" />
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="col-md-6 row">
+                    <div class="container section-title text-center" data-aos="fade-up">
+                        <p>Photographer</p>
+                    </div>
+                    @foreach ($fg_support as $fg)
+                        <div class="col-sm-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                            <div class="swiper-slide d-flex justify-content-center align-items-center">
+                                <img src="{{ $fg->foto_url ?? '' }}" alt="{{ $fg->name ?? '' }}"
+                                    style="max-width: 100px; max-height:100px;" class="img-fluid" />
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>

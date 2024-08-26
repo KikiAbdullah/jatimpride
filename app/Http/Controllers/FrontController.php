@@ -8,9 +8,11 @@ use App\Models\CartMerch;
 use App\Models\Master\Activity;
 use App\Models\Master\Crew;
 use App\Models\Master\Event;
+use App\Models\Master\FgSupport;
 use App\Models\Master\Merch;
 use App\Models\Master\MerchFoto;
 use App\Models\Master\Sponsor;
+use App\Models\Master\TeamSupport;
 use App\Models\Trans;
 use App\Models\TransLine;
 use App\User;
@@ -39,7 +41,9 @@ class FrontController extends Controller
             'activity' => Activity::orderBy('urutan')->get(),
             'sponsor_utama' => Sponsor::orderBy('urutan')->limit(3)->get(),
             // 'sponsor' => Sponsor::orderBy('urutan')->offset(3)->limit(PHP_INT_MAX)->get(), // Use a large number to get all remaining records
-            'sponsor' => Sponsor::orderBy('urutan')->get(), // Use a large number to get all remaining records
+            'sponsor' => Sponsor::orderBy('urutan')->get(),
+            'fg_support' => FgSupport::orderBy('urutan')->get(),
+            'team_support' => TeamSupport::orderBy('urutan')->get(),
         ];
 
         return view('front.index', $data);

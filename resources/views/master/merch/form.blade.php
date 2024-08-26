@@ -5,8 +5,8 @@
             <div class="d-flex mb-2" style="position: relative;">
                 <a href="#" style="position: absolute;right:0;" onclick="remove_file(this);"><i
                         class="ph-x-circle bg-white rounded-circle" style="color: red"></i></a>
-                <a href="{{ asset($item->foto_formatted) }}">
-                    <img src="{{ asset($item->foto_formatted) }}" class="rounded" style="width:100%;object-fit:cover;">
+                <a href="{{ $item->foto_url }}">
+                    <img src="{{ $item->foto_url }}" class="rounded" style="width:100%;object-fit:cover;">
                 </a>
                 <input type="hidden" name="file_exist" value="1">
             </div>
