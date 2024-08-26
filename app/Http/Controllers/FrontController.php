@@ -83,7 +83,8 @@ class FrontController extends Controller
         $data = [
             'title' => 'crew',
             'data' => [
-                'list_crew' => Crew::orderBy('urutan')->get(),
+                'first' => Crew::orderBy('urutan')->first(),
+                'list_crew' => Crew::orderBy('urutan')->offset(1)->limit(PHP_INT_MAX)->get(), // Use a large number to get all remaining records
             ],
         ];
 

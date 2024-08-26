@@ -183,7 +183,7 @@
     <!-- Clients Section -->
     <section id="clients" class="clients section">
         <div class="container section-title text-center" data-aos="fade-up">
-            <p>Our Sponsor</p>
+            <p>Sponsorship </p>
         </div>
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row justify-content-center gy-4 mb-3">
@@ -259,7 +259,7 @@
                 <div class="col-md-6 row justify-content-center">
                     <div class="col-sm-12">
                         <div class="container section-title text-center">
-                            <p>Photographer</p>
+                            <p>FG Support</p>
                         </div>
                     </div>
                     @foreach ($fg_support as $fg)
