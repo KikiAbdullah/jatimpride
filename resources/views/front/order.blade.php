@@ -203,6 +203,10 @@
 
             var merch = JSON.parse(window.localStorage.getItem('merchandise'));
 
+            if (!merch) {
+                merch = [];
+            }
+
 
             if (merch.length > 0) {
                 var merchItems = '';
