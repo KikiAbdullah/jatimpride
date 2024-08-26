@@ -2,24 +2,21 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Transaksi Berhasil - {{ $item->no }}</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
         body {
-            background-color: black;
-            color: white;
+            color: black;
             font-family: "Inter", sans-serif;
             line-height: 1.4;
             word-wrap: break-word;
         }
 
         .container {
-            background-color: black;
-
             width: 500px;
             margin: 0 auto;
             border-collapse: collapse;
@@ -50,9 +47,8 @@
         }
 
         .transaction-box {
-            border: white;
-            background-color: black;
-            color: white;
+            border: black;
+            color: black;
             width: 500px;
             margin: 0 auto;
             text-align: left;
@@ -60,7 +56,7 @@
 
         .transaction-box th {
             padding: 5px;
-            color: white;
+            color: black;
             line-height: 1.4;
         }
 
@@ -99,7 +95,6 @@
 
 <body>
     <center style="min-width: 500px; width: 100%">
-
         <table class="container" bgcolor="#fff" width="100%">
             <tbody>
                 <tr style="vertical-align: top" align="left">
@@ -117,7 +112,7 @@
                         <!-- LOGO -->
 
                         <!-- HEADER -->
-                        <br>
+                        <br />
                         <table class="container" bgcolor="#fff" width="100%">
                             <tbody>
                                 <tr style="vertical-align: top" align="left">
@@ -135,7 +130,7 @@
                         <!-- HEADER -->
 
                         <!-- BOX -->
-                        <br>
+                        <br />
                         <table class="transaction-box" bgcolor="#fff" width="100%">
                             <tbody>
                                 <tr style="vertical-align: top" align="left">
@@ -161,15 +156,17 @@
                                     <th>: {{ $item->jenisPengiriman->name ?? '' }}</th>
                                 </tr>
                                 <tr style="vertical-align: top" align="left">
-                                    <th colspan="2" style="width: 140px">Catatan
-                                        <br>
+                                    <th colspan="2" style="width: 140px">
+                                        Catatan
+                                        <br />
                                         : {{ $item->text ?? '' }}
                                     </th>
                                 </tr>
                                 @if ($item->status == 'rejected')
                                     <tr style="vertical-align: top" align="left">
-                                        <th colspan="2" style="width: 140px">Alasan Pembatalan
-                                            <br>
+                                        <th colspan="2" style="width: 140px">
+                                            Alasan Pembatalan
+                                            <br />
                                             : {{ $item->text_reject ?? '' }}
                                         </th>
                                     </tr>
@@ -178,7 +175,7 @@
                         </table>
                         <!-- BOX -->
 
-                        <br>
+                        <br />
                         <table class="container" bgcolor="#fff" width="100%">
                             <tbody>
                                 <tr style="vertical-align: top" align="left">
@@ -196,7 +193,7 @@
                                         <th>
                                             <div class="transaction-details">
                                                 {{ $line->merch->name }}
-                                                <br>
+                                                <br />
                                                 <small>{{ $line->harga_formatted }} x {{ $line->qty }}</small>
                                             </div>
                                         </th>
@@ -221,14 +218,14 @@
                             </tbody>
                         </table>
 
-                        <br>
+                        <br />
                         <table class="container" bgcolor="#fff" width="100%">
                             <tbody>
                                 <tr style="vertical-align: top" align="left">
                                     <th>
                                         <div class="footer">
-                                            {{ setting('contact_name') }}<br>
-                                            {{ setting('contact_alamat') }}<br>
+                                            {{ setting('contact_name') }}<br />
+                                            {{ setting('contact_alamat') }}<br />
                                             © {{ date('Y') }} JATIMPRIDE.
                                         </div>
                                     </th>
@@ -239,7 +236,7 @@
                 </tr>
             </tbody>
         </table>
-        <br><br>
+        <br /><br />
     </center>
 </body>
 
