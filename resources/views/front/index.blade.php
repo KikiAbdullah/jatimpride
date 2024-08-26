@@ -241,9 +241,11 @@
                 <div class="swiper-pagination"></div>
             </div>
             <div class="row justify-content-center my-3">
-                <div class="col-md-6 row">
-                    <div class="container section-title text-center" data-aos="fade-up">
-                        <p>Team Support</p>
+                <div class="col-md-6 row justify-content-center">
+                    <div class="col-sm-12">
+                        <div class="container section-title text-center" data-aos="fade-up">
+                            <p>Team Support</p>
+                        </div>
                     </div>
                     @foreach ($team_support as $team)
                         <div class="col-sm-6 d-flex align-items-stretch" data-aos="fade-up">
@@ -254,9 +256,11 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="col-md-6 row">
-                    <div class="container section-title text-center" data-aos="fade-up">
-                        <p>Photographer</p>
+                <div class="col-md-6 row justify-content-center">
+                    <div class="col-sm-12">
+                        <div class="container section-title text-center" data-aos="fade-up">
+                            <p>Photographer</p>
+                        </div>
                     </div>
                     @foreach ($fg_support as $fg)
                         <div class="col-sm-6 d-flex align-items-stretch" data-aos="fade-up">
