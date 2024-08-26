@@ -50,8 +50,8 @@ class FileMail extends Mailable
                 $subject = 'Pemesanan ' . $this->trans->no . ' Selesai';
                 $text   = 'Pesanan Anda telah selesai dan dikirimkan. Terima kasih telah berbelanja dengan kami!';
                 break;
-            case 'reject':
-                $subject = 'Pemesanan ' . $this->trans->no . ' Ditolak';
+            case 'rejected':
+                $subject = 'Mohon Maaf, Pemesanan ' . $this->trans->no . ' Ditolak';
                 $text   = 'Sayangnya, pesanan Anda telah ditolak. Jika Anda memiliki pertanyaan, silakan hubungi layanan pelanggan kami.';
                 break;
         }
