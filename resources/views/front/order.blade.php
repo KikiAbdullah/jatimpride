@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
                     <h3 class="h3">Items Details</h3>
                     <div class="bd-example-snippet bd-code-snippet mb-5">
                         <div class="bd-example m-0 border-0" id="item-details"></div>
@@ -117,7 +117,6 @@
         $(document).ready(function() {
             itemDetails();
 
-            var merch = JSON.parse(window.localStorage.getItem('merchandise'));
 
             $(document).delegate(".btn-number", "click", function(e) {
                 e.preventDefault();
@@ -201,6 +200,9 @@
                     e.preventDefault();
                 }
             });
+
+            var merch = JSON.parse(window.localStorage.getItem('merchandise'));
+
 
             if (merch.length > 0) {
                 var merchItems = '';

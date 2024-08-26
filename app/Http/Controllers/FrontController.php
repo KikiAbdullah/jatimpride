@@ -178,7 +178,7 @@ class FrontController extends Controller
         }
 
         $data = [
-            'title' => 'Order',
+            'title' => 'History',
             'item'  => Trans::find($id),
             'data'  => []
         ];
@@ -215,6 +215,8 @@ class FrontController extends Controller
             DB::beginTransaction();
 
             $response = responseFailed();
+
+            CartMerch::where('created_by', auth()->user()->id)->delete();
 
             $data = $request->all();
 
