@@ -21,10 +21,10 @@
 
             <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
                 <div class="hstack gap-0 mb-3 mb-lg-0">
-                    <a href="{{ route('trans.form-create') }}"
+                    {{-- <a href="{{ route('trans.form-create') }}"
                         class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold addBtn"><i
                             class="ph-plus-circle ph-2x text-indigo"></i>Transaksi Baru
-                    </a>
+                    </a> --}}
 
                     <span class="menuoption"></span>
                 </div>
