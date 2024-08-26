@@ -232,6 +232,10 @@
                                         <div class="footer">
                                             {{ setting('contact_name') }}<br />
                                             {{ setting('contact_alamat') }}<br />
+                                            <br>
+                                            Instagram : {{ setting('contact_instagram') }}<br />
+                                            Whatsapp : {{ setting('contact_whatsapp') }}<br />
+                                            <br>
                                             © {{ date('Y') }} JATIMPRIDE.
                                         </div>
                                     </th>
