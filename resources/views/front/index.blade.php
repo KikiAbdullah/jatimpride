@@ -249,7 +249,7 @@
                             </div>
                         </div>
                         @foreach ($team_support as $team)
-                            <div class="col-sm-6">
+                            <div class="col-6">
                                 <div class="swiper-slide text-center  d-flex justify-content-center align-items-center">
                                     <img src="{{ $team->foto_url ?? '' }}" alt="{{ $team->name ?? '' }}"
                                         style="max-width: 130px; max-height:130px;" class="img-fluid p-3" />
@@ -267,7 +267,7 @@
                             </div>
                         </div>
                         @foreach ($fg_support as $fg)
-                            <div class="col-sm-6">
+                            <div class="col-6">
                                 <div class="swiper-slide text-center  d-flex justify-content-center align-items-center">
                                     <img src="{{ $fg->foto_url ?? '' }}" alt="{{ $fg->name ?? '' }}"
                                         style="max-width: 130px; max-height:130px;" class="img-fluid p-3" />
