@@ -71,12 +71,12 @@
                                                             <td></td>
                                                             <td>: {{ auth()->user()->nowa }}</td>
                                                         </tr>
-                                                        <tr>
+                                                        {{-- <tr>
                                                             <th colspan="3" class="text-end">
                                                                 <a class="btn-location text-white"
                                                                     href="{{ route('front.profile-edit') }}">Edit</a>
                                                             </th>
-                                                        </tr>
+                                                        </tr> --}}
                                                     </table>
 
 
