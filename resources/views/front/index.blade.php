@@ -191,7 +191,7 @@
                     <div class="col-lg-4 col-md-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                         <div class="swiper-slide d-flex justify-content-center align-items-center">
                             <img src="{{ $itemSponsor->foto_url ?? '' }}" alt="{{ $itemSponsor->name ?? '' }}"
-                                class="img-fluid" />
+                                class="img-fluid" style="max-height: 200px; max-width:200px;" />
                         </div>
                     </div>
                 @endforeach
