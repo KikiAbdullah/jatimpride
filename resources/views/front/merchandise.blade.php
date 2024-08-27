@@ -46,10 +46,7 @@
                             <li><strong>Harga</strong>: {{ $harga }}</li>
                         </ul>
                         <p>
-                            Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia
-                            quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim.
-                            Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla
-                            at esse enim cum deserunt eius.
+                            {{ $item->text ?? '' }}
                         </p>
                         <br>
                         <a class="btn-location text-white" href="{{ route('front.order') }}">Beli Sekarang</a>
