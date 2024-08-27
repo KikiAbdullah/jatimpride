@@ -234,7 +234,7 @@
                     @foreach ($sponsor as $itemSponsor)
                         <div class="swiper-slide text-center">
                             <img src="{{ $itemSponsor->foto_url ?? '' }}" class="img-fluid"
-                                alt="{{ $itemSponsor->name ?? '' }}" style="max-height: 130px; max-width:130px;" />
+                                alt="{{ $itemSponsor->name ?? '' }}" style="max-height: 150px; max-width:150px;" />
                         </div>
                     @endforeach
                 </div>
@@ -252,7 +252,7 @@
                             <div class="col-6">
                                 <div class="swiper-slide text-center  d-flex justify-content-center align-items-center">
                                     <img src="{{ $team->foto_url ?? '' }}" alt="{{ $team->name ?? '' }}"
-                                        style="max-width: 130px; max-height:130px;" class="img-fluid p-3" />
+                                        style="max-width: 150px; max-height:150px;" class="img-fluid p-3" />
                                 </div>
                             </div>
                         @endforeach
@@ -270,7 +270,7 @@
                             <div class="col-6">
                                 <div class="swiper-slide text-center  d-flex justify-content-center align-items-center">
                                     <img src="{{ $fg->foto_url ?? '' }}" alt="{{ $fg->name ?? '' }}"
-                                        style="max-width: 130px; max-height:130px;" class="img-fluid p-3" />
+                                        style="max-width: 150px; max-height:150px;" class="img-fluid p-3" />
                                 </div>
                             </div>
                         @endforeach
