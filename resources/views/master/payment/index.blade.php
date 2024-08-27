@@ -168,7 +168,7 @@
                 var form = $(this).parents('form.delete');
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Are you sure disable this {{ $title }}?',
+                    title: 'Are you sure delete this {{ $title }}?',
                     showCancelButton: true,
                     confirmButtonText: 'Confirm',
                     buttonsStyling: false,

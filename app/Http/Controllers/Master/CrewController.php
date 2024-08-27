@@ -20,7 +20,7 @@ class CrewController extends Controller
         $this->folder           = 'master';
         $this->relation         = [];
         $this->model            = $model;
-        $this->withTrashed      = true;
+        $this->withTrashed      = false;
     }
 
     public function ajaxData()
@@ -117,7 +117,7 @@ class CrewController extends Controller
             if ($request->hasFile('foto')) {
                 $filename = $this->saveFoto($request->foto, 'crew');
                 $model->foto = $filename;
-                
+
                 $model->save();
             }
 

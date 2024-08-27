@@ -23,7 +23,7 @@ class TransController extends Controller
         $this->folder           = '';
         $this->relation         = ['customer', 'lines', 'jenisPengiriman', 'payment'];
         $this->model            = $model;
-        $this->withTrashed      = true;
+        $this->withTrashed      = false;
     }
 
     public function formData()

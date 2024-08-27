@@ -31,7 +31,7 @@ class MobileWebController extends Controller
         $this->relation         = ['customer', 'lines', 'jenisPengiriman', 'payment'];
         $this->model            = $model;
         $this->user            = $user;
-        $this->withTrashed      = true;
+        $this->withTrashed      = false;
     }
 
     public function formData()

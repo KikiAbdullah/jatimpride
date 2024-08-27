@@ -27,23 +27,49 @@ use Illuminate\Support\Facades\Storage;
 
 class FrontController extends Controller
 {
+    public function __construct(
+        Trans $trans,
+        Event $event,
+        Activity $activity,
+        Sponsor $sponsor,
+        FgSupport $fgSupport,
+        TeamSupport $teamSupport,
+        User $user,
+        Merch $merch
+    ) {
+        $this->relation_trans = ['customer', 'lines', 'jenisPengiriman', 'lines.merch'];
+        $this->trans = $trans;
+        $this->event = $event;
+        $this->activity = $activity;
+        $this->sponsor = $sponsor;
+        $this->fgSupport = $fgSupport;
+        $this->teamSupport = $teamSupport;
+        $this->user = $user;
+        $this->merch = $merch;
+    }
+
+    private function redirectIfSuperAdmin()
+    {
+        if (Auth::check() && auth()->user()->hasRole('SUPERADMIN')) {
+            return redirect()->route('siteurl');
+        }
+        return null;
+    }
+
     public function index(Request $request)
     {
-        if (Auth::check()) {
-            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
-                return redirect()->route('siteurl');
-            }
+        if ($redirect = $this->redirectIfSuperAdmin()) {
+            return $redirect;
         }
 
         $data = [
             'title' => 'index',
-            'event' => Event::orderBy('urutan')->get(),
-            'activity' => Activity::orderBy('urutan')->get(),
-            'sponsor_utama' => Sponsor::orderBy('urutan')->limit(3)->get(),
-            'sponsor' => Sponsor::orderBy('urutan')->offset(3)->limit(PHP_INT_MAX)->get(), // Use a large number to get all remaining records
-            // 'sponsor' => Sponsor::orderBy('urutan')->get(),
-            'fg_support' => FgSupport::orderBy('urutan')->get(),
-            'team_support' => TeamSupport::orderBy('urutan')->get(),
+            'event' => $this->event->orderBy('urutan')->get(),
+            'activity' => $this->activity->orderBy('urutan')->get(),
+            'sponsor_utama' => $this->sponsor->orderBy('urutan')->take(3)->get(),
+            'sponsor' => $this->sponsor->orderBy('urutan')->offset(3)->limit(PHP_INT_MAX)->get(), // Use a large number to get all remaining records
+            'fg_support' => $this->fgSupport->orderBy('urutan')->get(),
+            'team_support' => $this->teamSupport->orderBy('urutan')->get(),
         ];
 
         return view('front.index', $data);
@@ -51,19 +77,19 @@ class FrontController extends Controller
 
     public function merchandise(Request $request)
     {
-        if (Auth::check()) {
-            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
-                return redirect()->route('siteurl');
-            }
+        if ($redirect = $this->redirectIfSuperAdmin()) {
+            return $redirect;
         }
 
-        $merch = Merch::all();
+        $merch = $this->merch->get();
+        $minPrice = $merch->min('harga');
+        $maxPrice = $merch->max('harga');
 
         $data = [
             'title' => 'merchandise',
-            'item' => (clone $merch)->first(),
-            'list_size' => implode(', ', (clone $merch)->pluck('size', 'size')->toArray()),
-            'harga' => 'Rp ' . cleanNumber((clone $merch)->min('harga')) . ' - Rp ' . cleanNumber((clone $merch)->max('harga')),
+            'item' => $merch->first(),
+            'list_size' => $merch->pluck('size')->unique()->implode(', '),
+            'harga' => sprintf('Rp %s - Rp %s', cleanNumber($minPrice), cleanNumber($maxPrice)),
             'data' => [
                 'list_foto' => MerchFoto::orderBy('urutan')->get(),
             ],
@@ -74,17 +100,17 @@ class FrontController extends Controller
 
     public function crew(Request $request)
     {
-        if (Auth::check()) {
-            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
-                return redirect()->route('siteurl');
-            }
+        if ($redirect = $this->redirectIfSuperAdmin()) {
+            return $redirect;
         }
+
+        $crew = Crew::orderBy('urutan')->get();
 
         $data = [
             'title' => 'crew',
             'data' => [
-                'first' => Crew::orderBy('urutan')->first(),
-                'list_crew' => Crew::orderBy('urutan')->offset(1)->limit(PHP_INT_MAX)->get(), // Use a large number to get all remaining records
+                'first' => $crew->first(),
+                'list_crew' => $crew->skip(1), // Fetch all except the first crew member
             ],
         ];
 
@@ -165,16 +191,14 @@ class FrontController extends Controller
     //PROFILE
     public function profile(Request $request)
     {
-        if (Auth::check()) {
-            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
-                return redirect()->route('siteurl');
-            }
+        if (Auth::check() && auth()->user()->hasRole('SUPERADMIN')) {
+            return redirect()->route('siteurl');
         }
 
         $data = [
             'title' => 'Profile',
             'data'  => [
-                'history'   => Trans::with(['lines'])->where('customer_id', auth()->user()->id)->orderBy('id', 'desc')->get(),
+                'history'   => $this->trans->with($this->relation_trans)->where('customer_id', auth()->user()->id)->orderBy('id', 'desc')->get(),
             ]
         ];
 
@@ -183,15 +207,13 @@ class FrontController extends Controller
 
     public function history(Request $request, $id)
     {
-        if (Auth::check()) {
-            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
-                return redirect()->route('siteurl');
-            }
+        if (Auth::check() && auth()->user()->hasRole('SUPERADMIN')) {
+            return redirect()->route('siteurl');
         }
 
         $data = [
             'title' => 'History',
-            'item'  => Trans::find($id),
+            'item'  => $this->trans->find($id),
             'data'  => []
         ];
 
@@ -203,16 +225,14 @@ class FrontController extends Controller
     //ORDER
     public function order(Request $request)
     {
-        if (Auth::check()) {
-            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
-                return redirect()->route('siteurl');
-            }
+        if (Auth::check() && auth()->user()->hasRole('SUPERADMIN')) {
+            return redirect()->route('siteurl');
         }
 
         $data = [
             'title' => 'Order',
             'data'  => [
-                'merch'                     => Merch::all(),
+                'merch'                     => $this->merch->get(),
                 'list_jenis_pengiriman'     => $this->listJenisPengiriman(),
                 'list_provinsi'             => $this->listProvinsi(),
             ]
@@ -234,7 +254,7 @@ class FrontController extends Controller
 
             if (!empty($data['merch'])) {
                 foreach ($data['merch'] as $item) {
-                    $merch = Merch::find($item['id']);
+                    $merch = $this->merch->find($item['id']);
 
                     // Validate quantity
                     if ($item['qty'] > $merch->stok) {
@@ -272,10 +292,8 @@ class FrontController extends Controller
 
     public function payment(Request $request)
     {
-        if (Auth::check()) {
-            if (auth()->user()->roles->first()->name == 'SUPERADMIN') {
-                return redirect()->route('siteurl');
-            }
+        if (Auth::check() && auth()->user()->hasRole('SUPERADMIN')) {
+            return redirect()->route('siteurl');
         }
 
         $data = [
@@ -335,7 +353,7 @@ class FrontController extends Controller
                 'alamat'              => isset($data['alamat']) ? $data['alamat'] : null,
                 'status'              => 'open',
             ];
-            $model = Trans::create($createTrans);
+            $model = $this->trans->create($createTrans);
 
             // Save shipping proof
             if ($request->hasFile('bukti_pengiriman')) {
@@ -359,7 +377,7 @@ class FrontController extends Controller
                 TransLine::insert($cartToLines);
 
                 foreach ($cartToLines as $cartLine) {
-                    $merch = Merch::find($cartLine['merch_id']);
+                    $merch = $this->merch->find($cartLine['merch_id']);
                     $merch->decrement('stok', $cartLine['qty']);
                 }
 
@@ -410,7 +428,7 @@ class FrontController extends Controller
         try {
             DB::beginTransaction();
 
-            $trans = Trans::with(['lines'])->find($id);
+            $trans = $this->trans->with(['lines'])->find($id);
 
             if (!empty($trans)) {
                 $trans->update([
@@ -421,7 +439,7 @@ class FrontController extends Controller
                 ]);
 
                 foreach ($trans->lines as $key => $line) {
-                    $merch = Merch::find($line->merch_id);
+                    $merch = $this->merch->find($line->merch_id);
                     $merch->increment('stok', $line->qty);
                 }
             }

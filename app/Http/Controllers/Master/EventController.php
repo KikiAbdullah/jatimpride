@@ -20,7 +20,7 @@ class EventController extends Controller
         $this->folder           = 'master';
         $this->relation         = [];
         $this->model            = $model;
-        $this->withTrashed      = true;
+        $this->withTrashed      = false;
     }
 
     public function ajaxData()
