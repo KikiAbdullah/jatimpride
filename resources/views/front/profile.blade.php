@@ -103,7 +103,7 @@
                                                             <li><strong>Customer</strong>:
                                                                 {{ $history->customer->name ?? '' }}</li>
                                                             <li><strong>Jenis Pengiriman</strong>:
-                                                                {{ $history->jenisPengiriman->name ?? '' }}
+                                                                {{ $history->jenisPengiriman->name ?? '' }}<br>
                                                                 {{ $history->alamat_prov ?? '' }}<br>
                                                                 {{ $history->alamat ?? '' }}<br>
                                                             </li>

@@ -45,7 +45,7 @@
                                         </li>
                                         <li>
                                             <strong>Jenis Pengiriman</strong>:
-                                            {{ $item->jenisPengiriman->name ?? '' }}
+                                            {{ $item->jenisPengiriman->name ?? '' }}<br>
                                             {{ $item->alamat_prov ?? '' }}<br>
                                             {{ $item->alamat ?? '' }}<br>
                                         </li>
