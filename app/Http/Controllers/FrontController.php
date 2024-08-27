@@ -219,6 +219,73 @@ class FrontController extends Controller
 
         return view('front.history', $data);
     }
+
+    public function profileEdit(Request $request)
+    {
+        $view  = [
+            'title'     => 'Edit Profile',
+            'subtitle'  => 'Edit Profile',
+            'item'      => auth()->user(),
+        ];
+        return view('front.profile_edit')->with($view);
+    }
+
+    public function profileUpdate(Request $request, $id)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $data  = $this->getRequest();
+
+            $model = $this->user->findOrFail($id);
+
+            if ($data['password'] == "") {
+                $model->update([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'nowa' => $data['nowa'],
+                ]);
+            } else {
+                $model->update([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'nowa' => $data['nowa'],
+                    'password' => $data['password'],
+                ]);
+            }
+
+            $model->syncRoles('GUEST');
+
+            $log_helper     = new LogHelper;
+
+            $log_helper->storeLogCustomMessage('User <b>' . auth()->user()->name . '</b> melakukan perbuahan data profile <b>' . $model->id . '</b>', 'edit');
+
+            DB::commit();
+            if ($request->ajax()) {
+                $response           = [
+                    'status'            => true,
+                    'msg'               => 'Data Saved.',
+                ];
+                return response()->json($response);
+            } else {
+                return redirect()->route('front.profile')
+                    ->withSuccess('Berhasil');
+            }
+        } catch (Exception $e) {
+
+            DB::rollback();
+            if ($request->ajax()) {
+                $response           = [
+                    'status'            => false,
+                    'msg'               => $e->getMessage(),
+                ];
+                return response()->json($response);
+            } else {
+                return $this->redirectBackWithError($e->getMessage());
+            }
+        }
+    }
     //PROFILE
 
 

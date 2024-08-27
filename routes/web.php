@@ -172,29 +172,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
-    // Route::group(['prefix' => 'mobile', 'as' => 'mobile.'], function () {
-    //     Route::get('/',                 'Mobile\MobileWebController@index')->name('index');
-    //     Route::get('/history',          'Mobile\MobileWebController@history')->name('history');
-    //     Route::get('/history-detail/{id}',          'Mobile\MobileWebController@historyDetail')->name('history-detail');
-    //     Route::get('/history-reject/{id}',          'Mobile\MobileWebController@historyReject')->name('history-reject');
-
-    //     Route::get('/product-detail/{id}',   'Mobile\MobileWebController@productDetail')->name('product-detail');
-
-    //     Route::post('/cart-store',              'Mobile\MobileWebController@cartStore')->name('cart-store');
-    //     Route::post('/cart-update',              'Mobile\MobileWebController@cartUpdate')->name('cart-update');
-    //     Route::get('/cart-delete/{id}',              'Mobile\MobileWebController@cartDelete')->name('cart-delete');
-    //     Route::get('/cart',                     'Mobile\MobileWebController@cart')->name('cart');
-
-
-
-    //     Route::get('/order',            'Mobile\MobileWebController@order')->name('order');
-    //     Route::post('/order-store',     'Mobile\MobileWebController@orderStore')->name('order-store');
-
-    //     Route::get('/profile',          'Mobile\MobileWebController@profile')->name('profile');
-    //     Route::get('/profile-edit',     'Mobile\MobileWebController@profileEdit')->name('profile-edit');
-    //     Route::post('profile-update/{id}',   'Mobile\MobileWebController@profileUpdate')->name('profile-update');
-    // });
-
     // STATE
     Route::get('get-kota', 'AjaxController@listKota')->name('get.kota');
     Route::get('get-kecamatan', 'AjaxController@listKecamatan')->name('get.kecamatan');
@@ -210,6 +187,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('history/{id}',       'FrontController@history')->name('front.history');
     Route::get('reject/{id}',       'FrontController@reject')->name('front.reject');
 
+    Route::get('profile-edit',          'FrontController@profileEdit')->name('front.profile-edit');
+    Route::post('profile-update/{id}',   'FrontController@profileUpdate')->name('front.profile-update');
     //FRONT LOGIN
 });
 

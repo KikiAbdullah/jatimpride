@@ -241,35 +241,41 @@
                 <div class="swiper-pagination"></div>
             </div>
             <div class="row justify-content-center my-3" data-aos="fade-up">
-                <div class="col-md-6 row justify-content-center">
-                    <div class="col-sm-12">
-                        <div class="container section-title text-center">
-                            <p>Team Support</p>
-                        </div>
-                    </div>
-                    @foreach ($team_support as $team)
-                        <div class="col-sm-6">
-                            <div class="swiper-slide d-flex align-items-center">
-                                <img src="{{ $team->foto_url ?? '' }}" alt="{{ $team->name ?? '' }}"
-                                    style="max-width: 200px; max-height:200px;" class="img-fluid" />
+                <div class="col-md-6">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12">
+                            <div class="container section-title text-center">
+                                <p>Team Support</p>
                             </div>
                         </div>
-                    @endforeach
+                        @foreach ($team_support as $team)
+                            <div class="col-3">
+                                <div class="swiper-slide text-center  d-flex justify-content-center align-items-center">
+                                    <img src="{{ $team->foto_url ?? '' }}" alt="{{ $team->name ?? '' }}"
+                                        style="max-width: 130px; max-height:130px;" class="img-fluid p-3" />
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
                 </div>
-                <div class="col-md-6 row justify-content-center">
-                    <div class="col-sm-12">
-                        <div class="container section-title text-center">
-                            <p>FG Support</p>
-                        </div>
-                    </div>
-                    @foreach ($fg_support as $fg)
-                        <div class="col-sm-6">
-                            <div class="swiper-slide d-flex align-items-center">
-                                <img src="{{ $fg->foto_url ?? '' }}" alt="{{ $fg->name ?? '' }}"
-                                    style="max-width: 200px; max-height:200px;" class="img-fluid" />
+                <div class="col-md-6">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12">
+                            <div class="container section-title text-center">
+                                <p>FG Support</p>
                             </div>
                         </div>
-                    @endforeach
+                        @foreach ($fg_support as $fg)
+                            <div class="col-3">
+                                <div class="swiper-slide text-center  d-flex justify-content-center align-items-center">
+                                    <img src="{{ $fg->foto_url ?? '' }}" alt="{{ $fg->name ?? '' }}"
+                                        style="max-width: 130px; max-height:130px;" class="img-fluid p-3" />
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
                 </div>
             </div>
         </div>

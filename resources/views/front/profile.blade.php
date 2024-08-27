@@ -55,25 +55,31 @@
                                             data-aos-delay="200">
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <tr>
-                                                                <th width="20%" class="text-end">Name</th>
-                                                                <td></td>
-                                                                <td>: {{ auth()->user()->name }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th width="20%" class="text-end">Email</th>
-                                                                <td></td>
-                                                                <td>: {{ auth()->user()->email }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th width="20%" class="text-end">Whatsapp</th>
-                                                                <td></td>
-                                                                <td>: {{ auth()->user()->nowa }}</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
+                                                    <table width="100%">
+                                                        <tr>
+                                                            <th width="20%" class="text-end">Name</th>
+                                                            <td></td>
+                                                            <td>: {{ auth()->user()->name }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th width="20%" class="text-end">Email</th>
+                                                            <td></td>
+                                                            <td>: {{ auth()->user()->email }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th width="20%" class="text-end">Whatsapp</th>
+                                                            <td></td>
+                                                            <td>: {{ auth()->user()->nowa }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="3" class="text-end">
+                                                                <a class="btn-location text-white"
+                                                                    href="{{ route('front.profile-edit') }}">Edit</a>
+                                                            </th>
+                                                        </tr>
+                                                    </table>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -109,7 +115,7 @@
                                                                 {{ $history->text_reject }}</li>
                                                         </ul>
                                                     </div>
-                                                    <div class="col-lg-12">
+                                                    <div class="col-lg-12 text-end">
                                                         <a class="btn-location text-white"
                                                             href="{{ route('front.history', $history->id) }}">Detail</a>
                                                     </div>
