@@ -111,8 +111,10 @@
                                                     <div class="col-lg-6">
                                                         <ul>
                                                             <li><strong>Catatan</strong>:<br> {{ $history->text }}</li>
-                                                            <li><strong>Alasan Reject</strong>:<br>
-                                                                {{ $history->text_reject }}</li>
+                                                            @if ($history->status == 'rejected')
+                                                                <li><strong>Alasan Reject</strong>:<br>
+                                                                    {{ $history->text_reject }}</li>
+                                                            @endif
                                                         </ul>
                                                     </div>
                                                     <div class="col-lg-12 text-end">
