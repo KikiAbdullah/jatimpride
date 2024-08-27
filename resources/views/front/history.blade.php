@@ -46,13 +46,23 @@
                                         <li>
                                             <strong>Jenis Pengiriman</strong>:
                                             {{ $item->jenisPengiriman->name ?? '' }}
+                                            {{ $item->alamat_prov ?? '' }}<br>
+                                            {{ $item->alamat ?? '' }}<br>
                                         </li>
+                                        @if ($item->status == 'closed' && $item->jenis_pengiriman_id == 1)
+                                            <li>
+                                                <strong>No Resi</strong>:
+                                                {{ $item->noresi ?? '' }}
+                                            </li>
+                                        @endif
                                         <li><strong>Total</strong>: Rp {{ cleanNumber($item->total) }}
                                         </li>
                                         <li><strong>Catatan</strong>:<br> {{ $item->text }}
                                         </li>
-                                        <li><strong>Alasan Reject</strong>:<br> {{ $item->text_reject }}
-                                        </li>
+                                        @if ($item->status == 'rejected')
+                                            <li><strong>Alasan Reject</strong>:<br> {{ $item->text_reject }}
+                                            </li>
+                                        @endif
                                     </ul>
                                     @if ($item->status == 'open')
                                         <button

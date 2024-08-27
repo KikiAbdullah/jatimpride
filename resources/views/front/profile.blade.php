@@ -103,7 +103,16 @@
                                                             <li><strong>Customer</strong>:
                                                                 {{ $history->customer->name ?? '' }}</li>
                                                             <li><strong>Jenis Pengiriman</strong>:
-                                                                {{ $history->jenisPengiriman->name ?? '' }}</li>
+                                                                {{ $history->jenisPengiriman->name ?? '' }}
+                                                                {{ $history->alamat_prov ?? '' }}<br>
+                                                                {{ $history->alamat ?? '' }}<br>
+                                                            </li>
+                                                            @if ($history->status == 'closed' && $history->jenis_pengiriman_id == 1)
+                                                                <li>
+                                                                    <strong>No Resi</strong>:
+                                                                    {{ $history->noresi ?? '' }}
+                                                                </li>
+                                                            @endif
                                                             <li><strong>Total</strong>: Rp
                                                                 {{ cleanNumber($history->total) }}</li>
                                                         </ul>
