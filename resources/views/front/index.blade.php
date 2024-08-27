@@ -234,7 +234,7 @@
                     @foreach ($sponsor as $itemSponsor)
                         <div class="swiper-slide text-center">
                             <img src="{{ $itemSponsor->foto_url ?? '' }}" class="img-fluid"
-                                alt="{{ $itemSponsor->name ?? '' }}" />
+                                alt="{{ $itemSponsor->name ?? '' }}" style="max-height: 130px; max-width:130px;" />
                         </div>
                     @endforeach
                 </div>
