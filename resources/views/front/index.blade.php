@@ -244,7 +244,7 @@
                 <div class="col-md-6">
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
-                            <div class="container section-title text-center">
+                            <div class="container pb-0 section-title text-center">
                                 <p>Team Support</p>
                             </div>
                         </div>
@@ -262,7 +262,7 @@
                 <div class="col-md-6">
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
-                            <div class="container section-title text-center">
+                            <div class="container pb-0 section-title text-center">
                                 <p>FG Support</p>
                             </div>
                         </div>
