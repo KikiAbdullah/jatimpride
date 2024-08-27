@@ -69,7 +69,7 @@
                 <div class="col-lg-9 content">
 
                     <!-- End Section Title -->
-                    <p class="text" style="text-align: justify;">
+                    <p class="text" style="text-align: justify !important;">
                         {!! setting('about_text') ?? '' !!}
                     </p>
                     <br>
