@@ -57,6 +57,11 @@
                                                 <div class="col-lg-12">
                                                     <table width="100%">
                                                         <tr>
+                                                            <th width="20%" class="text-end">Username</th>
+                                                            <td></td>
+                                                            <td>: {{ auth()->user()->username }}</td>
+                                                        </tr>
+                                                        <tr>
                                                             <th width="20%" class="text-end">Name</th>
                                                             <td></td>
                                                             <td>: {{ auth()->user()->name }}</td>
@@ -71,12 +76,12 @@
                                                             <td></td>
                                                             <td>: {{ auth()->user()->nowa }}</td>
                                                         </tr>
-                                                        {{-- <tr>
+                                                        <tr>
                                                             <th colspan="3" class="text-end">
                                                                 <a class="btn-location text-white"
                                                                     href="{{ route('front.profile-edit') }}">Edit</a>
                                                             </th>
-                                                        </tr> --}}
+                                                        </tr>
                                                     </table>
 
 
@@ -99,7 +104,8 @@
                                                     <div class="col-lg-6">
                                                         <ul>
                                                             <li><strong>Tanggal</strong>:
-                                                                {{ $history->created_at->format('d F Y H:i:s') ?? '' }}</li>
+                                                                {{ $history->created_at->format('d F Y H:i:s') ?? '' }}
+                                                            </li>
                                                             <li><strong>Customer</strong>:
                                                                 {{ $history->customer->name ?? '' }}</li>
                                                             <li><strong>Jenis Pengiriman</strong>:

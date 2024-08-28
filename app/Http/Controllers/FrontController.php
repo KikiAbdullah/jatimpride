@@ -236,7 +236,28 @@ class FrontController extends Controller
 
             DB::beginTransaction();
 
-            $data  = $this->getRequest();
+            $request->validate([
+                'email' => 'required|email'
+            ]);
+
+            // Cek apakah email sudah ada
+            $existingUser = User::where('email', $request->email)->first();
+
+            if ($existingUser && $existingUser->id != $id) {
+                $errorMsg = 'Email sudah terdaftar.';
+
+                if ($request->ajax()) {
+                    $response           = [
+                        'status'            => false,
+                        'msg'               => $errorMsg,
+                    ];
+                    return response()->json($response);
+                } else {
+                    return $this->redirectBackWithError($errorMsg);
+                }
+            }
+
+            $data  = $request->all();
 
             $model = $this->user->findOrFail($id);
 

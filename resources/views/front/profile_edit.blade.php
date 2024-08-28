@@ -15,9 +15,8 @@
                 <nav class="breadcrumbs">
                     <div class="container">
                         <ol>
-                            <li><a href="{{ route('front.merchandise') }}">Merchandise</a></li>
-                            <li><a href="{{ route('front.order') }}">Order</a></li>
-                            <li class="current">Payment</li>
+                            <li><a href="{{ route('front.profile') }}">Profile</a></li>
+                            <li class="current">Edit</li>
                         </ol>
                     </div>
                 </nav>
@@ -71,7 +70,8 @@
                         </div>
 
                         <div class="col-md-12 text-end">
-                            <button type="submit" class="btn btn-lg btn-primary">Update</button>
+                            <a href="{{ route('front.profile') }}" class="me-3">Batal</a>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
 
                     </div>
