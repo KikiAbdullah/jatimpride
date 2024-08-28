@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Master\Merch;
 use App\Models\Trans;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -41,6 +42,8 @@ class AppController extends Controller
         foreach ($statuses as $status) {
             $data['total'][$status] = Trans::where('status', $status)->count();
         }
+
+        $data['merches'] = Merch::all();
 
         $data['userlog'] = $this->listUserLog();
 

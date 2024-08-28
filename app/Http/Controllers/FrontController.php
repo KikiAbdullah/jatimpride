@@ -280,7 +280,7 @@ class FrontController extends Controller
 
             $log_helper     = new LogHelper;
 
-            $log_helper->storeLogCustomMessage('User <b>' . auth()->user()->name . '</b> melakukan perbuahan data profile <b>' . $model->id . '</b>', 'edit');
+            $log_helper->storeLogCustomMessage('User <b>' . auth()->user()->name . '</b> melakukan perubahan data profile <b>ID:' . $model->id . '</b>', 'edit');
 
             DB::commit();
             if ($request->ajax()) {

@@ -86,6 +86,38 @@
 
         <div class="row">
             <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h5 class="mb-0">Sisa Stok</h5>
+
+                        <div class="d-inline-flex ms-auto">
+                            <a href="{{ route('master.merch.index') }}" class="btn btn-primary">
+                                <i class="ph-t-shirt  me-2"></i>
+                                Edit Stok
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table text-nowrap">
+                            <tbody>
+                                @foreach ($merches as $merch)
+                                    <tr>
+                                        <td>
+
+                                            <span
+                                                class="d-inline-block {{ $merch->stok > 10 ? 'bg-success' : 'bg-danger' }} rounded-pill p-1 me-1"></span>
+                                            {{ $merch->name_size }}
+                                        </td>
+                                        <td class="text-end">
+                                            <h6 class="mb-0">{{ cleanNumber($merch->stok) }} Pcs</h6>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-4">
                 <div class="card">
