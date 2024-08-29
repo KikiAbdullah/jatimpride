@@ -147,6 +147,67 @@
 <br><br>
 <hr>
 
+
+<div class="row mb-3">
+    <label class="col-lg-2 col-form-label text-lg-end d-none d-lg-block">Merch Foto</label>
+    <div class="col-lg-4">
+        {!! Form::file('merch_foto_1', [
+            'class' => 'form-control',
+            'id' => 'merchFoto1Upload',
+        ]) !!}
+        @if (isset($item) && !empty($item->merch_foto_1))
+            <div class="row mb-2 justify-content-center mt-2">
+                <div class="col-lg-4 col-4 mb-1">
+                    <div class="d-flex mb-2" style="position: relative;">
+                        <a href="#" style="position: absolute;right:0;" onclick="remove_file(this);">
+                            <i class="ph-x-circle bg-white rounded-circle" style="color: red"></i>
+                        </a>
+                        <a href="{{ $item->merch_foto_1_url }}">
+                            <img src="{{ $item->merch_foto_1_url }}" class="rounded"
+                                style="max-height:100px;max-width:100px;object-fit:cover;">
+                        </a>
+                        <input type="hidden" name="merch_foto_1_exist" value="1">
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
+    <label class="col-lg-2 col-form-label text-lg-end d-none d-lg-block">Merch Foto</label>
+    <div class="col-lg-4">
+        {!! Form::file('merch_foto_2', [
+            'class' => 'form-control',
+            'id' => 'merchFoto2Upload',
+        ]) !!}
+        @if (isset($item) && !empty($item->merch_foto_2))
+            <div class="row mb-2 justify-content-center mt-2">
+                <div class="col-lg-4 col-4 mb-1">
+                    <div class="d-flex mb-2" style="position: relative;">
+                        <a href="#" style="position: absolute;right:0;" onclick="remove_file(this);">
+                            <i class="ph-x-circle bg-white rounded-circle" style="color: red"></i>
+                        </a>
+                        <a href="{{ $item->merch_foto_2_url }}">
+                            <img src="{{ $item->merch_foto_2_url }}" class="rounded"
+                                style="max-height:100px;max-width:100px;object-fit:cover;">
+                        </a>
+                        <input type="hidden" name="merch_foto_2_exist" value="1">
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
+</div>
+
+
+<div class="row mb-3">
+    <label class="col-lg-2 col-form-label text-lg-end d-none d-lg-block">Merch Text</label>
+    <div class="col-lg-10">
+        {!! Form::textarea('merch_text', null, ['class' => 'form-control', 'rows' => 2]) !!}
+    </div>
+</div>
+
+<br><br>
+<hr>
+
 <div class="row mb-3">
     <label class="col-lg-2 col-form-label text-lg-end d-none d-lg-block">Contact Name</label>
     <div class="col-lg-4">

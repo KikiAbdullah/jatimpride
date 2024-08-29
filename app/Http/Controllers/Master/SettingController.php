@@ -84,6 +84,28 @@ class SettingController extends Controller
                 $model->about_foto = $filename;
                 $model->save();
             }
+
+            if (empty($data['merch_foto_1_exist'])) {
+                $model->merch_foto_1 = null;
+                $model->save();
+            }
+
+            if ($request->hasFile('merch_foto_1')) {
+                $filename = $this->saveFoto($request->merch_foto_1, 'merch_foto');
+                $model->merch_foto_1 = $filename;
+                $model->save();
+            }
+
+            if (empty($data['merch_foto_2_exist'])) {
+                $model->merch_foto_2 = null;
+                $model->save();
+            }
+
+            if ($request->hasFile('merch_foto_2')) {
+                $filename = $this->saveFoto($request->merch_foto_2, 'merch_foto');
+                $model->merch_foto_2 = $filename;
+                $model->save();
+            }
             //file
 
             $log_helper     = new LogHelper;

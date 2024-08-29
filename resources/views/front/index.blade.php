@@ -92,24 +92,18 @@
         <div class="container">
             <div class="row gy-4 justify-content-center">
                 <div class="col-lg-8 row">
-                    <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <img src="{{ asset('app_local/img/tshirt-placeholder.jpg') }}" class="img-fluid" alt="">
-
+                    <div class="col-lg-6 col-md-6 d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="100">
+                        <img src="{{ setting('merch_foto_1_url') }}" class="img-fluid" alt="">
                     </div>
                     <!-- End Service Item -->
 
-                    <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                        <img src="{{ asset('app_local/img/tshirt-placeholder.jpg') }}" class="img-fluid" alt="">
+                    <div class="col-lg-6 col-md-6 d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+                        <img src="{{ setting('merch_foto_2_url') }}" class="img-fluid" alt="">
                     </div>
                     <!-- End Service Item -->
 
                     <div class="col-lg-12 text-center">
-                        <p class="mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint nisi
-                            aliquid eligendi
-                            dignissimos
-                            voluptatem soluta, ea quis amet ipsum odit aliquam nostrum earum iusto, optio maxime
-                            mollitia
-                            vel, repellat accusantium!</p>
+                        <p class="mt-5">{{ setting('merch_text') }}</p>
 
                         <a class="btn-location text-white" href="{{ route('front.merchandise') }}">Beli Sekarang</a>
 
@@ -252,7 +246,7 @@
                         </div>
                         @foreach ($team_support as $team)
                             <div class="col-6">
-                                <div class="swiper-slide text-center  d-flex justify-content-center align-items-center">
+                                <div class="swiper-slide text-center d-flex justify-content-center align-items-center">
                                     <img src="{{ $team->foto_url ?? '' }}" alt="{{ $team->name ?? '' }}"
                                         style="max-width: 150px; max-height:150px;" class="img-fluid p-3" />
                                 </div>

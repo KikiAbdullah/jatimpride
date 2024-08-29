@@ -23,6 +23,11 @@ class Setting extends Model
         'about_name',
         'about_jabatan',
         'about_text',
+
+        'merch_foto_1',
+        'merch_foto_2',
+        'merch_text',
+
         'contact_name',
         'contact_alamat',
         'contact_whatsapp',
@@ -37,6 +42,8 @@ class Setting extends Model
         'logo_url',
         'event_logo_url',
         'about_foto_url',
+        'merch_foto_1_url',
+        'merch_foto_2_url',
     ];
 
     public function getIconUrlAttribute()
@@ -76,6 +83,26 @@ class Setting extends Model
             return asset('storage/' . $path);
         } else {
             return asset('app_local/img/mas-fadh.jpg');
+        }
+    }
+
+    public function getMerchFoto1UrlAttribute()
+    {
+        $path = 'merch_foto/' . $this->merch_foto_1;
+        if (Storage::exists('public/' . $path)) {
+            return asset('storage/' . $path);
+        } else {
+            return asset('app_local/img/tshirt-placeholder.jpg');
+        }
+    }
+
+    public function getMerchFoto2UrlAttribute()
+    {
+        $path = 'merch_foto/' . $this->merch_foto_2;
+        if (Storage::exists('public/' . $path)) {
+            return asset('storage/' . $path);
+        } else {
+            return asset('app_local/img/tshirt-placeholder.jpg');
         }
     }
 
