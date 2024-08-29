@@ -84,7 +84,9 @@
                             {!! Form::hidden('jenis_pengiriman_id', null, ['id' => 'jenis-pengiriman-id']) !!}
                         </div>
 
-                        <p id="text-pengiriman" class="mb-3"></p>
+                        <div class="alert alert-warning mb-3" id="text-pengiriman" style="display: none;" role="alert">
+                        </div>
+
                         <div class="bd-example row" id="alamat-row">
 
                             <div class="col-md-6 col-sm-12 mb-3">
@@ -237,6 +239,7 @@
 
         // Function to toggle visibility of #alamat-row based on selected jenis_pengiriman_id
         function toggleAddressRow() {
+
             // Get the selected value of the radio buttons
             var selectedJenisPengiriman = $('input[name="jenis_pengiriman_id"]:checked').val();
             var keterangan = $('input[name="jenis_pengiriman_id"]:checked').data('text');
@@ -246,13 +249,19 @@
 
             // Show or hide #alamat-row based on the selected value
             if (selectedJenisPengiriman == 1) {
+
                 $('#alamat-row').show();
-            } else {
+                $('#text-pengiriman').show();
+
+            } else if (selectedJenisPengiriman == 2) {
                 $('.provinsi_pribadi').val('').trigger('change');
                 $('.kota').val('').trigger('change');
                 $('.kecamatan').val('').trigger('change');
                 $('.kelurahan').val('').trigger('change');
                 $('#alamat-row').hide();
+                $('#text-pengiriman').show();
+
+
             }
 
             $('#text-pengiriman').html(keterangan);
