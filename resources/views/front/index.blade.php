@@ -182,8 +182,9 @@
 
     <!-- Clients Section -->
     <section id="clients" class="clients section">
-        <div class="container section-title text-center" data-aos="fade-up">
+        <div class="container section-title text-center pb-3" data-aos="fade-up">
             <p>Sponsorship </p>
+            <h2></h2>
         </div>
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row justify-content-center gy-4 mb-3">
@@ -244,8 +245,9 @@
                 <div class="col-md-6">
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
-                            <div class="container pb-0 section-title text-center">
+                            <div class="container pb-3 section-title text-center">
                                 <p>Team Support</p>
+                                <h2></h2>
                             </div>
                         </div>
                         @foreach ($team_support as $team)
@@ -262,8 +264,9 @@
                 <div class="col-md-6">
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
-                            <div class="container pb-0 section-title text-center">
+                            <div class="container pb-3 section-title text-center">
                                 <p>FG Support</p>
+                                <h2></h2>
                             </div>
                         </div>
                         @foreach ($fg_support as $fg)

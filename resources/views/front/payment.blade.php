@@ -74,11 +74,12 @@
                     <h3 class="h3">Jenis Pengiriman</h3>
                     <div class="bd-example-snippet bd-code-snippet mb-5">
                         <div class="bd-example mb-5 border-0">
-                            @foreach ($data['list_jenis_pengiriman'] as $jenisId => $jenisPengiriman)
+                            @foreach ($data['list_jenis_pengiriman'] as $jenisPengiriman)
                                 <input type="radio" class="btn-check" name="jenis_pengiriman_id"
-                                    value="{{ $jenisId }}" id="jenis-{{ $jenisId }}" autocomplete="off">
+                                    value="{{ $jenisPengiriman->id }}" id="jenis-{{ $jenisPengiriman->id }}"
+                                    data-text="{{ $jenisPengiriman->text }}" autocomplete="off">
                                 <label class="btn btn-outline-warning" style="min-width: 30%"
-                                    for="jenis-{{ $jenisId }}">{{ $jenisPengiriman }}</label>
+                                    for="jenis-{{ $jenisPengiriman->id }}">{{ $jenisPengiriman->name }}</label>
                             @endforeach
                             {!! Form::hidden('jenis_pengiriman_id', null, ['id' => 'jenis-pengiriman-id']) !!}
                         </div>
@@ -138,7 +139,7 @@
                             </div>
                         </div>
                         <div class="bd-example row" id="dikirim-row">
-                            <p>Pengambilan T-Shirt akan diberitahukan melalui email / informasi di dashboard</p>
+                            <p id="text-pengiriman"></p>
                         </div>
                         <div class="bd-example row">
                             <div class="col-md-6 col-sm-12 mb-3">
@@ -241,6 +242,8 @@
         function toggleAddressRow() {
             // Get the selected value of the radio buttons
             var selectedJenisPengiriman = $('input[name="jenis_pengiriman_id"]:checked').val();
+            var keterangan = $('input[name="jenis_pengiriman_id"]:checked').data('text');
+
 
             $('#jenis-pengiriman-id').val(selectedJenisPengiriman);
 
@@ -256,6 +259,8 @@
                 $('#dikirim-row').show();
                 $('#alamat-row').hide();
             }
+
+            $('#text-pengiriman').html(keterangan);
         }
     </script>
 @endsection

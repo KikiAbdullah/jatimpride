@@ -9,6 +9,7 @@ use App\Models\Master\Activity;
 use App\Models\Master\Crew;
 use App\Models\Master\Event;
 use App\Models\Master\FgSupport;
+use App\Models\Master\JenisPengiriman;
 use App\Models\Master\Merch;
 use App\Models\Master\MerchFoto;
 use App\Models\Master\Sponsor;
@@ -388,7 +389,7 @@ class FrontController extends Controller
             'title' => 'Payment',
             'data'  => [
                 'cart'                      => CartMerch::with(['merch'])->where('created_by', auth()->user()->id)->get(),
-                'list_jenis_pengiriman'     => $this->listJenisPengiriman(),
+                'list_jenis_pengiriman'     => JenisPengiriman::all(),
                 'list_provinsi'             => $this->listProvinsi(),
             ]
         ];
