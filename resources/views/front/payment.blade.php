@@ -84,8 +84,8 @@
                             {!! Form::hidden('jenis_pengiriman_id', null, ['id' => 'jenis-pengiriman-id']) !!}
                         </div>
 
+                        <p id="text-pengiriman" class="mb-3"></p>
                         <div class="bd-example row" id="alamat-row">
-                            <p id="text-pengiriman"></p>
 
                             <div class="col-md-6 col-sm-12 mb-3">
                                 <label for="regFullNameHelp" class="form-label">Provinsi</label>
@@ -137,9 +137,6 @@
                                     {!! Form::textarea('alamat', null, ['class' => 'form-control', 'placeholder' => 'Alamat', 'rows' => 2]) !!}
                                 </div>
                             </div>
-                        </div>
-                        <div class="bd-example row" id="dikirim-row">
-                            <p id="text-pengiriman"></p>
                         </div>
                         <div class="bd-example row">
                             <div class="col-md-6 col-sm-12 mb-3">
@@ -250,13 +247,11 @@
             // Show or hide #alamat-row based on the selected value
             if (selectedJenisPengiriman == 1) {
                 $('#alamat-row').show();
-                $('#dikirim-row').hide();
             } else {
                 $('.provinsi_pribadi').val('').trigger('change');
                 $('.kota').val('').trigger('change');
                 $('.kecamatan').val('').trigger('change');
                 $('.kelurahan').val('').trigger('change');
-                $('#dikirim-row').show();
                 $('#alamat-row').hide();
             }
 
