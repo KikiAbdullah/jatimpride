@@ -85,7 +85,7 @@
                         </div>
 
                         <div class="bd-example row" id="alamat-row">
-                            <p>Pengiriman akan dilakukan dengan metode pembayaran COD</p>
+                            <p id="text-pengiriman"></p>
 
                             <div class="col-md-6 col-sm-12 mb-3">
                                 <label for="regFullNameHelp" class="form-label">Provinsi</label>
