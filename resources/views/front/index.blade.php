@@ -241,7 +241,7 @@
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-            <div class="row justify-content-center my-3" data-aos="fade-up">
+            <div class="row justify-content-center my-3 pt-4" data-aos="fade-up">
                 <div class="col-md-6">
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
