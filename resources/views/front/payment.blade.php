@@ -141,8 +141,22 @@
                             </div>
                         </div>
                         <div class="bd-example row">
+                            <div class="col-md-12">
+                                <p>Transfer Pembayaran kamu ke rekening BCA</p>
+                            </div>
+                            <div class="d-flex mb-5">
+                                <img src="{{ asset('app_local/img/bca.svg') }}" class="img-fluid" style="max-width: 100px;"
+                                    alt="">
+                                <div class="ms-3">
+                                    <h3 class="fw-bold text-warning">RAKA NURDIANSYAH</h3>
+                                    <h3 class="fs-lg fw-semibold">1991537649</h3>
+                                    <input type="hidden" value="1991537649" id="norek">
+                                    <a class="text-warning" onclick="copyRekening()"><i class="bi bi-copy"></i> Copy
+                                        Rekening</a>
+                                </div>
+                            </div>
                             <div class="col-md-6 col-sm-12 mb-3">
-                                <label for="regFullNameHelp" class="form-label">Bukti Pembayaran</label>
+                                <label for="regFullNameHelp" class="form-label">Upload Bukti Pembayaran</label>
                                 <div class="input-group has-validation">
                                     {!! Form::file('bukti_pengiriman', null, ['class' => 'form-control', 'placeholder' => 'Alamat']) !!}
                                 </div>
@@ -265,6 +279,22 @@
             }
 
             $('#text-pengiriman').html(keterangan);
+        }
+
+        function copyRekening() {
+            // Get the text field
+            var copyText = document.getElementById('norek');
+
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.value);
+
+            Swal.fire({
+                title: "Copy To Clipboard",
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 3000,
+            });
         }
     </script>
 @endsection
