@@ -91,20 +91,20 @@
                                         target="_blank"
                                         rel="noopener noreferrer">{{ setting('contact_email') ?? '' }}</a></span></p>
                         </div>
-                        <div class="social-links d-flex mt-4">
-                            <a href="{{ setting('contact_instagram') ?? '' }}" target="_blank"><i
-                                    class="bi bi-instagram"></i></a>
-                            <a href="{{ setting('contact_tiktok') ?? '' }}" target="_blank"><i
-                                    class="bi bi-tiktok"></i></a>
-                            <a href="{{ setting('contact_youtube') ?? '' }}" target="_blank"><i
-                                    class="bi bi-youtube"></i></a>
-                        </div>
+
                     </div>
                     <div class="col-lg-6">
-                        <a href="{{ route('front.index') }}">
-                            <img src="{{ setting('logo_url') ?? '' }}" class="img-fluid" style="opacity: 0.5"
-                                alt="">
-                        </a>
+                        <div class="footer-contact pt-3">
+                            <h2>Follow Us on Social Media</h2>
+                        </div>
+                        <div class="social-links d-flex mt-4">
+                            <a class="fs-2" href="{{ setting('contact_instagram') ?? '' }}" target="_blank"><i
+                                    class="bi bi-instagram"></i></a>
+                            <a class="fs-2" href="{{ setting('contact_tiktok') ?? '' }}" target="_blank"><i
+                                    class="bi bi-tiktok"></i></a>
+                            <a class="fs-2" href="{{ setting('contact_youtube') ?? '' }}" target="_blank"><i
+                                    class="bi bi-youtube"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
