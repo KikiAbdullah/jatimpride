@@ -6,8 +6,8 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>REGISTER</h2>
-            <p>REGISTER</p>
+            <h2>Daftar Akun</h2>
+            <p>Daftar Akun</p>
         </div><!-- End Section Title -->
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -41,7 +41,7 @@
                         <div class="col-md-6">
                             {!! Form::text('name', null, [
                                 'class' => in_array('name', $errors->keys()) ? 'form-control is-invalid' : 'form-control',
-                                'placeholder' => 'Name',
+                                'placeholder' => 'Nama',
                             ]) !!}
                         </div>
 
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            {!! Form::text('nowa', null, ['class' => 'form-control', 'placeholder' => 'WhatsApp Number']) !!}
+                            {!! Form::text('nowa', null, ['class' => 'form-control', 'placeholder' => 'No Whatsapp']) !!}
                         </div>
 
                         <div class="col-md-12">
@@ -61,11 +61,11 @@
                         </div>
 
                         <div class="col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" class="btn btn-primary">Daftar Akun</button>
                         </div>
 
                         <div class="col-md-12 text-center">
-                            <p>Already have an account? <a href="{{ route('login') }}">Log In</a></p>
+                            <p>Sudah memiliki akun? <a href="{{ route('login') }}">Masuk</a></p>
                         </div>
 
                     </div>

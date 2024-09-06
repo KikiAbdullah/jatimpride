@@ -43,6 +43,7 @@
                                     <th>ID</th>
                                     <th class="text-center">Foto</th>
                                     <th>Name</th>
+                                    <th>Kategori</th>
                                     <th>Urutan</th>
                                 </tr>
                             </thead>
@@ -92,6 +93,9 @@
                     },
                     {
                         data: 'name'
+                    },
+                    {
+                        data: 'kategori'
                     },
                     {
                         data: 'urutan'

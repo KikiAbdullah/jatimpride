@@ -16,6 +16,7 @@ class Activity extends Model
     protected $fillable = [
         'name',
         'urutan',
+        'kategori',
         'foto',
         'created_by',
     ];

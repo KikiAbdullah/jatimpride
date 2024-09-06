@@ -6,8 +6,8 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>PROFILE</h2>
-            <p>MY PROFILE</p>
+            <h2>PROFIL</h2>
+            <p>PROFIL</p>
         </div><!-- End Section Title -->
 
         <div class="container">
@@ -15,8 +15,8 @@
                 <nav class="breadcrumbs">
                     <div class="container">
                         <ol>
-                            <li><a href="{{ route('front.index') }}">Home</a></li>
-                            <li class="current">Profile</li>
+                            <li><a href="{{ route('front.index') }}">Beranda</a></li>
+                            <li class="current">Profil</li>
                         </ol>
                     </div>
                 </nav>
@@ -31,7 +31,7 @@
                                 <button class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-profile" type="button" role="tab"
                                     aria-controls="v-pills-profile" aria-selected="true">
-                                    <i class="bi bi-person-circle me-2"></i>Profile
+                                    <i class="bi bi-person-circle me-2"></i>Profil
                                 </button>
                                 <button class="nav-link" id="v-pills-history-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-history" type="button" role="tab"
@@ -41,7 +41,7 @@
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"
                                     class="nav-link">
-                                    <i class="bi bi-box-arrow-right me-2"></i>Log Out
+                                    <i class="bi bi-box-arrow-right me-2"></i>Keluar
                                 </a>
                                 <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
@@ -62,7 +62,7 @@
                                                             <td>: {{ auth()->user()->username }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th width="20%" class="text-end">Name</th>
+                                                            <th width="20%" class="text-end">Nama</th>
                                                             <td></td>
                                                             <td>: {{ auth()->user()->name }}</td>
                                                         </tr>

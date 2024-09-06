@@ -65,9 +65,9 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
             @if (Auth::check())
-                <a class="btn-getstarted ms-" href="{{ route('front.profile') }}">Profile</a>
+                <a class="btn-getstarted ms-" href="{{ route('front.profile') }}">Profil</a>
             @else
-                <a class="btn-getstarted" href="{{ route('login') }}">Login</a>
+                <a class="btn-getstarted" href="{{ route('login') }}">Masuk</a>
             @endif
         </div>
     </header>

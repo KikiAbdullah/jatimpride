@@ -6,8 +6,8 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>LOG IN</h2>
-            <p>LOG IN</p>
+            <h2>Masuk</h2>
+            <p>Masuk</p>
         </div><!-- End Section Title -->
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -47,16 +47,16 @@
                         <div class="d-flex align-items-center mb-3">
                             <label class="form-check">
                                 <input type="checkbox" name="remember" class="form-check-input" checked>
-                                <span class="form-check-label">Remember</span>
+                                <span class="form-check-label">Ingatkan</span>
                             </label>
                         </div>
 
                         <div class="col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                            <button type="submit" class="btn btn-primary w-100">Masuk</button>
                         </div>
 
                         <div class="col-md-12 text-center">
-                            <p>Don't have an account? <a href="{{ route('front.register') }}">Register</a></p>
+                            <p>Belum memiliki akun? <a href="{{ route('front.register') }}">Daftar Akun</a></p>
                         </div>
 
                     </div>

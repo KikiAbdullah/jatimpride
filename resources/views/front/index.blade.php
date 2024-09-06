@@ -92,12 +92,14 @@
         <div class="container">
             <div class="row gy-4 justify-content-center">
                 <div class="col-lg-8 row">
-                    <div class="col-lg-6 col-md-6 d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-6 col-md-6 d-flex justify-content-center align-items-center" data-aos="fade-up"
+                        data-aos-delay="100">
                         <img src="{{ setting('merch_foto_1_url') }}" class="img-fluid" alt="">
                     </div>
                     <!-- End Service Item -->
 
-                    <div class="col-lg-6 col-md-6 d-flex justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-lg-6 col-md-6 d-flex justify-content-center align-items-center" data-aos="fade-up"
+                        data-aos-delay="200">
                         <img src="{{ setting('merch_foto_2_url') }}" class="img-fluid" alt="">
                     </div>
                     <!-- End Service Item -->
@@ -128,15 +130,42 @@
 
         <div class="container">
             <div class="row gy-4" data-aos="fade-up" data-aos-delay="200">
-                @foreach ($activity as $itemAct)
+                @foreach ($activity as $kategoriName => $itemAct)
                     <div class="col-lg-6 col-md-6">
-                        <figure class="img-hover-text">
-                            <img src="{{ $itemAct->foto_url }}" class="w-100" alt="{{ $itemAct->name ?? '' }}" />
-                            <figcaption>
-                                <h1>{{ $itemAct->name ?? '' }}</h1>
-                            </figcaption>
-                            <a href="#"></a>
-                        </figure>
+                        <div class="portfolio-details-slider swiper init-swiper">
+
+                            <script type="application/json" class="swiper-config">
+                                {
+                                    "loop": true,
+                                    "speed": 600,
+                                    "autoplay": {
+                                    "delay": 5000
+                                    },
+                                    "slidesPerView": "auto",
+                                    "pagination": {
+                                    "el": ".swiper-pagination",
+                                    "type": "bullets",
+                                    "clickable": true
+                                    }
+                                }
+                                </script>
+
+                            <div class="swiper-wrapper align-items-center">
+                                @foreach ($itemAct as $itemAct2)
+                                    <div class="swiper-slide">
+                                        <figure class="img-hover-text">
+                                            <img src="{{ $itemAct2->foto_url }}" class="w-100"
+                                                alt="{{ $itemAct2->name ?? '' }}" />
+                                            <figcaption>
+                                                <h1>{{ $itemAct2->name ?? '' }}</h1>
+                                            </figcaption>
+                                            <a href="#"></a>
+                                        </figure>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
                     </div>
                 @endforeach
             </div>
