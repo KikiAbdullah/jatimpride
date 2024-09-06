@@ -72,7 +72,7 @@
                         </tr>
                     @endforeach
                     <tr>
-                        <td class="fw-semibold text-end" colspan="{{ count($merchSize) + 6 }}">Total</td>
+                        <td class="fw-semibold text-end" colspan="{{ count($merchSize) + 7 }}">Total</td>
                         <td class="text-end fw-semibold">{{ cleanNumber($items->sum('total')) ?? '' }}</td>
                     </tr>
                 </tbody>

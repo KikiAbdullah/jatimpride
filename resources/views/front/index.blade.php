@@ -212,7 +212,7 @@
         <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row justify-content-center gy-4 mb-3">
                 @foreach ($sponsor_utama as $itemSponsor)
-                    <div class="col-lg-4 col-md-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-lg-3 col-md-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                         <div class="swiper-slide d-flex justify-content-center align-items-center">
                             <img src="{{ $itemSponsor->foto_url ?? '' }}" alt="{{ $itemSponsor->name ?? '' }}"
                                 class="img-fluid" style="max-height: 200px; max-width:200px;" />
