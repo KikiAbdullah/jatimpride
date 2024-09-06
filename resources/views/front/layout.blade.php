@@ -67,7 +67,7 @@
             @if (Auth::check())
                 <a class="btn-getstarted ms-" href="{{ route('front.profile') }}">Profil</a>
             @else
-                <a class="btn-getstarted" href="{{ route('login') }}">Masuk</a>
+                <a class="btn-getstarted" href="{{ route('login') }}">Log In</a>
             @endif
         </div>
     </header>

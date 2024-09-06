@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="col-md-12 text-center">
-                            <p>Sudah memiliki akun? <a href="{{ route('login') }}">Masuk</a></p>
+                            <p>Sudah memiliki akun? <a href="{{ route('login') }}">Log In</a></p>
                         </div>
 
                     </div>

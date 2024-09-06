@@ -6,8 +6,8 @@
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <h2>Masuk</h2>
-            <p>Masuk</p>
+            <h2>LOGIN</h2>
+            <p>LOGIN</p>
         </div><!-- End Section Title -->
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary w-100">Masuk</button>
+                            <button type="submit" class="btn btn-primary w-100">Log In</button>
                         </div>
 
                         <div class="col-md-12 text-center">
