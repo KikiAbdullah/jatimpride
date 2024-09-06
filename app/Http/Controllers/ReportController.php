@@ -67,6 +67,7 @@ class ReportController extends Controller
             $view                   = [
                 'title'                 => "Laporan Transaksi",
                 'items'                 => $items,
+                'merchSize'             => $this->listSize(),
                 'tanggal'               => $request->tanggal,
             ];
 

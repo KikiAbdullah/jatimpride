@@ -32,14 +32,20 @@
             <table class="table table-xxs table-bordered table-striped">
                 <thead>
                     <tr class="text-center">
-                        <th width="10%">Tanggal</th>
-                        <th>No</th>
-                        <th>Customer</th>
-                        <th>Jenis Pengiriman</th>
-                        <th>Size</th>
-                        <th>Keterangan</th>
-                        <th>Status</th>
-                        <th>Total(Rp)</th>
+                        <th rowspan="2" width="10%">Tanggal</th>
+                        <th rowspan="2">No</th>
+                        <th rowspan="2">Customer</th>
+                        <th rowspan="2">Jenis Pengiriman</th>
+                        <th colspan="{{ count($merchSize) }}">Size</th>
+                        <th rowspan="2">Qty</th>
+                        <th rowspan="2">Keterangan</th>
+                        <th rowspan="2">Status</th>
+                        <th rowspan="2">Total(Rp)</th>
+                    </tr>
+                    <tr>
+                        @foreach ($merchSize as $size)
+                            <th>{{ $size }}</th>
+                        @endforeach
                     </tr>
                 </thead>
                 <tbody>
@@ -49,9 +55,12 @@
                             <td class="text-center">{{ $item->no }}</td>
                             <td class="text-center">{{ $item->customer->name ?? '' }}</td>
                             <td class="text-center">{{ $item->jenisPengiriman->name ?? '' }}</td>
-                            <td class="text-center">
-                                {{ implode(', ', $item->lines->pluck('size', 'size')->toArray()) ?? '' }}
-                            </td>
+                            @foreach ($merchSize as $merchId => $size)
+                                <td class="text-center fw-semibold">
+                                    {{ $item->lines->where('merch_id', $merchId)->sum('qty') ?? '' }}
+                                </td>
+                            @endforeach
+                            <td class="text-end fw-semibold">{{ $item->lines->sum('qty') }}</td>
                             <td>
                                 <small>{{ $item->text ?? '' }}</small>
                                 @if ($item->status == 'rejected')
@@ -63,7 +72,7 @@
                         </tr>
                     @endforeach
                     <tr>
-                        <td class="fw-semibold" colspan="7">Total</td>
+                        <td class="fw-semibold text-end" colspan="{{ count($merchSize) + 6 }}">Total</td>
                         <td class="text-end fw-semibold">{{ cleanNumber($items->sum('total')) ?? '' }}</td>
                     </tr>
                 </tbody>
