@@ -313,7 +313,8 @@
 @section('customjs')
     <script>
         // Set the date we're counting down to
-        var countDownDate = new Date("{{ setting('event_date') ?? '' }}").getTime();
+        var countDownDate = new Date("{{ formatDate('Y-m-d H:i:s', 'Y-m-d\TH:i:s\Z', setting('event_date')) ?? '' }}")
+            .getTime();
 
         // Update the count down every 1 second
         var x = setInterval(function() {
