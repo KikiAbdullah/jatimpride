@@ -67,8 +67,8 @@ class FrontController extends Controller
             'title' => 'index',
             'event' => $this->event->orderBy('urutan')->get(),
             'activity' => $this->activity->orderBy('urutan')->get()->groupBy('kategori'),
-            'sponsor_utama' => $this->sponsor->orderBy('urutan')->take(3)->get(),
-            'sponsor' => $this->sponsor->orderBy('urutan')->offset(3)->limit(PHP_INT_MAX)->get(), // Use a large number to get all remaining records
+            'sponsor_utama' => $this->sponsor->orderBy('urutan')->take(4)->get(),
+            'sponsor' => $this->sponsor->orderBy('urutan')->offset(4)->limit(PHP_INT_MAX)->get(), // Use a large number to get all remaining records
             'fg_support' => $this->fgSupport->orderBy('urutan')->get(),
             'team_support' => $this->teamSupport->orderBy('urutan')->get(),
         ];
