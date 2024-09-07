@@ -5,8 +5,26 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>{{ env('APP_NAME') }}</title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="description"
+        content="JATIM PRIDE merupakan sebuah kegiatan apresiasi dalam bidang otomotif terkhusus sepeda motor, yang didasarkan oleh banyaknya antusiasme terhadap sepeda motor akhir-akhir ini, sehingga kami “JATI JAYA ENTERTAINMENT” menginisiasi acara yang bertujuan untuk menyambung tali silaturahmi dan seduluran diantara banyaknya komunitas sepeda motor dengan berbagai jenis style yang ada, untuk itu kami mengundang seluruh pemuda yang memiliki hobi yang sama dalam bidang otomotif di sekitar Provinsi Jawa Timur untuk dapat hadir." />
+    <meta name="keywords"
+        content="Jatim Pride, event otomotif, sepeda motor, komunitas motor, Jawa Timur, silaturahmi bikers, Jatim Pride Vol 4, Jati Jaya Entertainment, acara motor Jawa Timur, persaudaraan bikers, otomotif Jawa Timur, pertemuan komunitas motor, event bikers, gaya motor custom, hobi otomotif, acara motor regional" />
+
+
+    <!-- Open Graph Meta Tags (Untuk Social Media) -->
+    <meta property="og:title" content="JATIM PRIDE">
+    <meta property="og:description"
+        content="JATIM PRIDE merupakan sebuah kegiatan apresiasi dalam bidang otomotif terkhusus sepeda motor, yang didasarkan oleh banyaknya antusiasme terhadap sepeda motor akhir-akhir ini, sehingga kami “JATI JAYA ENTERTAINMENT” menginisiasi acara yang bertujuan untuk menyambung tali silaturahmi dan seduluran diantara banyaknya komunitas sepeda motor dengan berbagai jenis style yang ada, untuk itu kami mengundang seluruh pemuda yang memiliki hobi yang sama dalam bidang otomotif di sekitar Provinsi Jawa Timur untuk dapat hadir.">
+    <meta property="og:image" content="{{ setting('logo_url') }}">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:title" content="JATIM PRIDE">
+    <meta name="twitter:description"
+        content="JATIM PRIDE merupakan sebuah kegiatan apresiasi dalam bidang otomotif terkhusus sepeda motor, yang didasarkan oleh banyaknya antusiasme terhadap sepeda motor akhir-akhir ini, sehingga kami “JATI JAYA ENTERTAINMENT” menginisiasi acara yang bertujuan untuk menyambung tali silaturahmi dan seduluran diantara banyaknya komunitas sepeda motor dengan berbagai jenis style yang ada, untuk itu kami mengundang seluruh pemuda yang memiliki hobi yang sama dalam bidang otomotif di sekitar Provinsi Jawa Timur untuk dapat hadir.">
+    <meta name="twitter:image" content="{{ setting('logo_url') }}">
+
 
     <!-- Favicons -->
     <link href="{{ setting('icon_url') ?? '' }}" rel="icon" />
