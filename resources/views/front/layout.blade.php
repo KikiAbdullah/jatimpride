@@ -78,7 +78,7 @@
                     <li><a href="{{ route('front.index') }}#event">Our Event</a></li>
                     <li><a class="{{ @$title == 'crew' ? 'active' : '' }}" href="{{ route('front.crew') }}">Our
                             Crew</a></li>
-                    <li><a href="#">Ticket</a></li>
+                    <li><a href="https://www.yesplis.com/event/jatim-pride-vol.-4" target="_blank">Ticket</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
