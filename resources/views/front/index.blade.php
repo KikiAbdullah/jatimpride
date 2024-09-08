@@ -214,8 +214,10 @@
                 @foreach ($sponsor_utama as $itemSponsor)
                     <div class="col-lg-3 col-md-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                         <div class="swiper-slide d-flex justify-content-center align-items-center">
-                            <img src="{{ $itemSponsor->foto_url ?? '' }}" alt="{{ $itemSponsor->name ?? '' }}"
-                                class="img-fluid" style="max-height: 200px; max-width:200px;" />
+                            <a href="{{ $itemSponsor->url }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ $itemSponsor->foto_url ?? '' }}" alt="{{ $itemSponsor->name ?? '' }}"
+                                    class="img-fluid" style="max-height: 200px; max-width:200px;" />
+                            </a>
                         </div>
                     </div>
                 @endforeach
@@ -257,8 +259,10 @@
                 <div class="swiper-wrapper align-items-center text-center">
                     @foreach ($sponsor as $itemSponsor)
                         <div class="swiper-slide text-center">
-                            <img src="{{ $itemSponsor->foto_url ?? '' }}" class="img-fluid"
-                                alt="{{ $itemSponsor->name ?? '' }}" style="max-height: 150px; max-width:150px;" />
+                            <a href="{{ $itemSponsor->url ?? '#' }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ $itemSponsor->foto_url ?? '' }}" class="img-fluid"
+                                    alt="{{ $itemSponsor->name ?? '' }}" style="max-height: 150px; max-width:150px;" />
+                            </a>
                         </div>
                     @endforeach
                 </div>
@@ -276,8 +280,10 @@
                         @foreach ($team_support as $team)
                             <div class="col-6">
                                 <div class="swiper-slide text-center d-flex justify-content-center align-items-center">
-                                    <img src="{{ $team->foto_url ?? '' }}" alt="{{ $team->name ?? '' }}"
-                                        style="max-width: 150px; max-height:150px;" class="img-fluid p-3" />
+                                    <a href="{{ $team->url ?? '#' }}" target="_blank" rel="noopener noreferrer">
+                                        <img src="{{ $team->foto_url ?? '' }}" alt="{{ $team->name ?? '' }}"
+                                            style="max-width: 150px; max-height:150px;" class="img-fluid p-3" />
+                                    </a>
                                 </div>
                             </div>
                         @endforeach
@@ -295,13 +301,13 @@
                         @foreach ($fg_support as $fg)
                             <div class="col-6">
                                 <div class="swiper-slide text-center  d-flex justify-content-center align-items-center">
-                                    <img src="{{ $fg->foto_url ?? '' }}" alt="{{ $fg->name ?? '' }}"
-                                        style="max-width: 150px; max-height:150px;" class="img-fluid p-3" />
+                                    <a href="{{ $fg->url ?? '#' }}" target="_blank" rel="noopener noreferrer">
+                                        <img src="{{ $fg->foto_url ?? '' }}" alt="{{ $fg->name ?? '' }}"
+                                            style="max-width: 150px; max-height:150px;" class="img-fluid p-3" />
+                                    </a>
                                 </div>
-                            </div>
                         @endforeach
                     </div>
-
                 </div>
             </div>
         </div>

@@ -35,6 +35,16 @@
 </div>
 
 <div class="row mb-3">
+    <label class="col-lg-3 col-form-label text-lg-end d-none d-lg-block">URL</label>
+    <div class="col-lg-9">
+        {!! Form::text('url', null, [
+            'class' => in_array('url', $errors->keys()) ? 'form-control is-invalid' : 'form-control',
+            'placeholder' => 'URL',
+        ]) !!}
+    </div>
+</div>
+
+<div class="row mb-3">
     <label class="col-lg-3 col-form-label text-lg-end d-none d-lg-block">Urutan</label>
     <div class="col-lg-9">
         {!! Form::number('urutan', null, [

@@ -17,6 +17,7 @@ class FgSupport extends Model
         'name',
         'urutan',
         'foto',
+        'url',
         'created_by',
     ];
 
