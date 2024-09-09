@@ -39,8 +39,13 @@
                             ]) !!}
                         </div>
 
-                        <div class="col-md-12">
-                            <input type="password" name="password" class="form-control" placeholder="•••••••••••">
+                        <div class="col-md-12 position-relative">
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="•••••••••••">
+                            <button type="button" id="togglePassword"
+                                class="btn btn-outline-secondary position-absolute top-50 end-0 translate-middle-y">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
                         </div>
 
 
@@ -72,4 +77,18 @@
 
 
 @section('customjs')
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function() {
+            // Toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            // Toggle the button text
+            $(this).html(type === 'password' ? '<i class="bi bi-eye-fill"></i>' :
+                '<i class="bi bi-eye-slash-fill"></i>');
+        });
+    </script>
 @endsection

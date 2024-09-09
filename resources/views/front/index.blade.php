@@ -300,12 +300,13 @@
                         </div>
                         @foreach ($fg_support as $fg)
                             <div class="col-6">
-                                <div class="swiper-slide text-center  d-flex justify-content-center align-items-center">
+                                <div class="swiper-slide text-center d-flex justify-content-center align-items-center">
                                     <a href="{{ $fg->url ?? '#' }}" target="_blank" rel="noopener noreferrer">
                                         <img src="{{ $fg->foto_url ?? '' }}" alt="{{ $fg->name ?? '' }}"
                                             style="max-width: 150px; max-height:150px;" class="img-fluid p-3" />
                                     </a>
                                 </div>
+                            </div>
                         @endforeach
                     </div>
                 </div>
