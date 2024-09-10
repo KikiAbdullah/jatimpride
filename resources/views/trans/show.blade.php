@@ -130,9 +130,9 @@
                                         Pengiriman</label>
                                     <div class="col-lg-9 mb-1">
                                         <div class="form-control-plaintext">
-                                            {{ ucwords($item->jenisPengiriman->name) }}
+                                            {{ ucwords($item->jenisPengiriman->name ?? '') }}
                                         </div>
-                                        <small><cite>{{ $item->jenisPengiriman->text }}</cite></small>
+                                        <small><cite>{{ $item->jenisPengiriman->text ?? '' }}</cite></small>
                                     </div>
                                 </div>
                                 <div class="row mb-1">
@@ -145,8 +145,8 @@
                                 <div class="row mb-1">
                                     <label class="col-lg-3 text-lg-end fw-normal text-muted form-custom-head">Alamat</label>
                                     <div class="col-lg-9 mb-1">
-                                        <div class="form-control-plaintext">{{ $item->alamat_prov }}</div>
-                                        <div class="form-control-plaintext">{{ $item->alamat }}</div>
+                                        <div class="form-control-plaintext">{{ $item->alamat_prov ?? '' }}</div>
+                                        <div class="form-control-plaintext">{{ $item->alamat ?? '' }}</div>
                                     </div>
                                 </div>
                                 <div class="row mb-1">
@@ -176,12 +176,8 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
-
                     </div>
                     <div class="col-md-6">
                         <div class="card">
@@ -214,7 +210,7 @@
                                         @endforeach
                                         <tr>
                                             <th colspan="3" class="text-end">Total [Rp]</th>
-                                            <th class="text-end">{{ cleanNumber ($item->lines->sum('total')) }}
+                                            <th class="text-end">{{ cleanNumber($item->lines->sum('total')) }}
                                             </th>
                                         </tr>
                                     </tbody>
