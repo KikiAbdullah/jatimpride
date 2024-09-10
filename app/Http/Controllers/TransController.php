@@ -45,7 +45,7 @@ class TransController extends Controller
             case 'open':
                 $btn['resend']                = $this->generateUrl('resend');
 
-                $btn['edit']                = $this->generateUrl('edit');
+                // $btn['edit']                = $this->generateUrl('edit');
                 $btn['destroy']             = $this->generateUrl('destroy');
 
                 $btn['confirm-view']             = $this->generateUrl('confirm-view');
