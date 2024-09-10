@@ -73,7 +73,7 @@
         var dtable;
         const urlAjax = '{{ route('trans.get-data') }}';
         const getButtonOption = '{{ route('trans.button-option') }}';
-        const buttons = {!! json_encode(['vedit' => $url['edit'], 'destroy' => $url['destroy']]) !!};
+        const buttons = {!! json_encode(['destroy' => $url['destroy']]) !!};
         var html_temp = $("#dynamic-form").html();
         var button_temp =
             '<a href="#!" class="btn flex-column btn-float py-2 mx-2 text-uppercase text-dark fw-semibold btnBack"><i class="ph-caret-left ph-2x text-indigo"></i>CANCEL</a>';
