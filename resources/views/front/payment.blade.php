@@ -254,6 +254,10 @@
         // Function to toggle visibility of #alamat-row based on selected jenis_pengiriman_id
         function toggleAddressRow() {
 
+            $('#alamat-row').hide();
+            $('#text-pengiriman').hide();
+
+
             // Get the selected value of the radio buttons
             var selectedJenisPengiriman = $('input[name="jenis_pengiriman_id"]:checked').val();
             var keterangan = $('input[name="jenis_pengiriman_id"]:checked').data('text');

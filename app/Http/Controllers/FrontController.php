@@ -406,6 +406,11 @@ class FrontController extends Controller
 
             $pengirimanRequiredFields = ['alamat', 'provinsi_id', 'kabupaten_id', 'kecamatan_id', 'kelurahan_id'];
 
+
+            if (empty($data['jenis_pengiriman_id'])) {
+                return $this->redirectBackWithError('Jenis Pengiriman harus dipilih');
+            }
+
             // Validate shipping address for specific delivery type
             if ($data['jenis_pengiriman_id'] == 1) {
                 foreach ($pengirimanRequiredFields as $field) {
