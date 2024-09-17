@@ -7,7 +7,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h2>HISTORY TRANSACTION</h2>
-            <p>{{ $item->no }}</p>
+            <p>{{ $item->no ?? '' }}</p>
         </div>
         <!-- End Section Title -->
 
